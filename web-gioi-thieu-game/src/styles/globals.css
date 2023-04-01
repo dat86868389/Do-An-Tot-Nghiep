@@ -199,6 +199,10 @@ ul {
   color: #797A7B;
 }
 
+.login-register-container label{
+  width: 100%;
+}
+
 
 .navbar-container.navbar-post {
   margin-top: 0;
