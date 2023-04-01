@@ -222,3 +222,9 @@ h6 {
   font-weight: bold;
 }
 
+
+
+.bg-admin-page {
+  background-color: #000000;
+  height: 100vh;
+}
