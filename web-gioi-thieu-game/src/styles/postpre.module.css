@@ -1,0 +1,84 @@
+.latest-posts li {
+    padding-bottom: 10px;
+}
+
+.postpre {
+    overflow: hidden;
+    margin-bottom: 35px;
+}
+
+.postpre img {
+    width: 100%;
+    height: 176px;
+    border-radius: 8px;
+    transition: 0.3s;
+}
+
+.postpre img:hover {
+    scale: 1.05;
+    border-radius: 8px;
+}
+
+.postpre a {
+    text-decoration: none;
+}
+
+.postpre .title {
+    display: block;
+    color: #fff;
+    text-transform: uppercase;
+    margin: 15px 0;
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.postpre .title:hover {
+    color: var(--hover-color);
+}
+
+.postpre .markscategory {
+    margin: 0 0 20px 0;
+    height: 80px;
+    display: -webkit-box;
+    width: 100%;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+
+
+.postpre .markscategory a {
+    font-size: 12px;
+    color: #971932;
+
+}
+
+.postpre .markscategory a:not(:first-child) {
+    margin-left: 5px;
+}
+
+.postpre .markscategory a:hover {
+    text-decoration: underline;
+}
+
+.views_and_watchpost {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.views_and_watchpost a {
+    padding: 8px 10px;
+    background-color: #293139;
+    color: #fff;
+    border-radius: 6px;
+}
+
+.views_and_watchpost a:hover {
+    background-color: var(--hover-color);
+}
+
+.views_and_watchpost p {
+    margin: 0;
+}
