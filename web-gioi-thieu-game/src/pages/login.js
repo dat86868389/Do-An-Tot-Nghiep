@@ -13,12 +13,7 @@ export default function Login() {
         <title>Đăng nhập</title>
       </Head>
 
-      <div className='row navbar-container'>
-        <div className='col col-lg-12 col-xl-12 col-xxl-12'>
-          <NavBarComponent />
-        </div>
-      </div>
-
+      <NavBarComponent />
 
       <div className='row login-register-container'>
         <h2>Đăng nhập</h2>

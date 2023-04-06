@@ -16,7 +16,7 @@ export default function navBarComponent() {
             <li className='col-md-4 col-lg-3'>
 
                 <div className={Lastest_post.postpre}>
-                    <Link href="#">
+                    <Link href="/posts/1">
                         <Image
                             rel="preload"
                             src={demoimage}
@@ -24,7 +24,7 @@ export default function navBarComponent() {
                             priority={true}
                         />
                     </Link>
-                    <Link href="#" className={Lastest_post.title}>
+                    <Link href="/posts/1" className={Lastest_post.title}>
                         FARMING SIMULATOR 19
                     </Link>
 
@@ -78,7 +78,7 @@ export default function navBarComponent() {
                     </p>
 
                     <div className={Lastest_post.views_and_watchpost}>
-                        <Link href='#'>
+                        <Link href='/posts/1'>
                             Xem bài viết
                         </Link>
 

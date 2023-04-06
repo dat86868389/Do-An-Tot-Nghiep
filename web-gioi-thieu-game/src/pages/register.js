@@ -14,12 +14,7 @@ export default function Register() {
         <link rel="icon" type="image/png" izes="32x32" href="/favicon-220x220.png" />
       </Head>
 
-      <div className='row navbar-container'>
-        <div className='col col-lg-12 col-xl-12 col-xxl-12'>
-          <NavBarComponent />
-        </div>
-      </div>
-
+      <NavBarComponent />
 
       <div className='row login-register-container'>
         <h2>Đăng ký</h2>

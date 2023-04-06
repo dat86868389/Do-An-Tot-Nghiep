@@ -10,6 +10,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import NavBarComponent from '@/components/navbar_component';
 import Footer from '@/components/footer.js';
 import NewPostsComponent from '@/components/new_posts_component';
+import Header from '@/components/header';
 
 
 export default function NewsPosts() {
@@ -24,27 +25,9 @@ export default function NewsPosts() {
                 <link rel="icon" type="image/png" izes="32x32" href="/favicon-220x220.png" />
             </Head>
 
-            <div className='row head-top'>
-                <div className='col-12 col-lg-6 col-xl-6 col-6'>
-                    <form>
-                        <input type="text" placeholder='Tìm kiếm...' />
-                        <button><FontAwesomeIcon icon={faMagnifyingGlass} /></button>
-                    </form>
-                </div>
+            <Header />
 
-                <div className='col-12 col-lg-6 col-xl-6 col-xxl-6'>
-                    <div className='head-top_links'>
-                        <Link href='/login'>Đăng nhập</Link>
-                        <Link href='/register'>Đăng ký</Link>
-                    </div>
-                </div>
-            </div>
-
-            <div className='row navbar-container'>
-                <div className='col col-lg-12 col-xl-12 col-xxl-12'>
-                    <NavBarComponent />
-                </div>
-            </div>
+            <NavBarComponent />
 
             <NewPostsComponent />
 
@@ -53,7 +36,7 @@ export default function NewsPosts() {
             </div>
 
             <h1>Bạn đang ở page: {page}</h1>
-        </div>  
+        </div>
 
     );
 }

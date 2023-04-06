@@ -228,3 +228,8 @@ h6 {
   background-color: #000000;
   height: 100vh;
 }
+
+
+.post-container {
+  background-color: var(--bg-color-container);
+}

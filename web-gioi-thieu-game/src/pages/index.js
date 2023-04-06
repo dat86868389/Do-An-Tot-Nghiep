@@ -11,6 +11,7 @@ import NavBarComponent from '@/components/navbar_component';
 import HotpostComponent from '@/components/hotposts_component';
 import LatestPosts8Component from '@/components/latest_posts_8';
 import Footer from '@/components/footer';
+import Header from '@/components/header';
 
 export default function Home() {
   return (
@@ -19,29 +20,10 @@ export default function Home() {
         <title>Trang chủ</title>
       </Head>
 
-      <div className='row head-top'>
-        <div className='col-12 col-lg-6 col-xl-6 col-6'>
-          <form>
-            <input type="text" placeholder='Tìm kiếm...' />
-            <button><FontAwesomeIcon icon={faMagnifyingGlass} /></button>
-          </form>
-        </div>
+      <Header />
 
-        <div className='col-12 col-lg-6 col-xl-6 col-xxl-6'>
-          <div className='head-top_links'>
-            <Link href='/login'>Đăng nhập</Link>
-            <Link href='/register'>Đăng ký</Link>
-          </div>
-        </div>
-      </div>
+      <NavBarComponent />
 
-
-
-      <div className='row navbar-container'>
-        <div className='col col-lg-12 col-xl-12 col-xxl-12'>
-          <NavBarComponent />
-        </div>
-      </div>
 
       <div className='row hotposts-container'>
         <h2 style={{ marginBottom: 20 + 'px' }}>Bài Viết <span className='txt-mark'>Nổi Bật</span></h2>
