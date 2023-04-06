@@ -50,9 +50,8 @@ export default function Register() {
         </div>
       </div>
 
-      <div className='row footer-container'>
-        <Footer />
-      </div>
+      <Footer />
+
     </div>
   );
 }

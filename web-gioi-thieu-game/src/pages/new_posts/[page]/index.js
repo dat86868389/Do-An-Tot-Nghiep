@@ -31,11 +31,8 @@ export default function NewsPosts() {
 
             <NewPostsComponent />
 
-            <div className='row footer-container'>
-                <Footer />
-            </div>
 
-            <h1>Bạn đang ở page: {page}</h1>
+            <Footer />
         </div>
 
     );

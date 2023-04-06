@@ -41,10 +41,7 @@ export default function Home() {
 
       <LatestPosts8Component />
 
-      <div className='row footer-container'>
-        <Footer />
-      </div>
-
+      <Footer />
     </div>
   );
 }

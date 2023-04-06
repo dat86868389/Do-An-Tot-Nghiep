@@ -7,7 +7,10 @@ import { faFacebook, faYouTube } from '@fortawesome/free-solid-svg-icons';
 
 export default function navBarComponent() {
     return (
-        <>
+
+        <div className='row footer-container'>
+
+
             <div className='col-12 col-sm-4'>
                 <Image
                     src={Logo}
@@ -17,11 +20,11 @@ export default function navBarComponent() {
 
                 <p>
                     Daominhha.com là website giới thiệu Game Miễn Phí Tốc độ cao mới nhất ,
-                     Full Kích Hoạt , Full DLC , Full Mods … 
-                     chia sẻ những thủ thuật về game và công nghệ . 
-                     Ngoài ra daominhha.com còn cung cấp cho anh em một nơi 
-                     tải Phần Mềm Miễn Phí Chất Lượng Cao . Với Phương Châm  
-                     ” Chia sẻ miễn phí tất cả “
+                    Full Kích Hoạt , Full DLC , Full Mods …
+                    chia sẻ những thủ thuật về game và công nghệ .
+                    Ngoài ra daominhha.com còn cung cấp cho anh em một nơi
+                    tải Phần Mềm Miễn Phí Chất Lượng Cao . Với Phương Châm
+                    ” Chia sẻ miễn phí tất cả “
                 </p>
 
 
@@ -70,7 +73,7 @@ export default function navBarComponent() {
                     </li>
                 </ul>
             </div>
+        </div>
 
-        </>
     );
 }

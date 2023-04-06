@@ -40,9 +40,9 @@ export default function Login() {
         </div>
       </div>
 
-      <div className='row footer-container'>
-        <Footer />
-      </div>
+
+      <Footer />
+
     </div>
   );
 }
