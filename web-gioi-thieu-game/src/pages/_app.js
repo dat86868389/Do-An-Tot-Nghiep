@@ -1,4 +1,3 @@
-
 import '@/styles/bootstrap.css';
 import '@/styles/globals.css';
 
