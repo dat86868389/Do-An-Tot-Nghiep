@@ -18,7 +18,6 @@ export default function Layout({ children }) {
             <NavBarComponent />
 
             <main>{children}</main>
-
             <Footer />
         </div>
 
