@@ -27,7 +27,7 @@ export default function navBarComponent() {
                         </li>
 
                         <li>
-                            <Link href="#">Đăng bài viết</Link>
+                            <Link href="/post_article">Đăng bài viết</Link>
                         </li>
 
                         <li>

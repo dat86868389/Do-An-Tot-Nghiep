@@ -230,6 +230,21 @@ h6 {
 }
 
 
-.post-container {
+.post-container, .write_post {
   background-color: var(--bg-color-container);
+}
+
+
+#editorjs {
+  background-color: #fff;
+  color: #000000;
+  margin: 20px 0;
+}
+
+.ce-block__content {
+  color: #000000;
+}
+
+.cdx-notifies {
+  color: black;
 }

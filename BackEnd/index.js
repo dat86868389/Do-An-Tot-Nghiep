@@ -2,6 +2,8 @@ const express = require('express');
 const app = express();
 const port = 3001;
 var cors = require('cors');
+const multer = require('multer');
+const upload = multer({ dest: 'uploads/' });
 
 //cho phép các domain dưới đây có thể thao tác với API của server
 const allowlistDomain = ['http://127.0.0.1:5500', 'http://localhost:3000', 'http://127.0.0.1:3000'];
@@ -18,6 +20,7 @@ const corsOptionsDelegate = function (req, callback) {
 app.use(cors(corsOptionsDelegate));
 
 require('./src/routes/users_route')(app);
+require('./src/routes/file_upload')(app, upload);
 
 
 app.get('/', (req, res) => {
