@@ -17,8 +17,8 @@
 body {
   background-image: url('../../public/background.jpg');
   background-repeat: no-repeat;
+  background-attachment: fixed;
   background-size: cover;
-  background-position: center;
   color: #fff;
   font-family: 'Montserrat', sans-serif;
 }
@@ -247,4 +247,13 @@ h6 {
 
 .cdx-notifies {
   color: black;
+}
+
+.write_post button {
+  border: none;
+  outline: none;
+  background-color: var(--border-bottom-submenu);
+  color: #fff;
+  padding: 10px;
+  margin-bottom: 10px;
 }
