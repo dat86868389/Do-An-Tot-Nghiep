@@ -5,3 +5,10 @@ exports.getUsers = function(req, res) {
         res.send({ result: data });
     });
 }
+
+exports.addUser = function (req, res) {
+    const data = req.body;
+    usersModel.addUser(data, function (respond) {
+        res.send({ result: respond });
+    });
+}

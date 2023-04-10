@@ -21,5 +21,17 @@ User.getUsers = function (result) {
     });
 }
 
+User.addUser = function (data, result) {
+    const sql = `call SP_addUser(n'${data.userName}', '${data.account}', '${data.password}', '${data.email}');`;
+    database.query(sql , function(err, user){
+        if (err) {
+            result(0); // nếu thực hiện truy vấn KHÔNG thành công
+        }
+        else {
+            result(1); //nếu thực hiện truy vấn thành công
+        }
+    });
+}
+
 
 module.exports = User;

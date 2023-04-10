@@ -7,5 +7,10 @@ module.exports = function(router) {
      * gồm các action
      * getPeople,getPeopleById,addPerson,deletePerson,updatePerson
      */
+
+    // get All Users
     router.get('/users/get',usersController.getUsers); 
+
+    // Register User
+    router.post('/user/add', usersController.addUser);
 }
