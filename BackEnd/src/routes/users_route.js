@@ -13,4 +13,7 @@ module.exports = function(router) {
 
     // Register User
     router.post('/user/add', usersController.addUser);
+
+    // User Login
+    router.get('/account/:account/password/:password', usersController.getUserByAccount);
 }

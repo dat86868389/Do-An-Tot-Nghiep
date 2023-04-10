@@ -1,6 +1,6 @@
 const database = require('../common/connect_mysql');
 
-const User = function(user) {
+const User = function (user) {
     this.UserId = user.UserId;
     this.RoleName = user.RoleName;
     this.UserName = user.UserName;
@@ -23,7 +23,7 @@ User.getUsers = function (result) {
 
 User.addUser = function (data, result) {
     const sql = `call SP_addUser(n'${data.userName}', '${data.account}', '${data.password}', '${data.email}');`;
-    database.query(sql , function(err, user){
+    database.query(sql, function (err) {
         if (err) {
             result(0); // nếu thực hiện truy vấn KHÔNG thành công
         }
@@ -33,5 +33,17 @@ User.addUser = function (data, result) {
     });
 }
 
+User.getUser = function (data, result) {
+    const sql = `select * from users where Account = '${data.account}' and Password = '${data.password}';`;
+    database.query(sql, function (err, user) {
+        if (err) {
+            throw err;
+        }
+
+        if (user) {
+            result(user);
+        }
+    });
+}
 
 module.exports = User;

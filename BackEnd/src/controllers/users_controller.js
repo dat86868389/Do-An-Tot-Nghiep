@@ -12,3 +12,11 @@ exports.addUser = function (req, res) {
         res.send({ result: respond });
     });
 }
+
+
+exports.getUserByAccount = function(req, res) {
+    const data = req.params;
+    usersModel.getUser(data, function (respond) {
+        res.send({ result: respond });
+    });
+}
