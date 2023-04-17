@@ -7,3 +7,9 @@ exports.addPosts = function (req, res) {
         res.send({ result: respond });
     });
 }
+
+exports.getTop8Latest = function (req, res) {
+    postsModel.getTop8Latest(function(data) {
+        res.send({ result: data });
+    });
+}

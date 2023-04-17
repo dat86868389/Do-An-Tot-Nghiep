@@ -11,14 +11,21 @@ const Posts = function (posts) {
 }
 
 Posts.addPosts = function (data, result) {
-    var content = `[`;
-     data.blocks.map((e) => {
-        content += JSON.stringify(e)
+    var content = `{"blocks": [`;
+    data.blocks.map((e, index) => {
+        if(index< data.blocks.length-1) {
+            content += JSON.stringify(e);
+            content += `,`
+        }
+        else {
+            content += JSON.stringify(e);
+        }
+        
     })
-    content += `]`;
-    console.log('1234411231232131',content);
+    content += `]}`;
+    console.log('123', content);
     const sql = `call SP_addPosts(${data.userId}, ${data.userId}, '${data.Title}', '${content}', 0, 1);`;
-    console.log(sql);
+
     database.query(sql, function (err) {
         if (err) {
             throw err
@@ -26,6 +33,19 @@ Posts.addPosts = function (data, result) {
         }
         else {
             result(1); //nếu thực hiện truy vấn thành công
+        }
+    });
+}
+
+Posts.getTop8Latest = function (result) {
+    const sql = `SELECT Title, View, PostId, TimePost from posts order by  TimePost DESC LIMIT 8;`;
+
+    database.query(sql, function (err, top8posts) {
+        if (err) {
+            throw err
+        }
+        else {
+            result(top8posts); //nếu thực hiện truy vấn thành công
         }
     });
 }

@@ -31,7 +31,7 @@ export default function Editor() {
             console.log('Saving failed: ', error)
         });
 
-        const data = { ...Title, ...content, ...user }
+        const data = { ...Title,...user, ...content}
         console.log(data);
         var myJsonString = JSON.stringify(data);
         console.log(myJsonString);

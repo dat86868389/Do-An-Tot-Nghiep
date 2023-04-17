@@ -23,6 +23,12 @@
     text-decoration: none;
 }
 
+.title_container {
+    overflow: hidden;
+    white-space: nowrap; 
+    width: 100%; 
+}
+
 .postpre .title {
     display: block;
     color: #fff;
@@ -30,6 +36,9 @@
     margin: 15px 0;
     font-size: 18px;
     font-weight: 700;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    
 }
 
 .postpre .title:hover {
