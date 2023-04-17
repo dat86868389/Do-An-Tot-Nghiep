@@ -257,3 +257,47 @@ h6 {
   padding: 10px;
   margin-bottom: 10px;
 }
+
+.head-top_links-logged {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  height: 100%;
+  padding-right: 15px; 
+}
+
+.head-top_links-logged a {
+  color: #fff;
+  text-decoration: none;
+}
+
+.head-top_links-logged span {
+  position: relative;
+}
+
+.head-top_links-logged span:hover .user-submenu {
+  display: block;
+}
+
+.user-submenu {
+  position: absolute;
+  background-color: #fff;
+  list-style: none;
+  padding: 10px 0;
+  z-index: 1;
+  border-radius: 5px;
+  width: 100%;
+  display: none;
+}
+
+.user-submenu li a {
+  color: #000000;
+  display: block;
+  font-size: 14px;
+  padding: 5px 5px 5px 10px;
+}
+
+.user-submenu li a:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+  color: var(--hover-color);
+}
