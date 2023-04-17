@@ -37,9 +37,8 @@ export default function Editor() {
                     holder: 'editorjs',
 
                     placeholder: 'Ấn vào đây để tạo nội dung',
-                    
+
                     tools: {
-                        header: Header,
                         table: Table,
                         embed: {
                             class: Embed,
@@ -104,14 +103,25 @@ export default function Editor() {
 
         <div className="row write_post">
 
-            <div className="col-12">
-                <div id="editorjs" />
-            </div>
+            <form>
+                <div className="col-12 title">
+                    <label>
+                        Tiêu đề bài viết ---- <b>(Tối thiểu 5 ký tự)</b> và <b>(Tối đa 200 ký tự)</b>.
+                        <br /><input type="text" name="name" placeholder="Tiêu đề bài viết" maxLength={200} required minLength={5} />
+                    </label>
+                </div>
 
-            <div className="col-12">
-                <button onClick={saveData}>Lưu bài viết</button>
-            </div>
 
+                <div className="col-12 write-content">
+                    <p>Nội dung</p>
+                    <div id="editorjs" />
+                </div>
+
+
+                <div className="col-12">
+                    <button onClick={saveData}>Lưu bài viết</button>
+                </div>
+            </form>
         </div>
     );
 }

@@ -36,7 +36,7 @@ export default function navBarComponent() {
                             <ul className={navbarStyle.submenu}>
                                 {
                                     categoriesData?.result.map(e => (
-                                        <li>
+                                        <li key={e.CategoryId}>
                                             <Link href={`http://localhost:3000/categorie/${e.CategoryId}?page=1`}>{e.CategoryName}</Link>
                                         </li>
                                     ))

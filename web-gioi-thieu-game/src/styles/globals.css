@@ -301,3 +301,22 @@ h6 {
   background-color: rgba(0, 0, 0, 0.1);
   color: var(--hover-color);
 }
+
+.write_post label {
+  width: 100%;
+  margin-top: 20px;
+}
+
+.write_post .title input{
+  width: 100%;
+  font-size: 20px;
+  padding: 5px 10px 10px 10px;
+  border: none;
+  outline: none;
+  font-weight: 600;
+  margin-top: 10px;
+}
+
+.write-content {
+  margin-top: 20px;
+}

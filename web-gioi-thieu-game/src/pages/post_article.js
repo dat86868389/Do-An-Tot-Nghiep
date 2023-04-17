@@ -15,6 +15,7 @@ export default function PostArticle() {
                 <link rel="icon" href="favicon.ico" />
             </Head>
 
+          
             <EditorBlock />
 
 
