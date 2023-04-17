@@ -6,8 +6,8 @@ import { useRouter } from "next/router";
 
 
 export default function Header(props) {
-    const { user, mutateUser } = useUser()
-    const router = useRouter()
+    const { user, mutateUser } = useUser();
+    const router = useRouter();
 
     //logout user
     async function handleLogout(e) {
@@ -53,7 +53,7 @@ export default function Header(props) {
                 }
 
                 {
-                    user.isLoggedIn === false && (
+                    user?.isLoggedIn === false && (
                         <>
                             <div className='head-top_links'>
                                 <Link href='/login'>Đăng nhập</Link>

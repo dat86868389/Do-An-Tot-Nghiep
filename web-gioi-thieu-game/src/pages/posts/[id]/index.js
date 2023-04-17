@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import Layout_Post from "../../../layouts/layout_post";
+import Layout_Post from "../../../layouts/layout";
 import Post from "@/components/post";
 
 export default function PostIndex() {

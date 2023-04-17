@@ -23,7 +23,6 @@ export default function useUser({
             // If redirectIfFound is also set, redirect if the user was found
             (redirectIfFound && user?.isLoggedIn)
         ) {
-            console.log('789789', user);
             Router.push(redirectTo);
         }
     }, [user, redirectIfFound, redirectTo])

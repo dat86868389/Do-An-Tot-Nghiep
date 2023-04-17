@@ -38,19 +38,33 @@ app.use(bodyParser.urlencoded({ extended: false }))
 
 app.use(bodyParser.json())
 
+// Api users, posts, categories
 require('./src/routes/users_route')(app);
+require('./src/routes/post_router')(app);
+require('./src/routes/categories_router')(app);
 
 // Upload Images API
 app.post('/upload', upload.single('image'), (req, res) => {
   res.send({
-      "success" : 1,
-      "file": {
-          "url" : `http://localhost:3001/public/images/${res.req.file.filename}`,
-      }
+    "success": 1,
+    "file": {
+      "url": `http://localhost:3001/public/images/${res.req.file.filename}`,
+    }
   });
 });
 // 
+app.get('/fetchUrl', (req, res) => {
 
+  res.send(
+    {
+      "success": 1,
+      "link": req.query.url,
+      "meta": {
+        
+      }
+    }
+  )
+});
 
 
 

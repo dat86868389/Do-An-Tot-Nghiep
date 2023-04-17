@@ -5,7 +5,6 @@ import { sessionOptions } from '../../lib/session';
 async function fetchUser(account, password) {
     const res = await fetch(`http://localhost:3001/account/${account}/password/${password}`);
     const user = await res.json();
-    console.log(user);
     return user.result[0];
 }
 
