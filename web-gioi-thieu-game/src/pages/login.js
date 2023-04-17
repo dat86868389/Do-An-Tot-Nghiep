@@ -1,17 +1,21 @@
 import Link from 'next/link';
 import Head from 'next/head';
-import { useRouter } from 'next/router'
+import { useRouter } from 'next/router';
 
 // import components
 import NavBarComponent from '@/components/navbar_component';
 import Footer from '@/components/footer.js';
+import useUser from '@/lib/useUser';
 
 
 export default function Login() {
-
+  const { mutateUser } = useUser({
+    redirectTo: '/',
+    redirectIfFound: true,
+  });
   const router = useRouter();
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     // Prevent the browser from reloading the page
     e.preventDefault();
 
@@ -20,24 +24,19 @@ export default function Login() {
     const formData = new FormData(form);
     const formJson = Object.fromEntries(formData.entries());
 
-    // You can pass formData as a fetch body directly:
-    fetch(`http://localhost:3001/account/${formJson.account}/password/${formJson.password}`, {
-      method: 'GET'
-    })
-      .then((response) => response.json())
-      .then((e) => {
-        console.log(e);
-        if(e.result.length) {
-          alert('Đăng nhập thành công');
-          router.push('/');
-        }
-        else {
-          alert('Đăng nhập thất bại');
-        }
-      }).catch((err) => {
-        alert("Đăng nhập thất bại!");
-        console.log(err);
-      });
+    try {
+      mutateUser(
+        await fetch('/api/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(formJson)
+        })
+      )
+
+    } catch (err) {
+      alert('Hệ thống đã xảy ra lỗi!!!');
+      console.log('Login -> Error', err);
+    }
   }
 
 
@@ -79,4 +78,9 @@ export default function Login() {
 
     </div>
   );
+}
+
+
+function proFile() {
+
 }
