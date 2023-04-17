@@ -26,13 +26,36 @@ export default function Editor() {
 
         let content = {};
         await editorRef.current.save().then((outputData) => {
-            content = {...outputData}
+            content = { ...outputData }
         }).catch((error) => {
             console.log('Saving failed: ', error)
         });
 
-        const data = {...Title, ...content}
-        console.log('12321ưqewq3', data);
+        const data = { ...Title, ...content, ...user }
+        console.log(data);
+        var myJsonString = JSON.stringify(data);
+        console.log(myJsonString);
+
+        fetch('http://localhost:3001/post/add', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data)
+        })
+            .then((response) => response.json())
+            .then((e) => {
+                if (e.result == 0) {
+                    alert("Đăng bài thất bại!");
+                }
+                else {
+                    alert("Đăng bài thành công!");
+                    router.push('/');
+                }
+            }).catch(() => {
+                alert("Đăng bài thất bại do lỗi hệ thống!");
+            });
+
     }
 
 
