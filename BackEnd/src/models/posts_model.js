@@ -1,28 +1,17 @@
 const database = require('../common/connect_mysql');
 
-const User = function (user) {
-    this.UserId = user.UserId;
-    this.RoleName = user.RoleName;
-    this.UserName = user.UserName;
-    this.Account = user.Account;
-    this.Password = user.Password;
-    this.Avartar = user.Avartar;
+const Posts = function (posts) {
+    this.UserId = posts.UserId;
+    this.CensorId = posts.CensorId;
+    this.Title = posts.Title;
+    this.Content = posts.Content;
+    this.View = posts.View;
+    this.Status = posts.Status;
+    this.TimePost = posts.TimePost;
 }
 
-User.getUsers = function (result) {
-    database.query(`select * from users`, function (err, users) {
-        if (err) {
-            result(err);
-        }
-        else {
-            result(users);
-        }
-
-    });
-}
-
-User.addUser = function (data, result) {
-    const sql = `call SP_addUser(n'${data.userName}', '${data.account}', '${data.password}', '${data.email}');`;
+Posts.addPosts = function (data, result) {
+    const sql = `call SP_addPosts(${data.UserId}, ${data.CensorId}, ${data.Title}, ${data.Content}, ${data.View}, ${data.Status});`;
     database.query(sql, function (err) {
         if (err) {
             result(0); // nếu thực hiện truy vấn KHÔNG thành công
@@ -33,17 +22,4 @@ User.addUser = function (data, result) {
     });
 }
 
-User.getUser = function (data, result) {
-    const sql = `select * from users where Account = '${data.account}' and Password = '${data.password}';`;
-    database.query(sql, function (err, user) {
-        if (err) {
-            throw err;
-        }
-
-        if (user) {
-            result(user);
-        }
-    });
-}
-
-module.exports = User;
+module.exports = Posts;

@@ -40,7 +40,7 @@ app.use(bodyParser.json())
 
 // Api users, posts, categories
 require('./src/routes/users_route')(app);
-require('./src/routes/post_router')(app);
+require('./src/routes/posts_router')(app);
 require('./src/routes/categories_router')(app);
 
 // Upload Images API
