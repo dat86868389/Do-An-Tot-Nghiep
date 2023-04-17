@@ -16,12 +16,23 @@ export default function Editor() {
     const editorRef = useRef();
     const LinkTool = require('@editorjs/link');
 
-    function saveData() {
-        editorRef.current.save().then((outputData) => {
-            console.log('Article data: ', outputData)
+    async function saveData(e) {
+        e.preventDefault();
+        // Read the form data
+        const form = e.target;
+        const formData = new FormData(form);
+
+        const Title = Object.fromEntries(formData.entries());
+
+        let content = {};
+        await editorRef.current.save().then((outputData) => {
+            content = {...outputData}
         }).catch((error) => {
             console.log('Saving failed: ', error)
         });
+
+        const data = {...Title, ...content}
+        console.log('12321ưqewq3', data);
     }
 
 
@@ -103,11 +114,11 @@ export default function Editor() {
 
         <div className="row write_post">
 
-            <form>
+            <form onSubmit={saveData}>
                 <div className="col-12 title">
                     <label>
                         Tiêu đề bài viết ---- <b>(Tối thiểu 5 ký tự)</b> và <b>(Tối đa 200 ký tự)</b>.
-                        <br /><input type="text" name="name" placeholder="Tiêu đề bài viết" maxLength={200} required minLength={5} />
+                        <br /><input type="text" name="Title" placeholder="Tiêu đề bài viết" maxLength={200} required minLength={5} />
                     </label>
                 </div>
 
@@ -119,7 +130,7 @@ export default function Editor() {
 
 
                 <div className="col-12">
-                    <button onClick={saveData}>Lưu bài viết</button>
+                    <button >Lưu bài viết</button>
                 </div>
             </form>
         </div>
