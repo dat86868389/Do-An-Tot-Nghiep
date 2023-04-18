@@ -17,7 +17,7 @@ export default function HotPostsComponent() {
 
                     <Image
                         rel="preload"
-                        priority={true}
+                        
                         src={demoimage}
                         alt="123123"
                     />
@@ -46,7 +46,6 @@ export default function HotPostsComponent() {
                             <Link href="#">
                                 <Image
                                     rel="preload"
-                                    priority={true}
                                     src={demoimage}
                                     alt="123"
                                 />
@@ -64,7 +63,7 @@ export default function HotPostsComponent() {
                             <Link href="#">
                                 <Image
                                     rel="preload"
-                                    priority={true}
+                                    
                                     src={demoimage}
                                     alt="123"
                                 />
@@ -81,7 +80,7 @@ export default function HotPostsComponent() {
                         <li>
                             <Link href="#">
                                 <Image
-                                    priority={true}
+                                    
                                     rel="preload"
                                     src={demoimage}
                                     alt="123"
@@ -100,7 +99,7 @@ export default function HotPostsComponent() {
                             <Link href="#">
                                 <Image
                                     rel="preload"
-                                    priority={true}
+                                    
                                     src={demoimage}
                                     alt="213"
                                 />
@@ -118,7 +117,7 @@ export default function HotPostsComponent() {
                             <Link href="#">
                                 <Image
                                     rel="preload"
-                                    priority={true}
+                                    
                                     src={demoimage}
                                     alt="123"
                                 />
@@ -138,7 +137,7 @@ export default function HotPostsComponent() {
                                     rel="preload"
                                     src={demoimage}
                                     alt="123"
-                                    priority={true}
+                                    
                                 />
                                 <div className={hotPostsComponent.contenttop2to7}>
                                     <p className={hotPostsComponent.posttitle}> SONS OF THE qFOREST1</p>

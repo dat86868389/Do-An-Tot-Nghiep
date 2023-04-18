@@ -3,7 +3,6 @@ import Head from "next/head";
 import Header from "@/components/header";
 import Footer from "@/components/footer";
 import NavBarComponent from "@/components/navbar_component";
-import Post from "@/components/post";
 
 export default function Layout({ children }) {
     return (

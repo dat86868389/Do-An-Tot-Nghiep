@@ -43,8 +43,8 @@ require('./src/routes/users_route')(app);
 require('./src/routes/posts_router')(app);
 require('./src/routes/categories_router')(app);
 
-// Upload Images API
-app.post('/upload', upload.single('image'), (req, res) => {
+// Upload Images EditorJS API
+app.post('/upload_image_editorjs', upload.single('image'), (req, res) => {
   res.send({
     "success": 1,
     "file": {
@@ -52,7 +52,22 @@ app.post('/upload', upload.single('image'), (req, res) => {
     }
   });
 });
-// 
+
+// Upload image 
+
+app.post('/upload_image', upload.single('image_thumnail'), function (req, res) {
+  // req.file is the name of your file in the form above, here 'uploaded_file'
+  // req.body will hold the text fields, if there were any 
+  console.log("req",req.file,"req body" ,req.body)
+  res.send({
+    "success": 1,
+    "file": {
+      "url": `http://localhost:3001/public/images/${res.req.file.filename}`,
+    }
+  })
+});
+
+// api for editorJS Link TOOL
 app.get('/fetchUrl', (req, res) => {
 
   res.send(
@@ -60,7 +75,7 @@ app.get('/fetchUrl', (req, res) => {
       "success": 1,
       "link": req.query.url,
       "meta": {
-        
+
       }
     }
   )

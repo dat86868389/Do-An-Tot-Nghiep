@@ -9,7 +9,14 @@ exports.addPosts = function (req, res) {
 }
 
 exports.getTop8Latest = function (req, res) {
-    postsModel.getTop8Latest(function(data) {
+    postsModel.getTop8Latest(function (data) {
         res.send({ result: data });
+    });
+}
+
+exports.getPostsById = function (req, res) {
+    const data = req.params;
+    postsModel.getPostsById(data, function (respond) {
+        res.send({ result: respond });
     });
 }

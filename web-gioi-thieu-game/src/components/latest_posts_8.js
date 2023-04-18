@@ -17,7 +17,7 @@ export default function navBarComponent() {
         fetch('http://localhost:3001/posts/top_8_Latest')
             .then(res => res.json())
             .then((data) => {
-                console.log(data);
+                console.log(data)
                 setNewwes8(data);
             })
     }, []);
@@ -30,10 +30,11 @@ export default function navBarComponent() {
                     <li className='col-md-4 col-lg-3' key={e.PostId}>
 
                         <div className={Lastest_post.postpre}>
-                            <Link href="/posts/1">
-                                <Image
+                            <Link href={`/posts/${e.PostId}`}>
+                                <img
                                     rel="preload"
-                                    src={demoimage}
+                                    src={e.Thumnail}
+
                                     alt="123"
                                     priority={true}
                                 />

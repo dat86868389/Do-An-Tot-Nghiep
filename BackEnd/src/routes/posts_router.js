@@ -6,4 +6,8 @@ module.exports = function(router) {
 
     // Add Post
     router.post('/post/add', postsController.addPosts);
+
+    // get posts by id 
+    router.get('/posts/:id', postsController.getPostsById);
+
 }
