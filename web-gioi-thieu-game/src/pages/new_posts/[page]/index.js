@@ -11,6 +11,7 @@ import NavBarComponent from '@/components/navbar_component';
 import Footer from '@/components/footer.js';
 import NewPostsComponent from '@/components/new_posts_component';
 import Header from '@/components/header';
+import Pagging from '@/components/paging_component';
 
 
 export default function NewsPosts() {
@@ -31,7 +32,7 @@ export default function NewsPosts() {
 
             <NewPostsComponent />
 
-
+            <Pagging />
             <Footer />
         </div>
 

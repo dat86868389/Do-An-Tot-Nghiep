@@ -52,8 +52,8 @@ Posts.getTop8Latest = function (result) {
     });
 }
 Posts.getPostsById = function (data, result) {
-    const sql = `select posts.Title, posts.Content from posts where posts.PostId = ${data.id}`;
-
+    const sql = `select posts.Title, posts.Content, users.UserName from posts INNER JOIN users ON posts.UserId = users.UserId where posts.PostId = ${data.id};`;
+    console.log(sql);
     database.query(sql, function (err, data) {
         if (err) {
             throw err

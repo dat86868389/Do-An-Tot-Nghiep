@@ -199,7 +199,7 @@ ul {
   color: #797A7B;
 }
 
-.login-register-container label{
+.login-register-container label {
   width: 100%;
 }
 
@@ -230,10 +230,14 @@ h6 {
 }
 
 
-.post-container, .write_post {
+.post-container,
+.write_post {
   background-color: var(--bg-color-container);
 }
 
+.post-container {
+  padding: 20px 0;
+}
 
 #editorjs {
   background-color: #fff;
@@ -263,7 +267,7 @@ h6 {
   align-items: center;
   justify-content: flex-end;
   height: 100%;
-  padding-right: 15px; 
+  padding-right: 15px;
 }
 
 .head-top_links-logged a {
@@ -307,7 +311,7 @@ h6 {
   margin-top: 20px;
 }
 
-.write_post .title input{
+.write_post .title input {
   width: 100%;
   font-size: 20px;
   padding: 5px 10px 10px 10px;
@@ -331,4 +335,45 @@ h6 {
 .post-container img {
   max-width: 100%;
   height: 100%;
+}
+
+.content-list-container {
+  margin-left: 30px;
+}
+
+.content-table {
+  margin-bottom: 20px;
+  width: 100%;
+}
+
+.content-table td {
+  border: 1px solid #dddddd;
+  padding: 8px;
+}
+
+.pagging-container {
+  background-color: var(--bg-color-container);
+
+}
+
+.pagging-container_buttons {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 0 16px 0;
+}
+
+.pagging-container_buttons a{
+  color: #fff;
+  text-decoration: none;
+  padding: 10px;
+}
+
+.pagging-container_buttons span {
+  padding: 10px;
+}
+
+.pagging-container_buttons span.active {
+  border: 3px solid;
+  border-color: var(--border-bottom-submenu);
+  border-radius: 50px;
 }
