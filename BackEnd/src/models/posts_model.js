@@ -25,7 +25,7 @@ Posts.addPosts = function (data, result) {
     // content += `]}`;
     // console.log('123', content);
 
-    var content = {blocks: data.blocks}
+    var content = { blocks: data.blocks }
     const sql = `call SP_addPosts(${data.userId},${data.userId},'${data.Title}','${JSON.stringify(content)}',0,1,'${data.thumnailLink}','${data.description}');`;
     console.log('sql', sql);
     database.query(sql, function (err) {
@@ -53,7 +53,7 @@ Posts.getTop8Latest = function (result) {
 }
 Posts.getPostsById = function (data, result) {
     const sql = `select posts.Title, posts.Content, users.UserName from posts INNER JOIN users ON posts.UserId = users.UserId where posts.PostId = ${data.id};`;
-    console.log(sql);
+    // console.log(sql);
     database.query(sql, function (err, data) {
         if (err) {
             throw err
@@ -64,8 +64,16 @@ Posts.getPostsById = function (data, result) {
     });
 }
 
-Posts.getTop8Posts = function (data, result) {
-
+Posts.getTopPosts = function (result) {
+    const sql = `select * from posts order by View DESC limit 8`;
+    database.query(sql, function (err, data) {
+        if (err) {
+            throw err;
+        }
+        else {
+            result(data);
+        }
+    })
 }
 
 module.exports = Posts;

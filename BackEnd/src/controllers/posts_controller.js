@@ -20,3 +20,9 @@ exports.getPostsById = function (req, res) {
         res.send({ result: respond });
     });
 }
+
+exports.getTop8Posts = function (req, res) {
+    postsModel.getTopPosts(function (data) {
+        res.send({ result: data});
+    })
+}
