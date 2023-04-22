@@ -65,7 +65,8 @@ Posts.getPostsById = function (data, result) {
 }
 
 Posts.getTopPosts = function (result) {
-    const sql = `select * from posts order by View DESC limit 8`;
+    const sql = `select posts.PostId,posts.Title,posts.View,posts.TimePost,posts.Thumnail,posts.description,users.UserName from posts inner join users on posts.UserId = users.UserId order by View DESC limit 8;`;
+    console.log(sql);
     database.query(sql, function (err, data) {
         if (err) {
             throw err;

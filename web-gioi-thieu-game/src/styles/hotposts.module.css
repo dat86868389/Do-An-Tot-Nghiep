@@ -97,10 +97,15 @@
 .contenttop2to7 {
     margin-left: 20px;
     overflow: hidden;
+    text-overflow: ellipsis; 
+    white-space: nowrap;
 }
 
 .contenttop2to7 .posttitle {
     text-transform: uppercase;
+    overflow: hidden;
+    text-overflow: ellipsis; 
+    white-space: nowrap;
 }
 
 .contenttop2to7 .description {
