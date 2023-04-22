@@ -1,5 +1,5 @@
 import useUser from "@/lib/useUser";
-import { faArrowRightFromBracket, faGamepad, faMagnifyingGlass, faUser } from "@fortawesome/free-solid-svg-icons";
+import { faArrowRightFromBracket, faBook, faGamepad, faMagnifyingGlass, faUser } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -41,6 +41,9 @@ export default function Header(props) {
                                         </li>
                                         <li>
                                             <Link href='#'><FontAwesomeIcon icon={faGamepad} /> Lịch sử xem bài viết</Link>
+                                        </li>
+                                        <li>
+                                            <Link href={`/personal_post/${user.userId}`}><FontAwesomeIcon icon={faBook} /> Bài viết của bạn</Link>
                                         </li>
                                         <li>
                                             <Link href='#' onClick={handleLogout}><FontAwesomeIcon icon={faArrowRightFromBracket} /> Đăng xuất</Link>

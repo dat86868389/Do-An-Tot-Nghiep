@@ -9,7 +9,6 @@ export default function Layout({ children }) {
 
         <div className='container-lg'>
             <Head>
-                <title>Giao dien doc bai</title>
                 <link rel="icon" href="favicon.ico" />
             </Head>
 

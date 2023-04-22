@@ -14,5 +14,9 @@ module.exports = function (router) {
     // get posts by id 
     router.get('/posts/:id', postsController.getPostsById);
 
+    //get all posts by id user
+    router.get('/get_personal_posts/:idUser', postsController.getPersonalPosts);
 
+    //delte post by id 
+    router.delete('/posts/delete/:id', postsController.deletePostById);
 }

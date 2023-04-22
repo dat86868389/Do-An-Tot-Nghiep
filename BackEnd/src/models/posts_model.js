@@ -66,7 +66,6 @@ Posts.getPostsById = function (data, result) {
 
 Posts.getTopPosts = function (result) {
     const sql = `select posts.PostId,posts.Title,posts.View,posts.TimePost,posts.Thumnail,posts.description,users.UserName from posts inner join users on posts.UserId = users.UserId order by View DESC limit 8;`;
-    console.log(sql);
     database.query(sql, function (err, data) {
         if (err) {
             throw err;
@@ -77,4 +76,28 @@ Posts.getTopPosts = function (result) {
     })
 }
 
+Posts.getPersonalPosts = function (prams, result) {
+    const sql = `select PostId,Title,TimePost,Thumnail,description from posts where UserId = ${prams.idUser};`;
+    database.query(sql, function (err, data) {
+        if (err) {
+            throw err;
+        }
+        else {
+            result(data);
+        }
+    })
+}
+
+Posts.deletePostById = function (id, result) {
+    const sql = `DELETE FROM posts WHERE PostId = ${id};`;
+    console.log(sql);
+    database.query(sql, function (err) {
+        if (err) {
+            result(0);
+        }
+        else {
+            result(1);
+        }
+    })
+}
 module.exports = Posts;

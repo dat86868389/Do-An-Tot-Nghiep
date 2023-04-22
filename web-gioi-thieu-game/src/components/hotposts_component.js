@@ -48,8 +48,11 @@ function handleRender(index, e) {
     if (index != 0) {
         return (
             <li>
-                <Link href="#">
+                <Link href={`/posts/${e.PostId}`}>
+
                     <img src={e.Thumnail} />
+
+
                     <div className={hotPostsComponent.contenttop2to7}>
                         <p className={hotPostsComponent.posttitle}> {e.Title}</p>
                         <div className={hotPostsComponent.description}>
@@ -69,10 +72,13 @@ function handleRenderTop1(e) {
         <div className='col-md-12 col-lg-6'>
             <div className={hotPostsComponent.top1_post}>
 
-                <img src={e.Thumnail} />
+                <Link href={`/posts/${e.PostId}`}>
+                    <img src={e.Thumnail} />
+                </Link>
+
 
                 <div className={hotPostsComponent.content}>
-                    <Link href="#top1Post">
+                    <Link href={`/posts/${e.PostId}`}>
                         {e.Title}
                     </Link>
 
