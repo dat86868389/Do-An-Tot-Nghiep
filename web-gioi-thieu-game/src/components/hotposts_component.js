@@ -45,9 +45,14 @@ export default function HotPostsComponent() {
 }
 
 function handleRender(index, e) {
+    const dateString = e.TimePost;
+    const dateObject = new Date(dateString);
+    const date = dateObject.getDate() < 10 ? `0${dateObject.getDate()}` : dateObject.getDate(); 
+    const month = dateObject.getMonth() < 10 ? `0${dateObject.getMonth()}` : dateObject.getMonth(); 
+    const year = dateObject.getFullYear();
     if (index != 0) {
         return (
-            <li>
+            <li key={e.PostId}>
                 <Link href={`/posts/${e.PostId}`}>
 
                     <img src={e.Thumnail} />
@@ -57,7 +62,7 @@ function handleRender(index, e) {
                         <p className={hotPostsComponent.posttitle}> {e.Title}</p>
                         <div className={hotPostsComponent.description}>
                             <p>{e.description}</p>
-                            <p><FontAwesomeIcon icon={faCalendarDays} /> {e.TimePost}</p>
+                            <p><FontAwesomeIcon icon={faCalendarDays} />  {`${date}-${month}-${year}`} </p>
 
                         </div>
                     </div>
@@ -68,6 +73,11 @@ function handleRender(index, e) {
 }
 
 function handleRenderTop1(e) {
+    const dateString = e.TimePost;
+    const dateObject = new Date(dateString);
+    const date = dateObject.getDate() < 10 ? `0${dateObject.getDate()}` : dateObject.getDate(); 
+    const month = dateObject.getMonth() < 10 ? `0${dateObject.getMonth()}` : dateObject.getMonth(); 
+    const year = dateObject.getFullYear();
     return (
         <div className='col-md-12 col-lg-6'>
             <div className={hotPostsComponent.top1_post}>
@@ -86,7 +96,7 @@ function handleRenderTop1(e) {
 
                     <div className={hotPostsComponent.athor_time_post}>
                         <p>Bởi: {e.UserName}</p>
-                        <p><FontAwesomeIcon icon={faCalendarDays} /> {e.TimePost}</p>
+                        <p><FontAwesomeIcon icon={faCalendarDays} /> {`${date}-${month}-${year}`} </p>
                     </div>
                 </div>
 
