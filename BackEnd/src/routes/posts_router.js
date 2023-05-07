@@ -19,4 +19,10 @@ module.exports = function (router) {
 
     //delte post by id 
     router.delete('/posts/delete/:id', postsController.deletePostById);
+
+    //get post by postId and userId
+    router.get('/posts/postId/:postId/userId/:userId', postsController.getPostByPostIdAndUserId);
+
+    //update post
+    router.put('/post/update', postsController.updatePost);
 }

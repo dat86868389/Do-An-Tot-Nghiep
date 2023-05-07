@@ -90,8 +90,34 @@ Posts.getPersonalPosts = function (prams, result) {
 
 Posts.deletePostById = function (id, result) {
     const sql = `DELETE FROM posts WHERE PostId = ${id};`;
-    console.log(sql);
+    // console.log(sql);
     database.query(sql, function (err) {
+        if (err) {
+            result(0);
+        }
+        else {
+            result(1);
+        }
+    })
+}
+
+Posts.getPostByPostIdAndUserId = function (params, result) {
+    const sql = `select * from posts where PostId=${params.postId} and UserId=${params.userId};`;
+    database.query(sql, function(err, data){
+        if (err) {
+            throw(err);
+        }
+        else {
+            result(data);
+        }
+    })
+}
+
+Posts.updatePost = function(data, result) {
+    var content = { blocks: data.blocks };
+
+    const sql = `call SP_updatePost(${data.idPost},'${data.Title}','${JSON.stringify(content)}','${data.thumbnail}','${data.description}');`;
+    database.query(sql, function (err){
         if (err) {
             result(0);
         }

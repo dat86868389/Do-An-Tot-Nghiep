@@ -41,3 +41,18 @@ exports.deletePostById = function (req, res) {
         res.send({ result: data });
     });
 }
+
+exports.getPostByPostIdAndUserId = function (req, res) {
+    const params = req.params;
+    console.log(params);
+    postsModel.getPostByPostIdAndUserId(params, function (data) {
+        res.send({ result: data });
+    });
+}
+
+exports.updatePost = function (req, res) {
+    const data = req.body;
+    postsModel.updatePost(data, function(data) {
+        res.send({ result: data });
+    })
+}
