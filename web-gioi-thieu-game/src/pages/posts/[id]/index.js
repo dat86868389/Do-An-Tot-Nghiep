@@ -39,7 +39,7 @@ export default function PostIndex() {
 
                 {
                     postData?.blocks.map(block => (
-                        <div className="col-12 block-content">
+                        <div className="col-12 block-content" key={block.id}>
                             {handleRenderPostData(block)}
                         </div>
                     ))
@@ -61,22 +61,23 @@ function handleRenderPostData(block) {
                 <img
                     src={block.data.file.url}
                     height='80%'
+                    key={block.id}
                 />
             )
 
         case 'paragraph':
             return (
-                <p>{block.data.text}</p>
+                <p key={block.id}>{block.data.text}</p>
             )
 
         case 'linkTool':
             return (
-                <Link href={block.data.link}>{block.data.link}</Link>
+                <Link href={block.data.link}  key={block.id} >{block.data.link}</Link>
             )
         case 'list': {
             let list = ``;
             block.data.items.map((item, index) => (
-                list += `<p classname='content-list'>${index + 1}: ${item.content}</p>`
+                list += `<p classname='content-list' key=${`${block.id}${index}`}>${index + 1}: ${item.content}</p>`
             ))
             return (
                 <div className="content-list-container" dangerouslySetInnerHTML={{ __html: list }} />

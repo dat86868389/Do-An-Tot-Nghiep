@@ -379,3 +379,43 @@ h6 {
   border-color: var(--border-bottom-submenu);
   border-radius: 50px;
 }
+
+.thumnail {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  display: none;
+  background-color: rgba(0, 0, 0, 0.8);
+  height: 100%;
+  width: 100%;
+}
+
+.thumnail.active {
+  display: block;
+  z-index: 10;
+}
+
+.thumnail .image {
+  width: 320px;
+  height: 280px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.thumnail .image img {
+  width: 100%;
+  height: 100%;
+}
+
+.thumnail .close {
+  background-color: #CE0607;
+  position: absolute;
+  right: 30px;
+  top: 20px;
+  cursor: pointer;
+  padding: 8px 18px;
+  font-size: 20px;
+}

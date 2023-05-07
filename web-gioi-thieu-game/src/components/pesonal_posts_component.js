@@ -2,8 +2,10 @@ import { useEffect, useRef, useState } from 'react';
 import PersonalPostStyle from '../styles/pesonal_posts_component.module.css';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import useUser from '@/lib/useUser';
 
 export default function PesonalPostsComponent(props) {
+    const {user} = useUser();
     const router = useRouter();
     const pesonnalPostsRef = useRef();
     const [pesonalPosts, setpesonalPosts] = useState();
@@ -55,7 +57,7 @@ export default function PesonalPostsComponent(props) {
                         </div>
 
                         <div className={PersonalPostStyle.buttons}>
-                            <Link href='#'>Sửa</Link>
+                            <Link href={`/update_post/${e.PostId}?userId=${user.userId}`}>Sửa</Link>
                             <button onClick={() => handleDeltePost(e.PostId, index)}>Xóa</button>
                         </div>
                     </div>

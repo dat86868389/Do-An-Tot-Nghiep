@@ -155,19 +155,22 @@ export default function Editor() {
         <div className="row write_post">
 
             <form onSubmit={saveData}>
-                <div className="col-12 title">
-                    <label>
-                        Tiêu đề bài viết ---- <b>(Tối thiểu 5 ký tự)</b> và <b>(Tối đa 200 ký tự)</b>.
-                        <br /><input type="text" name="Title" placeholder="Tiêu đề bài viết" maxLength={200} required minLength={5} />
-                    </label>
+                <div className="row">
+                    <div className="col-6 title">
+                        <label>
+                            Tiêu đề bài viết ---- <b>(Tối thiểu 5 ký tự)</b> và <b>(Tối đa 200 ký tự)</b>.
+                            <br /><input type="text" name="Title" placeholder="Tiêu đề bài viết" maxLength={200} required minLength={5} />
+                        </label>
+                    </div>
+
+                    <div className="col-6 title">
+                        <label>
+                            Ảnh xem trước của bài viết --- <b>Ảnh png, jpg, jpeg</b>
+                            <br /><input type="file" name="image_thumnail" accept="image/png, image/jpeg" required className="demo1" />
+                        </label>
+                    </div>
                 </div>
 
-                <div className="col-12 title">
-                    <label>
-                        Ảnh xem trước của bài viết --- <b>Chỉ chấp nhận định dạng ảnh png, jpg, jpeg</b>
-                        <br /><input type="file" name="image_thumnail" accept="image/png, image/jpeg" required className="demo1" />
-                    </label>
-                </div>
 
                 <div className="col-12 title">
                     <label>
