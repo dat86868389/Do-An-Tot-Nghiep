@@ -2,7 +2,6 @@ const postsModel = require('../models/posts_model');
 
 exports.addPosts = function (req, res) {
     const data = req.body;
-    console.log(data);
     postsModel.addPosts(data, function (respond) {
         res.send({ result: respond });
     });
@@ -36,7 +35,6 @@ exports.getPersonalPosts = function (req, res) {
 
 exports.deletePostById = function (req, res) {
     const prams = req.params;
-    console.log(prams);
     postsModel.deletePostById(prams.id, function (data) {
         res.send({ result: data });
     });
@@ -44,7 +42,6 @@ exports.deletePostById = function (req, res) {
 
 exports.getPostByPostIdAndUserId = function (req, res) {
     const params = req.params;
-    console.log(params);
     postsModel.getPostByPostIdAndUserId(params, function (data) {
         res.send({ result: data });
     });
@@ -52,7 +49,7 @@ exports.getPostByPostIdAndUserId = function (req, res) {
 
 exports.updatePost = function (req, res) {
     const data = req.body;
-    postsModel.updatePost(data, function(data) {
+    postsModel.updatePost(data, function (data) {
         res.send({ result: data });
     })
 }

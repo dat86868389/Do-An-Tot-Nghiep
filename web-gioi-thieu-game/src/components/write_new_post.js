@@ -1,4 +1,4 @@
-import React, { memo, useEffect, useRef } from "react"
+import React, { memo, useEffect, useRef, useState } from "react"
 import EditorJS from '@editorjs/editorjs';
 import Header from '@editorjs/header';
 import ImageTool from '@editorjs/image';
@@ -8,6 +8,7 @@ import useUser from "@/lib/useUser";
 import { useRouter } from "next/router";
 import Table from '@editorjs/table';
 import axios from "axios";
+import CategoriesList from "./categories_component";
 
 
 export default function Editor() {
@@ -16,6 +17,9 @@ export default function Editor() {
     const editorRef = useRef();
     const LinkTool = require('@editorjs/link');
 
+    const [categories, setCategories] = useState();
+
+    // handle save post data
     async function saveData(e) {
         e.preventDefault();
         // Read the form data
@@ -75,9 +79,10 @@ export default function Editor() {
 
     }
 
-
+    //check user logged
     useEffect(() => {
         if (user?.isLoggedIn == false) {
+            alert('bạn chưa đăng nhập');
             router.push('/login');
         }
         else {
@@ -149,6 +154,19 @@ export default function Editor() {
 
     }, []);
 
+    // get categories from api 
+    useEffect(() => {
+        fetch('http://localhost:3001/categories/get')
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+                setCategories(data.result);
+            })
+            .catch(() => {
+                alert('Hệ thống đang xảy ra lỗi vui lòng thử lại sau')
+            })
+    }, []);
+
 
     return (
 
@@ -183,6 +201,16 @@ export default function Editor() {
                 <div className="col-12 write-content">
                     <p>Nội dung</p>
                     <div id="editorjs" />
+                </div>
+
+                <div className="col-12 categories_title">
+                    <p>Chọn thể loại của bài viết</p>
+                    {
+                        categories?.length > 0 && (
+                            <CategoriesList categoriesList={categories} />
+                        )
+                    }
+
                 </div>
 
 
