@@ -27,14 +27,21 @@ Posts.addPosts = function (data, result) {
 
     var content = { blocks: data.blocks }
     const sql = `call SP_addPosts(${data.userId},${data.userId},'${data.Title}','${JSON.stringify(content)}',0,1,'${data.thumnailLink}','${data.description}');`;
-    console.log('sql', sql);
-    database.query(sql, function (err) {
+    database.query(sql, function (err, data1) {
         if (err) {
             // throw err;
             result(0); // nếu thực hiện truy vấn KHÔNG thành công
         }
         else {
-            result(1); //nếu thực hiện truy vấn thành công
+            database.query(`select PostId from posts where UserId = 34 order by TimePost desc;`, function (err, idPost) {
+                if (err) {
+                    result(0); // nếu thực hiện truy vấn KHÔNG thành công
+                }
+                else {
+                    result(idPost[0].PostId); //nếu thực hiện truy vấn thành công
+                }
+            });
+
         }
     });
 }
@@ -103,9 +110,9 @@ Posts.deletePostById = function (id, result) {
 
 Posts.getPostByPostIdAndUserId = function (params, result) {
     const sql = `select * from posts where PostId=${params.postId} and UserId=${params.userId};`;
-    database.query(sql, function(err, data){
+    database.query(sql, function (err, data) {
         if (err) {
-            throw(err);
+            throw (err);
         }
         else {
             result(data);
@@ -113,11 +120,11 @@ Posts.getPostByPostIdAndUserId = function (params, result) {
     })
 }
 
-Posts.updatePost = function(data, result) {
+Posts.updatePost = function (data, result) {
     var content = { blocks: data.blocks };
 
     const sql = `call SP_updatePost(${data.idPost},'${data.Title}','${JSON.stringify(content)}','${data.thumbnail}','${data.description}');`;
-    database.query(sql, function (err){
+    database.query(sql, function (err) {
         if (err) {
             result(0);
         }
