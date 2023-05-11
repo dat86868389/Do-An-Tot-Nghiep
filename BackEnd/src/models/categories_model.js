@@ -16,4 +16,8 @@ Categories.getAllCategories = function (result) {
     });
 }
 
+Categories.addCategoriesForPost = function(data, result) {
+    const sql = `call SP_addCategoriesForPost('1,2,3,4,5', 79);`;
+}
+
 module.exports = Categories;

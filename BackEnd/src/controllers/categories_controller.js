@@ -5,3 +5,8 @@ exports.getAllCategories = function(req, res) {
         res.send({ result: data });
     });
 }
+
+exports.addCategoriesForPost = function(req, res) {
+    var data = req.body;
+    console.log(data);
+}
