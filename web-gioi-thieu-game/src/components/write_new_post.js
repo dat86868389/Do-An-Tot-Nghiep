@@ -90,6 +90,7 @@ export default function Editor() {
             });
 
         let categoriesData = { id: idPost, cateList: categoriesChekedList }
+        console.log(categoriesData);
         fetch(`http://localhost:3001/categories/post/add`, {
             method: 'POST',
             headers: {

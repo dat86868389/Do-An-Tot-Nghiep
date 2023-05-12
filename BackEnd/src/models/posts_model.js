@@ -33,11 +33,13 @@ Posts.addPosts = function (data, result) {
             result(0); // nếu thực hiện truy vấn KHÔNG thành công
         }
         else {
-            database.query(`select PostId from posts where UserId = 34 order by TimePost desc;`, function (err, idPost) {
+            database.query(`select PostId from posts where UserId = ${data.userId} order by TimePost desc;`, function (err, idPost) {
                 if (err) {
                     result(0); // nếu thực hiện truy vấn KHÔNG thành công
                 }
                 else {
+                    console.log(idPost[0].PostId);
+                    console.log(sql);
                     result(idPost[0].PostId); //nếu thực hiện truy vấn thành công
                 }
             });
@@ -139,6 +141,29 @@ Posts.updatePost = function (data, result) {
         else {
             result(1);
         }
+    })
+}
+
+Posts.getPostByPage = function (data, result) {
+    console.log(data);
+    const sql = `select * from posts order by TimePost DESC limit ${data.limit} offset ${(parseInt(data.page) - 1) * parseInt(data.limit)}`;
+    database.query(sql, function (err, res) {
+        if (err) {
+            throw err;
+        }
+        else {
+            result(res);
+        }
+    })
+}
+
+Posts.getPostQuantity = function (result) {
+    const sql = `select count(PostId) as quantity from posts`;
+    database.query(sql, function (err, res) {
+        if (err) {
+            throw err;
+        }
+        result(res);
     })
 }
 module.exports = Posts;

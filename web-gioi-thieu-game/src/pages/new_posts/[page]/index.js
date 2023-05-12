@@ -13,7 +13,26 @@ import { useEffect, useState } from 'react';
 
 export default function NewsPosts() {
     const router = useRouter();
-    const { page } = router.query;  
+    const [data, setData] = useState();
+
+    useEffect(() => {
+        if (router.isReady) {
+            const { page } = router.query;
+            console.log(page);
+            fetch(`http://localhost:3001/posts/get_posts_by_page/${page}/limit/8`)
+                .then(res => res.json())
+                .then(e => {
+                    setData({
+                        page,
+                        listPosts: e.result,
+                    });
+                })
+                .catch(() => {
+
+                })
+        }
+
+    }, [router.isReady])
 
     return (
         <div className='container-lg'>
@@ -23,22 +42,29 @@ export default function NewsPosts() {
 
             <Header />
 
+
+
             <NavBarComponent />
 
-            <NewPostsComponent />
 
-            {
-                page != '' && (
-                    <Pagging
-                        currentPage={page}
-                    />
-                )
-            }
+
+            <NewPostsComponent data={data?.listPosts} />
+
+
+
+            <Pagging
+                currentPage={data?.page}
+                totalPages={data?.page}
+            />
+
+
+
 
             <Footer />
         </div>
 
     );
+
 
 
 }

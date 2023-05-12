@@ -25,4 +25,10 @@ module.exports = function (router) {
 
     //update post
     router.put('/post/update', postsController.updatePost);
+
+    //get post by page
+    router.get('/posts/get_posts_by_page/:page/limit/:limit', postsController.getPostByPage);
+
+    //get post quantity
+    router.get('/posts/get/quantity', postsController.getPostQuantity);
 }

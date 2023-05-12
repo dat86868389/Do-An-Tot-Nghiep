@@ -53,3 +53,16 @@ exports.updatePost = function (req, res) {
         res.send({ result: data });
     })
 }
+
+exports.getPostByPage = function (req, res) {
+    const data = req.params;
+    postsModel.getPostByPage(data, function(data) {
+        res.send({ result : data});
+    })
+}
+
+exports.getPostQuantity = function(req, res) {
+    postsModel.getPostQuantity(function(data) {
+        res.send({ result : data});
+    })
+}

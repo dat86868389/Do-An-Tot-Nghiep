@@ -15,18 +15,18 @@ export default function PostIndex() {
         if (router.isReady) {
             const { id } = router.query;
             fetch(`http://localhost:3001/posts/${id}`)
-            .then(res => res.json())
-            .then((e) => {
-                const content = JSON.parse(e.result[0].Content);
-                const title = e.result[0].Title;
-                const username = e.result[0].UserName;
+                .then(res => res.json())
+                .then((e) => {
+                    const content = JSON.parse(e.result[0].Content);
+                    const title = e.result[0].Title;
+                    const username = e.result[0].UserName;
 
-                const data = { title, username, ...content };
-                console.log(data);
-                setPostData(data);
-            })
+                    const data = { title, username, ...content };
+                    console.log(data);
+                    setPostData(data);
+                })
         }
-        
+
     }, [router.isReady]);
 
     return (
@@ -72,7 +72,7 @@ function handleRenderPostData(block) {
 
         case 'linkTool':
             return (
-                <Link href={block.data.link}  key={block.id} >{block.data.link}</Link>
+                <Link href={block.data.link} key={block.id} >{block.data.link}</Link>
             )
         case 'list': {
             let list = ``;
