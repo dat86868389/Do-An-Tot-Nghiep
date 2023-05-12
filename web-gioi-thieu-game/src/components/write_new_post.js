@@ -29,7 +29,7 @@ export default function Editor() {
     function handleDeleteCategory(id) {
         setCategoriesChekedList(categoriesChekedList.filter(e => e != id));
     }
-    console.log(12);
+
     // handle save post data
     async function saveData(e) {
         e.preventDefault();
@@ -68,7 +68,8 @@ export default function Editor() {
         var myJsonString = JSON.stringify(postdata);
         console.log(myJsonString);
 
-        fetch('http://localhost:3001/post/add', {
+        let idPost;
+        await fetch('http://localhost:3001/post/add', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -79,14 +80,36 @@ export default function Editor() {
             .then((e) => {
                 if (e.result == 0) {
                     alert("Đăng bài thất bại do trong bài viết bạn có thể có ký tự đặc biệt, biểu cảm. Hoặc do bạn coppy link ( Hãy dùng thẻ link )");
+                    router.push('/');
                 }
                 else {
-                    alert("Đăng bài thành công!");
-                    router.push('/');
+                    idPost = e.result;
                 }
             }).catch(() => {
                 alert("Đăng bài thất bại do lỗi hệ thống!");
             });
+
+        let categoriesData = { id: idPost, cateList: categoriesChekedList }
+        fetch(`http://localhost:3001/categories/post/add`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(categoriesData)
+        })
+            .then(res => res.json())
+            .then(e => {
+                if (e.result == 0) {
+                    alert('Đăng bài viết không thành công');
+                    router.push('/');
+                }
+                else {
+                    router.push('/');
+                }
+            })
+            .catch(() => {
+                alert('Lỗi Hệ Thống');
+            })
 
     }
 

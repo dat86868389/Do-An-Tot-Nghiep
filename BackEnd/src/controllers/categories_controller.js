@@ -8,5 +8,7 @@ exports.getAllCategories = function(req, res) {
 
 exports.addCategoriesForPost = function(req, res) {
     var data = req.body;
-    console.log(data);
+    categoriesModel.addCategoriesForPost(data, function(r){
+        res.send({result : r})
+    })
 }

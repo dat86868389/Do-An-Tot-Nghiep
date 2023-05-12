@@ -27,7 +27,7 @@ Posts.addPosts = function (data, result) {
 
     var content = { blocks: data.blocks }
     const sql = `call SP_addPosts(${data.userId},${data.userId},'${data.Title}','${JSON.stringify(content)}',0,1,'${data.thumnailLink}','${data.description}');`;
-    database.query(sql, function (err, data1) {
+    database.query(sql, function (err) {
         if (err) {
             // throw err;
             result(0); // nếu thực hiện truy vấn KHÔNG thành công
@@ -96,14 +96,22 @@ Posts.getPersonalPosts = function (prams, result) {
 }
 
 Posts.deletePostById = function (id, result) {
-    const sql = `DELETE FROM posts WHERE PostId = ${id};`;
+    const sql = `DELETE FROM categoriespost WHERE PostId = ${id};`;
     // console.log(sql);
     database.query(sql, function (err) {
         if (err) {
             result(0);
         }
         else {
-            result(1);
+            const sql = `DELETE FROM posts WHERE PostId = ${id};`;
+            database.query(sql, function (err) {
+                if (err) {
+                    result(0)
+                }
+                else {
+                    result(1);
+                }
+            })
         }
     })
 }

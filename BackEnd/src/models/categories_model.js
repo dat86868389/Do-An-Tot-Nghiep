@@ -16,8 +16,27 @@ Categories.getAllCategories = function (result) {
     });
 }
 
-Categories.addCategoriesForPost = function(data, result) {
-    const sql = `call SP_addCategoriesForPost('1,2,3,4,5', 79);`;
+Categories.addCategoriesForPost = function (data, result) {
+    var listCate = ``;
+    data.cateList.map((e, index) => {
+        if (index == data.cateList.length - 1) {
+            listCate += e;
+        }
+        else {
+            listCate += `${e},`;
+        }
+
+    })
+    const sql = `call SP_addCategoriesForPost('${listCate}',${data.id});`;
+    database.query(sql, function (err) {
+        if (err) {
+            throw err;
+            result(0);
+        }
+        else {
+            result(1)
+        }
+    })
 }
 
 module.exports = Categories;
