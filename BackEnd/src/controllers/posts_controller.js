@@ -66,3 +66,10 @@ exports.getPostQuantity = function(req, res) {
         res.send({ result : data});
     })
 }
+
+exports.getPostsByKeyWord = function (req, res) {
+    const data = req.params;
+    postsModel.getPostsByKeyWord(data, function(data) {
+        res.send({ result : data});
+    })
+}

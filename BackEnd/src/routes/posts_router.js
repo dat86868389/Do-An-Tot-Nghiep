@@ -31,4 +31,7 @@ module.exports = function (router) {
 
     //get post quantity
     router.get('/posts/get/quantity', postsController.getPostQuantity);
+
+    //find posts by keywords
+    router.get('/posts/search/:keyword', postsController.getPostsByKeyWord);
 }

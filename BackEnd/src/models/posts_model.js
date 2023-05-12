@@ -166,4 +166,16 @@ Posts.getPostQuantity = function (result) {
         result(res);
     })
 }
+
+Posts.getPostsByKeyWord = function (data, result) {
+    const sql = `select * from posts where Title like '%${data.keyword}%'`;
+    database.query(sql, function (err, res) {
+        if (err) {
+            throw err;
+        }
+        else {
+            result(res);
+        }
+    });
+}
 module.exports = Posts;
