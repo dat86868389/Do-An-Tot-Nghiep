@@ -1,7 +1,13 @@
 
 
 
-export default function CategoriesList({ categoriesList, handleAddCategory, handleDeleteCategory }) {
+export default function CategoriesList(
+    {
+        categoriesList,
+        onChooseCategory,
+        onUnChooseCategory
+    }) {
+
     return (
         <ul className="categories_container">
             {
@@ -13,7 +19,7 @@ export default function CategoriesList({ categoriesList, handleAddCategory, hand
                                 value={e.CategoryId}
                                 onChange={e => {
                                     console.log(e.target.checked);
-                                    e.target.checked == true ? handleAddCategory(parseInt(e.target.value)) : handleDeleteCategory(parseInt(e.target.value));
+                                    e.target.checked == true ? onChooseCategory(parseInt(e.target.value)) : onUnChooseCategory(parseInt(e.target.value));
                                 }}
                             /> {e.CategoryName}
                         </label>

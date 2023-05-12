@@ -1,14 +1,12 @@
 import React, { memo, useEffect, useRef, useState } from "react"
 import EditorJS from '@editorjs/editorjs';
-import Header from '@editorjs/header';
 import ImageTool from '@editorjs/image';
 import Embed from '@editorjs/embed';
 import NestedList from '@editorjs/nested-list';
 import useUser from "@/lib/useUser";
 import { useRouter } from "next/router";
 import Table from '@editorjs/table';
-import axios from "axios";
-import CategoriesList from "./categories_component";
+import CategoriesList from "@/components/categories_component";
 
 
 export default function Editor() {
@@ -19,6 +17,19 @@ export default function Editor() {
 
     const [categories, setCategories] = useState();
 
+    // handle categoriesChekedList
+    const [categoriesChekedList, setCategoriesChekedList] = useState([]);
+    function handleAddCategories(id) {
+        setCategoriesChekedList([
+            ...categoriesChekedList,
+            id
+        ])
+    }
+
+    function handleDeleteCategory(id) {
+        setCategoriesChekedList(categoriesChekedList.filter(e => e != id));
+    }
+    console.log(12);
     // handle save post data
     async function saveData(e) {
         e.preventDefault();
@@ -207,7 +218,11 @@ export default function Editor() {
                     <p>Chọn thể loại của bài viết</p>
                     {
                         categories?.length > 0 && (
-                            <CategoriesList categoriesList={categories} />
+                            <CategoriesList
+                                categoriesList={categories}
+                                onChooseCategory={handleAddCategories}
+                                onUnChooseCategory={handleDeleteCategory}
+                            />
                         )
                     }
 
