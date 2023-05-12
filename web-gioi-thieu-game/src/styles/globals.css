@@ -433,3 +433,9 @@ h6 {
 .categories_title p {
   margin-bottom: 0;
 }
+
+.pagging_buttons.disable {
+  pointer-events: none;
+  cursor: not-allowed;
+  color: gray;
+}
