@@ -117,7 +117,6 @@ export default function Editor() {
     //check user logged
     useEffect(() => {
         if (user?.isLoggedIn == false) {
-            alert('bạn chưa đăng nhập');
             router.push('/login');
         }
         else {

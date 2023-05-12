@@ -20,11 +20,23 @@ export default function Header(props) {
 
     }
 
+    function handleSearch(e) {
+        // Prevent the browser from reloading the page
+        e.preventDefault();
+
+        // Read the form data
+        const form = e.target;
+        const formData = new FormData(form);
+        const formJson = Object.fromEntries(formData.entries());
+        console.log(formJson);
+        router.push(`/search/${formJson.key_word}`)
+    }
+
     return (
         <div className='row head-top'>
             <div className='col-12 col-lg-6 col-xl-6 col-6'>
-                <form>
-                    <input type="text" placeholder='Tìm kiếm...' />
+                <form onSubmit={handleSearch}>
+                    <input type="text" placeholder='Tìm kiếm bài viết...' name="key_word"/>
                     <button><FontAwesomeIcon icon={faMagnifyingGlass} /></button>
                 </form>
             </div>
