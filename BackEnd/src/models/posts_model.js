@@ -180,7 +180,9 @@ Posts.getPostsByKeyWord = function (data, result) {
 }
 
 Posts.getPostsByCategory = function (categoryId, result) {
-    const sql = `call SP_GetPostByCategory(${categoryId})`;
+    const sql = `select categoriespost.PostId, posts.Title, posts.Thumnail, posts.TimePost, posts.description
+    from categoriespost inner join posts on categoriespost.PostId = posts.PostId
+    where categoriespost.CategoryId = ${categoryId};`;
     database.query(sql, function (err, data) {
         if (err) {
             throw err;
