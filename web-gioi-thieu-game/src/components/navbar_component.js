@@ -50,11 +50,11 @@ export default function navBarComponent() {
                         </li>
 
                         <li>
-                            <Link href="#">Game PC</Link>
+                            <Link href="/categorie/17?page=1">Game PC</Link>
                         </li>
 
                         <li>
-                            <Link href="#">Game mobile</Link>
+                            <Link href="/categorie/18?page=1">Game mobile</Link>
                         </li>
 
                         <li>

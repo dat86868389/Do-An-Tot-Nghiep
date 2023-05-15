@@ -33,7 +33,7 @@ export default function navBarComponent() {
             })
 
     }, []);
-    // console.log('data',data[0].categories);
+
     return (
 
         <ul className='row latest-posts'>
@@ -62,9 +62,8 @@ export default function navBarComponent() {
                                 <FontAwesomeIcon icon={faTags} />
 
                                 {
-                                    // console.log('333',data[index].categories)
                                     data[index]?.categories?.map(category => (
-                                        <Link href="#">
+                                        <Link href={`/categorie/${category.CategoryId}?page=1`}>
                                             {category.CategoryName}
                                         </Link>
                                     ))

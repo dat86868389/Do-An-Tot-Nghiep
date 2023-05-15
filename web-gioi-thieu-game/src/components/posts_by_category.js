@@ -8,13 +8,27 @@ import { faEye, faTags } from "@fortawesome/free-solid-svg-icons";
 export default function PostByCategory({ id, page }) {
 
     const [data, setData] = useState([]);
-    useEffect(()=> {
+
+    useEffect(() => {
+        let posts = []
         fetch(`http://localhost:3001/posts/category/${id}`)
-        .then(res => res.json())
-        .then(data => {
-            setData(data.result);
-        })
-    }, [id])
+            .then(res => res.json())
+            .then((data) => {
+                posts = data.result;
+                posts.map((e, index) => {
+                    fetch(`http://localhost:3001/categories/get_by_post_id/${e.PostId}`)
+                        .then(res => res.json())
+                        .then(r => {
+                            posts[index] = { ...posts[index], categories: r.result }
+                        })
+                        .finally(() => {
+                            setData(posts);
+                        })
+                })
+
+            })
+
+    }, [id]);
 
     return (
         <ul className="row post-container">
@@ -86,7 +100,7 @@ export default function PostByCategory({ id, page }) {
                     </li>
                 ))
             }
-          
+
         </ul>
     );
 }
