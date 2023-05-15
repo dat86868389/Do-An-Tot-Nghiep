@@ -178,4 +178,17 @@ Posts.getPostsByKeyWord = function (data, result) {
         }
     });
 }
+
+Posts.getPostsByCategory = function (categoryId, result) {
+    const sql = `call SP_GetPostByCategory(${categoryId})`;
+    database.query(sql, function (err, data) {
+        if (err) {
+            throw err;
+        }
+        else {
+            result(data);
+        }
+    });
+}
+
 module.exports = Posts;

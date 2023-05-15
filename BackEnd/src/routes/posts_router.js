@@ -34,4 +34,7 @@ module.exports = function (router) {
 
     //find posts by keywords
     router.get('/posts/search/:keyword', postsController.getPostsByKeyWord);
+
+    // get posts by category
+    router.get('/posts/category/:category', postsController.getPostsByCategory);
 }

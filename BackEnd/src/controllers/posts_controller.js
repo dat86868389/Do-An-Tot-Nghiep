@@ -73,3 +73,10 @@ exports.getPostsByKeyWord = function (req, res) {
         res.send({ result : data});
     })
 }
+
+exports.getPostsByCategory = function(req, res) {
+    const categoryId = req.params.category;
+    postsModel.getPostsByCategory(categoryId, function(data) {
+        res.send({ result : data});
+    })
+}
