@@ -39,4 +39,20 @@ Categories.addCategoriesForPost = function (data, result) {
     })
 }
 
+Categories.getCategoriesByPostId = function (postId, result) {
+    const sql = `select categoriespost.CategoryId, categories.CategoryName 
+    from categoriespost inner join categories
+    on categoriespost.CategoryId = categories.CategoryId
+    where categoriespost.PostId = ${postId};`
+
+    database.query(sql, function (err, categories) {
+        if (err) {
+            throw err;
+        }
+        else {
+            result(categories);
+        }
+    })
+}
+
 module.exports = Categories;

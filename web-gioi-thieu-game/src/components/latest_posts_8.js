@@ -11,22 +11,34 @@ import { useEffect, useState } from 'react';
 
 export default function navBarComponent() {
 
-    const [newwest8, setNewwes8] = useState(null);
+    const [data, setData] = useState([]);
 
     useEffect(() => {
+        let posts = []
         fetch('http://localhost:3001/posts/top_8_Latest')
             .then(res => res.json())
             .then((data) => {
-                console.log(data)
-                setNewwes8(data);
+                posts = data.result;
+                posts.map((e, index) => {
+                    fetch(`http://localhost:3001/categories/get_by_post_id/${e.PostId}`)
+                        .then(res => res.json())
+                        .then(r => {
+                            posts[index] = { ...posts[index], categories: r.result }
+                        })
+                        .finally(() => {
+                            setData(posts);
+                        })
+                })
+                
             })
-    }, []);
 
+    }, []);
+    // console.log('data',data[0].categories);
     return (
 
         <ul className='row latest-posts'>
             {
-                newwest8?.result.map(e => (
+                data?.map((e, index) => (
                     <li className='col-md-4 col-lg-3' key={e.PostId}>
 
                         <div className={Lastest_post.postpre}>
@@ -48,51 +60,18 @@ export default function navBarComponent() {
 
                             <p className={Lastest_post.markscategory}>
                                 <FontAwesomeIcon icon={faTags} />
-                                <Link href="#">
-                                    Game,
-                                </Link>
+
+                                {
+                                    // console.log('333',data[index].categories)
+                                    data[index]?.categories?.map(category => (
+                                        <Link href="#">
+                                            {category.CategoryName}
+                                        </Link>
+                                    ))
+                                }
 
 
 
-
-
-                                <Link href="#">
-                                    Game Chiến Thuật,
-                                </Link>
-
-
-                                <Link href="#">
-                                    Game Chiến Thuật,
-                                </Link>
-
-
-                                <Link href="#">
-                                    Game Chiến Thuật,
-                                </Link>
-
-
-                                <Link href="#">
-                                    Game Chiến Thuật,
-                                </Link>
-
-
-                                <Link href="#">
-                                    Game Chiến Thuật,
-                                </Link>
-
-
-                                <Link href="#">
-                                    Game Chiến Thuật,
-                                </Link>
-
-
-                                <Link href="#">
-                                    Game Chiến Thuật,
-                                </Link>
-
-                                <Link href="#">
-                                    Game Chiến Thuật,
-                                </Link>
                             </p>
 
                             <div className={Lastest_post.views_and_watchpost}>

@@ -12,3 +12,10 @@ exports.addCategoriesForPost = function(req, res) {
         res.send({result : r})
     })
 }
+
+exports.getCategoriesByPostId = function(req, res) {
+    var postId = req.params.postId;
+    categoriesModel.getCategoriesByPostId(postId, function(r){
+        res.send({result : r})
+    })
+}
