@@ -20,14 +20,8 @@ export default function navBarComponent() {
         let categoriesData = [];
         fetch('http://localhost:3001/posts/top_8_Latest')
             .then(res => res.json())
-            .then(async e => {
+            .then(e => {
                 posts = e.result;
-                await posts.map(async (e, index) => {
-                    const categoriesJson = await fetch(`http://localhost:3001/categories/get_by_post_id/${e.PostId}`);
-                    const categories = await categoriesJson.json();
-                    setCategories()
-                    posts[index] = { ...posts[index], categories };
-                })
                 setPosts(posts);
             })
     }, []);

@@ -3,6 +3,7 @@ import Lastest_post from '../styles/postpre.module.css';
 import Link from "next/link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faTags } from "@fortawesome/free-solid-svg-icons";
+import CategoriesLinksComponent from "./categories_links_component";
 
 
 export default function PostByCategory({ id, page }) {
@@ -14,18 +15,8 @@ export default function PostByCategory({ id, page }) {
         fetch(`http://localhost:3001/posts/category/${id}`)
             .then(res => res.json())
             .then((data) => {
-                posts = data.result;
+                setData( data.result);
             })
-
-        posts.map((e, index) => {
-            fetch(`http://localhost:3001/categories/get_by_post_id/${e.PostId}`)
-                .then(res => res.json())
-                .then(r => {
-                    posts[index] = { ...posts[index], categories: r.result }
-                })
-        })
-        setData(posts);
-
     }, []);
 
     return (
@@ -49,13 +40,7 @@ export default function PostByCategory({ id, page }) {
 
                             <p className={Lastest_post.markscategory}>
                                 <FontAwesomeIcon icon={faTags} />
-                                {
-                                    data[index]?.categories?.map(category => (
-                                        <Link href={`/categorie/${category.CategoryId}?page=1`}>
-                                            {category.CategoryName}
-                                        </Link>
-                                    ))
-                                }
+                                <CategoriesLinksComponent postID={post.PostId}/>
                             </p>
 
                             <div className={Lastest_post.views_and_watchpost}>
