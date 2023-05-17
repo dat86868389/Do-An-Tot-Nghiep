@@ -5,21 +5,26 @@ import { useEffect, useState } from "react";
 
 export default function PostIndex() {
     const router = useRouter();
-    const [prams, setPrams] = useState();
-
+    const [prams, setPrams] = useState(null);
 
     useEffect(() => {
-        const { id, page } = router.query;
-        console.log(id);
-        setPrams({ idCategory: id, page })
-    }, [router.isReady, router.query.id])
-    return (
-        <Layout>
+        if (router.isReady) {
+            const { id, page } = router.query;
+            setPrams({ id, page });
+        }
+        
+    }, [router.isReady, router.query.id]);
 
-            <PostsByCategory id={prams.idCategory} page={prams.page} />
+    console.log(prams);
+    if (prams != null) {
+        console.log(prams);
+        return (
+            <Layout>
+                <PostsByCategory id={prams.id} />
+            </Layout>
+        );
+    } 
+    
 
 
-
-        </Layout>
-    );
 }
