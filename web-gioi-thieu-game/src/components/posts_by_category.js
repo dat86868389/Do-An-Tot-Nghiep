@@ -17,7 +17,7 @@ export default function PostByCategory({ id, page }) {
             .then((data) => {
                 setData( data.result);
             })
-    }, []);
+    }, [id]);
 
     return (
         <ul className="row post-container">

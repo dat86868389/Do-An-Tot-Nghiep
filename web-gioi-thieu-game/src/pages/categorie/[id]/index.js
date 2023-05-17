@@ -10,15 +10,15 @@ export default function PostIndex() {
 
     useEffect(() => {
         const { id, page } = router.query;
+        console.log(id);
         setPrams({ idCategory: id, page })
     }, [router.isReady, router.query.id])
     return (
         <Layout>
-            {
-                prams?.idCategory !== undefined && prams?.page !== undefined && (
-                    <PostsByCategory id={prams.idCategory} page={prams.page} />
-                )
-            }
+
+            <PostsByCategory id={prams.idCategory} page={prams.page} />
+
+
 
         </Layout>
     );
