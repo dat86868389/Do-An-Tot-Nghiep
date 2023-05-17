@@ -10,30 +10,28 @@ export default function PostByCategory({ id, page }) {
     const [data, setData] = useState([]);
 
     useEffect(() => {
-        let posts = []
+        let posts = [];
         fetch(`http://localhost:3001/posts/category/${id}`)
             .then(res => res.json())
             .then((data) => {
                 posts = data.result;
-                posts.map((e, index) => {
-                    fetch(`http://localhost:3001/categories/get_by_post_id/${e.PostId}`)
-                        .then(res => res.json())
-                        .then(r => {
-                            posts[index] = { ...posts[index], categories: r.result }
-                        })
-                        .finally(() => {
-                            setData(posts);
-                        })
-                })
-
             })
 
-    }, [id]);
+        posts.map((e, index) => {
+            fetch(`http://localhost:3001/categories/get_by_post_id/${e.PostId}`)
+                .then(res => res.json())
+                .then(r => {
+                    posts[index] = { ...posts[index], categories: r.result }
+                })
+        })
+        setData(posts);
+
+    }, []);
 
     return (
         <ul className="row post-container">
             {
-                data?.map((post) => (
+                data?.map((post, index) => (
                     <li className='col-md-4 col-lg-3' key={post.PostId}>
 
                         <div className={Lastest_post.postpre}>
@@ -51,41 +49,13 @@ export default function PostByCategory({ id, page }) {
 
                             <p className={Lastest_post.markscategory}>
                                 <FontAwesomeIcon icon={faTags} />
-                                <Link href="#">
-                                    Game,
-                                </Link>
-
-                                <Link href="#">
-                                    Game Chiến Thuật,
-                                </Link>
-
-                                <Link href="#">
-                                    Game Chiến Thuật,
-                                </Link>
-
-                                <Link href="#">
-                                    Game Chiến Thuật,
-                                </Link>
-
-                                <Link href="#">
-                                    Game Chiến Thuật,
-                                </Link>
-
-                                <Link href="#">
-                                    Game Chiến Thuật,
-                                </Link>
-
-                                <Link href="#">
-                                    Game Chiến Thuật,
-                                </Link>
-
-                                <Link href="#">
-                                    Game Chiến Thuật,
-                                </Link>
-
-                                <Link href="#">
-                                    Game Chiến Thuật,
-                                </Link>
+                                {
+                                    data[index]?.categories?.map(category => (
+                                        <Link href={`/categorie/${category.CategoryId}?page=1`}>
+                                            {category.CategoryName}
+                                        </Link>
+                                    ))
+                                }
                             </p>
 
                             <div className={Lastest_post.views_and_watchpost}>
