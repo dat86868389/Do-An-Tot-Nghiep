@@ -1,5 +1,6 @@
 const database = require('../common/connect_mysql');
 
+
 const Posts = function (posts) {
     this.userId = posts.userId;
     this.CensorId = posts.CensorId;

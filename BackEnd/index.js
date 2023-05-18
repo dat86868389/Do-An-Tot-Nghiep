@@ -42,6 +42,7 @@ app.use(bodyParser.json())
 require('./src/routes/users_route')(app);
 require('./src/routes/posts_router')(app);
 require('./src/routes/categories_router')(app);
+require('./src/routes/comments_router')(app);
 
 // Upload Images EditorJS API
 app.post('/upload_image_editorjs', upload.single('image'), (req, res) => {
