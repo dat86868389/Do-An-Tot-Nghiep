@@ -11,7 +11,7 @@ export default function CommentsComponent({ postId }) {
     const fetcher = url => fetch(url).then(r => r.json())
     const { data } = useSWR(`http://localhost:3001/comments/post/${postId}`,
         fetcher,
-        { refreshInterval: 100 }
+        { refreshInterval: 50 }
     );
 
     //when user post comment
