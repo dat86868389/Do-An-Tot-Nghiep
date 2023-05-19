@@ -3,6 +3,8 @@ import Layout_Post from "../../../layouts/layout";
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import Head from "next/head";
+import CommentsComponent from "@/components/comments_component";
+import CommentStyle from '../../../styles/comments.module.css';
 
 export default function PostIndex() {
     const router = useRouter();
@@ -13,7 +15,9 @@ export default function PostIndex() {
 
     useEffect(() => {
         if (router.isReady) {
+      
             const { id } = router.query;
+            console.log("id: ",id);
             fetch(`http://localhost:3001/posts/${id}`)
                 .then(res => res.json())
                 .then((e) => {
@@ -21,7 +25,7 @@ export default function PostIndex() {
                     const title = e.result[0].Title;
                     const username = e.result[0].UserName;
 
-                    const data = { title, username, ...content };
+                    const data = { title, username, ...content, id };
                     console.log(data);
                     setPostData(data);
                 })
@@ -46,8 +50,20 @@ export default function PostIndex() {
                 }
                 <h2>Tác giả: {postData?.username}</h2>
 
-
             </div>
+
+            <div className="row comments">
+                <div className={CommentStyle.border}>
+                    <h3 className={CommentStyle.title}>Bình Luận</h3>
+                </div>
+                {
+                    postData?.id != undefined && (
+                        <CommentsComponent postId={postData?.id}/>
+                    )
+                }
+            </div>
+
+
 
         </Layout_Post>
     );

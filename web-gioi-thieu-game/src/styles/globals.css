@@ -451,3 +451,9 @@ h6 {
 .search_result_container {
   background-color: var(--bg-color-container);
 }
+
+.comments {
+  background-color: var(--bg-color-container);
+  padding: 20px 0;
+}
+

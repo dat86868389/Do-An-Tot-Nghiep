@@ -16,7 +16,7 @@ exports.addComment = function (req, res) {
 exports.getCommentsByPost = function(req, res) {
     const Comment = CommentModel;
     
-    Comment.find({postId: req.params.postId})
+    Comment.find({postId: req.params.postId}).sort({time: -1})
     .then(r => {
         res.send({ result: r });
     })
