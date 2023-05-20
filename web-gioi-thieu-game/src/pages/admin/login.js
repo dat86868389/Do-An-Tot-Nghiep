@@ -31,12 +31,14 @@ export default function AdminLogin() {
                     .then(e => {
                         if (e.result == -1) {
                             alert('Tài khoản hoặc mật khẩu không đúng!');
+                        } else {
+                            if (e?.roleID != 0) {
+                                alert('Bạn không có quyền vào trang này');
+                                return;
+                            }
                         }
 
-                        if (e.roleID != 0) {
-                            alert('Bạn không có quyền vào trang này');
-                            return;
-                        }
+                        
                     })
             )
 
