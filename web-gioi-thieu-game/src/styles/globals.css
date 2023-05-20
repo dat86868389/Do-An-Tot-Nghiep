@@ -458,3 +458,11 @@ h6 {
   padding: 20px 0;
 }
 
+.login-page {
+  background-color: #6FCCA7;
+  color: #000000;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

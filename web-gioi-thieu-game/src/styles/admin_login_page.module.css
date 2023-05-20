@@ -1,0 +1,30 @@
+.container {
+    height: 60%;
+}
+
+.form {
+    background-color: #fff;
+    padding: 20px;
+    height: 100%;
+    border-radius: 15px;
+    box-shadow: 0 0 10px gray;
+}
+
+.form h2 {
+    text-align: center;
+    color: #46847A;
+}
+
+.form input {
+    width: 100%;
+    margin: 20px 0;
+    padding: 10px;
+}
+
+.form button {
+    margin: 20px 0;
+    padding: 10px;
+    background-color: #46847A;
+    color: #fff;
+    border-radius: 6px;
+}
