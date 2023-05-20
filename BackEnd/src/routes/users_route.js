@@ -16,4 +16,7 @@ module.exports = function(router) {
 
     // User Login
     router.get('/account/:account/password/:password', usersController.getUserByAccount);
+
+    // Get User Quantity
+    router.get('/users/quantity',usersController.getUserQuantity);
 }

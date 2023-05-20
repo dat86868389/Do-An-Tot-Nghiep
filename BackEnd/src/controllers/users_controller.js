@@ -20,3 +20,9 @@ exports.getUserByAccount = function(req, res) {
         res.send({ result: respond });
     });
 }
+
+exports.getUserQuantity = function(req, res) {
+    usersModel.getUserQuantity(function (respond) {
+        res.send({ result: respond });
+    });
+}

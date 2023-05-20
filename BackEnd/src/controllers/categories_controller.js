@@ -19,3 +19,9 @@ exports.getCategoriesByPostId = function(req, res) {
         res.send({result : r});
     })
 }
+
+exports.getCategoriesQuantity = function(req, res) {
+    categoriesModel.getCategoriesQuantity(function(count) {
+        res.send({result : count});
+    });
+}

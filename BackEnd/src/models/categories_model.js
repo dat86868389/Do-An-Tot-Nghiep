@@ -55,4 +55,16 @@ Categories.getCategoriesByPostId = function (postId, result) {
     })
 }
 
+Categories.getCategoriesQuantity = function (result) {
+    const sql = 'select count(categories.CategoryId) as count from categories;';
+    database.query(sql, function (err, count) {
+        if (err) {
+            result(err);
+        }
+        else {
+            result(count);
+        }
+    });
+}
+
 module.exports = Categories;

@@ -3,9 +3,15 @@ import DasboardStyle from "../styles/dashboard.module.css";
 import { faBook, faTag, faUser } from "@fortawesome/free-solid-svg-icons";
 import Link from "next/link";
 import Head from "next/head";
+import useSWR from 'swr';
 
 export default function Dasboard() {
+    const fetcher = (...args) => fetch(...args).then((res) => res.json());
+    const user_quantity = useSWR('http://localhost:3001/users/quantity', fetcher);
+    const posts_quantity = useSWR('http://localhost:3001/posts/get/quantity', fetcher);
+    const categories_quantity = useSWR('http://localhost:3001/categories/quantity', fetcher);
 
+    console.log(user_quantity);
     return (
         <>
             <div className={`${DasboardStyle.container}`}>
@@ -22,7 +28,9 @@ export default function Dasboard() {
                             <p className={`${DasboardStyle.statistical_title}`}>
                                 <FontAwesomeIcon icon={faUser} />
                             </p>
-                            <p className={`${DasboardStyle.statistical_quantity}`}>500</p>
+                            <p className={`${DasboardStyle.statistical_quantity}`}>
+                                {user_quantity?.data?.result[0].count}
+                            </p>
                         </div>
                     </div>
 
@@ -34,7 +42,9 @@ export default function Dasboard() {
                             <p className={`${DasboardStyle.statistical_title}`}>
                                 <FontAwesomeIcon icon={faBook} />
                             </p>
-                            <p className={`${DasboardStyle.statistical_quantity}`}>500</p>
+                            <p className={`${DasboardStyle.statistical_quantity}`}>
+                                {posts_quantity?.data?.result[0].quantity}
+                            </p>
                         </div>
                     </div>
 
@@ -46,7 +56,9 @@ export default function Dasboard() {
                             <p className={`${DasboardStyle.statistical_title}`}>
                                 <FontAwesomeIcon icon={faTag} />
                             </p>
-                            <p className={`${DasboardStyle.statistical_quantity}`}>500</p>
+                            <p className={`${DasboardStyle.statistical_quantity}`}>
+                                {categories_quantity?.data?.result[0].count}
+                            </p>
                         </div>
                     </div>
 

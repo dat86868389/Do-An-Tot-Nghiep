@@ -46,4 +46,17 @@ User.getUser = function (data, result) {
     });
 }
 
+User.getUserQuantity = function (result) {
+    const sql = `select count(users.UserId) as count from users;`;
+
+    database.query(sql, function (err, count) {
+        if (err) {
+            throw err;
+        }
+        else {
+            result(count);
+        }
+    });
+}
+
 module.exports = User;
