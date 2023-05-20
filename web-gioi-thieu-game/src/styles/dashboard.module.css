@@ -1,0 +1,71 @@
+.statistical {
+    padding-bottom: 20px;
+}
+.statistical_user_background {
+    background-color: #0766E9;
+    border-radius: 10px;
+    padding: 10px 0;
+}
+
+.statistical_cate_background {
+    background-color: #069969;
+    border-radius: 10px;
+    padding: 10px 0;
+}
+
+.statistical_posts_background {
+    background-color: #F94B68;
+    border-radius: 10px;
+    padding: 10px 0;
+}
+
+.statistical_post_not_approved_yet_background {
+    background-color: #FF0000;
+    border-radius: 10px;
+    padding: 10px 0;
+}
+
+.statistical_title {
+    color: #fff;
+    font-weight: 500;
+    text-align: center;
+    font-size: 22px;
+}
+
+.statistical_icon {
+    color: #fff;
+    text-align: center;
+}
+
+.statistical_quantity {
+    color: #fff;
+    text-align: center;
+    font-size: 22px;
+}
+
+.container {
+    overflow: auto;
+    max-height: 100vh;
+    padding: 20px 0 100px 0;
+}
+
+.container::-webkit-scrollbar {
+    display: none;
+}
+
+
+.table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.tr:nth-child(even) {
+    background-color: #dddddd;
+}
+
+.td,
+.th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}

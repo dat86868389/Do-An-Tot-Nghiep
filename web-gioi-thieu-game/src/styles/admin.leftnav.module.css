@@ -1,0 +1,14 @@
+.link {
+    display: block;
+    text-decoration: none;
+    color: #fff;
+    padding: 20px 5px;
+}
+
+.link:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+.link.active {
+    background-color: rgba(0, 0, 0, 0.8);
+}

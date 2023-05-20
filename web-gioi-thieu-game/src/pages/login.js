@@ -31,6 +31,12 @@ export default function Login() {
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(formJson)
         })
+          .then(res => res.json())
+          .then(e => {
+            if (e.result == -1) {
+              alert('Tài khoản hoặc mật khẩu không đúng!');
+            }
+          })
       )
 
     } catch (err) {
