@@ -27,7 +27,7 @@ Posts.addPosts = function (data, result) {
     // console.log('123', content);
 
     var content = { blocks: data.blocks }
-    const sql = `call SP_addPosts(${data.userId},${data.userId},'${data.Title}','${JSON.stringify(content)}',0,1,'${data.thumnailLink}','${data.description}');`;
+    const sql = `call SP_addPosts(${data.userId},${data.userId},'${data.Title}','${JSON.stringify(content)}',0,0,'${data.thumnailLink}','${data.description}');`;
     database.query(sql, function (err) {
         if (err) {
             // throw err;
