@@ -106,3 +106,10 @@ exports.getPostsStatusCode0Quantity = function(req, res) {
         res.send({ result : data});
     })
 }
+
+exports.getPostsbyPageOnAdminSide = function(req, res) {
+    const page = req.params.page;
+    postsModel.getPostsbyPageOnAdminSide(page, function(data){
+        res.send({ result : data});
+    })
+}

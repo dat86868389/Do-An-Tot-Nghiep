@@ -49,4 +49,7 @@ module.exports = function (router) {
 
     // get post info by postId (on admin side)
     router.get('/post/getinfo/:postId', postsController.getInfoByPostId);
+
+    // get post on admin side
+    router.get('/posts/get/page/:page', postsController.getPostsbyPageOnAdminSide);
 }

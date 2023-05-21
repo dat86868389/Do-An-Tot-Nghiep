@@ -277,4 +277,24 @@ Posts.getPostsStatusCode0Quantity = function (result) {
         result(data);
     })
 }
+
+Posts.getPostsbyPageOnAdminSide = function(page, result) {
+    const sql = `select posts.PostId, 
+    posts.UserId, 
+    posts.Title,
+    posts.Status,
+    posts.TimePost,
+    posts.description,
+    users.UserName
+    from posts inner join users on posts.UserId = users.UserId
+    order by TimePost DESC
+    limit 15 offset ${page-1};`;
+    console.log('123213213',sql);
+    database.query(sql, function (err, posts) {
+        if(err) {
+            throw err;
+        }
+        result(posts);
+    })
+}
 module.exports = Posts;

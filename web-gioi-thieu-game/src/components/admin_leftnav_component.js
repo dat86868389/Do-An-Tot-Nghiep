@@ -24,7 +24,7 @@ export default function AdminLeftNav() {
 
             <div className="row">
                 <div className="col-12">
-                    <Link href={`/admin`}  className={`${LeftNavStyle.link}`}>
+                    <Link href={`/admin/posts_management`}  className={`${LeftNavStyle.link}`}>
                         Quản lý bài viết
                     </Link>
                 </div>
@@ -40,7 +40,7 @@ export default function AdminLeftNav() {
 
             <div className="row">
                 <div className="col-12">
-                    <Link href={`/admin`}  className={`${LeftNavStyle.link}`}>
+                    <Link href={`/admin/cate_management`}  className={`${LeftNavStyle.link}`}>
                         Quản lý thể loại
                     </Link>
                 </div>
