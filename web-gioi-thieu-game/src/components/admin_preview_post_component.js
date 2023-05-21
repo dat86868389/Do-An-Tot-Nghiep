@@ -24,77 +24,78 @@ export default function AdminPreviewPost({ postID }) {
             .then(e => {
                 setData(e);
                 console.log(e);
-            })
-    }, [postID != undefined])
 
-
-
-    useEffect(() => {
-        if (!editorRef.current) {
-            let content = JSON.parse(data?.result[0]?.Content);
-            const editor = new EditorJS({
-
-                holder: 'editorjs',
-
-                placeholder: 'Ấn vào đây để tạo nội dung',
-                data: {
-                    blocks: content.blocks
-                },
-                tools: {
-                    table: Table,
-                    embed: {
-                        class: Embed,
-                        config: {
-                            services: {
-                                youtube: true,
-                                coub: true,
-                                facebook: true,
-                                instagram: true,
-                                twitter: true,
-
-                            }
-                        }
-                    },
-
-                    image: {
-                        class: ImageTool,
-                        config: {
-                            endpoints: {
-                                byFile: 'http://localhost:3001/upload_image_editorjs',
-                                byUrl: 'http://localhost:3001/upload_image_editorjs',
-                            },
-
-                            field: 'image',
-                            types: 'image/*'
-                        }
-                    },
-
-                    list: {
-                        class: NestedList,
-                        inlineToolbar: true,
-                        config: {
-                            defaultStyle: 'ordered'
+                if (!editorRef.current) {
+                    console.log("123", data?.result[0]?.Content);
+                    let content = JSON.parse(e.result[0].Content);
+                    const editor = new EditorJS({
+        
+                        holder: 'editorjs',
+        
+                        placeholder: 'Ấn vào đây để tạo nội dung',
+                        data: {
+                            blocks: content.blocks
                         },
-                    },
-
-                    linkTool: {
-                        class: LinkTool,
-                        config: {
-                            endpoint: 'http://localhost:3001/fetchUrl', // Your backend endpoint for url data fetching,
+                        tools: {
+                            table: Table,
+                            embed: {
+                                class: Embed,
+                                config: {
+                                    services: {
+                                        youtube: true,
+                                        coub: true,
+                                        facebook: true,
+                                        instagram: true,
+                                        twitter: true,
+        
+                                    }
+                                }
+                            },
+        
+                            image: {
+                                class: ImageTool,
+                                config: {
+                                    endpoints: {
+                                        byFile: 'http://localhost:3001/upload_image_editorjs',
+                                        byUrl: 'http://localhost:3001/upload_image_editorjs',
+                                    },
+        
+                                    field: 'image',
+                                    types: 'image/*'
+                                }
+                            },
+        
+                            list: {
+                                class: NestedList,
+                                inlineToolbar: true,
+                                config: {
+                                    defaultStyle: 'ordered'
+                                },
+                            },
+        
+                            linkTool: {
+                                class: LinkTool,
+                                config: {
+                                    endpoint: 'http://localhost:3001/fetchUrl', // Your backend endpoint for url data fetching,
+                                }
+                            },
+        
                         }
-                    },
-
+                    })
+                    console.log("123");
+                    editorRef.current = editor;
                 }
             })
 
-            editorRef.current = editor;
-        }
+
         return () => {
             if (editorRef.current && editorRef.current.destroy) {
                 editorRef.current.destroy();
             }
         }
-    }, [])
+    }, [postID != undefined])
+
+
 
 
     return (
