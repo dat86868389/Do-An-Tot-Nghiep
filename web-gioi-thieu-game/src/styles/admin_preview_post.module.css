@@ -1,0 +1,9 @@
+.container {
+    overflow: auto;
+    max-height: 100vh;
+    padding: 20px 0 100px 0;
+}
+
+.container::-webkit-scrollbar {
+    display: none;
+}

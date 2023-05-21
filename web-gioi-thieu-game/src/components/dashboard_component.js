@@ -10,8 +10,18 @@ export default function Dasboard() {
     const user_quantity = useSWR('http://localhost:3001/users/quantity', fetcher);
     const posts_quantity = useSWR('http://localhost:3001/posts/get/quantity', fetcher);
     const categories_quantity = useSWR('http://localhost:3001/categories/quantity', fetcher);
+    const posts_waitting = useSWR('http://localhost:3001/posts/status/code/0', fetcher);
 
-    console.log(user_quantity);
+
+    function handleAcept(postID) {
+        fetch(`http://localhost:3001/posts/set/status/code/1/postId/${postID}`, {
+            method: 'PUT'
+        })
+            .then((res) => res.json())
+            .then((e) => {
+                console.log(e);
+            });
+    }
     return (
         <>
             <div className={`${DasboardStyle.container}`}>
@@ -75,48 +85,39 @@ export default function Dasboard() {
                     </div>
                 </div>
 
-                {/* nguoi dang ky moi nhat */}
+                {/* cac bai viet chua duyet */}
                 <div className="row">
                     <div className="col-12">
                         <h2>Các bài viết chưa duyệt - <span><Link href={`#`}>xem tất cả</Link></span></h2>
                         <table className={`${DasboardStyle.table}`}>
                             <thead>
                                 <tr className={`${DasboardStyle.tr}`}>
-                                    <th className={`${DasboardStyle.th}`}>Tài Khoản</th>
-                                    <th className={`${DasboardStyle.th}`}>Tên Người Dùng</th>
-                                    <th className={`${DasboardStyle.th}`}>Email</th>
+                                    <th className={`${DasboardStyle.th}`}>Tên bài viết</th>
+                                    <th className={`${DasboardStyle.th}`}>Người đăng</th>
+                                    <th className={`${DasboardStyle.th}`}>Ngày đăng</th>
+                                    <th className={`${DasboardStyle.th}`}>Nội dung</th>
+                                    <th className={`${DasboardStyle.th}`}>Duyệt</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr className={`${DasboardStyle.tr}`}>
-                                    <td className={`${DasboardStyle.td}`}>Alfreds Futterkiste</td>
-                                    <td className={`${DasboardStyle.td}`}>Maria Anders</td>
-                                    <td className={`${DasboardStyle.td}`}>Germany21321321@gmail.com</td>
-                                </tr>
+                                {
+                                    posts_waitting?.data?.result.map(post => (
+                                        <tr className={`${DasboardStyle.tr}`}>
+                                            <td className={`${DasboardStyle.td}`}>{post.Title}</td>
+                                            <td className={`${DasboardStyle.td}`}>{post.UserName}</td>
+                                            <td className={`${DasboardStyle.td}`}>
+                                                {handleRenderDate(post.TimePost)}
+                                            </td>
+                                            <td className={`${DasboardStyle.td}`}>
+                                                <Link href={`/admin/preview_post/${post.PostId}`} target="_blank">xem</Link>
+                                            </td>
+                                            <td className={`${DasboardStyle.td}`}>
+                                                <button onClick={()=>handleAcept(post.PostId)}>Duyệt</button>
+                                            </td>
+                                        </tr>
+                                    ))
+                                }
 
-                                <tr className={`${DasboardStyle.tr}`}>
-                                    <td className={`${DasboardStyle.td}`}>Alfreds Futterkiste</td>
-                                    <td className={`${DasboardStyle.td}`}>Maria Anders</td>
-                                    <td className={`${DasboardStyle.td}`}>Germany</td>
-                                </tr>
-
-                                <tr className={`${DasboardStyle.tr}`}>
-                                    <td className={`${DasboardStyle.td}`}>Alfreds Futterkiste</td>
-                                    <td className={`${DasboardStyle.td}`}>Maria Anders</td>
-                                    <td className={`${DasboardStyle.td}`}>Germany</td>
-                                </tr>
-
-                                <tr className={`${DasboardStyle.tr}`}>
-                                    <td className={`${DasboardStyle.td}`}>Alfreds Futterkiste</td>
-                                    <td className={`${DasboardStyle.td}`}>Maria Anders</td>
-                                    <td className={`${DasboardStyle.td}`}>Germany</td>
-                                </tr>
-
-                                <tr className={`${DasboardStyle.tr}`}>
-                                    <td className={`${DasboardStyle.td}`}>Alfreds123213 Futterkiste</td>
-                                    <td className={`${DasboardStyle.td}`}>Mariasad Anders</td>
-                                    <td className={`${DasboardStyle.td}`}>Germany</td>
-                                </tr>
                             </tbody>
 
                         </table>
@@ -174,4 +175,19 @@ export default function Dasboard() {
             </div>
         </>
     )
+}
+
+
+function handleRenderDate(time) {
+    const dateString = time;
+    const dateObject = new Date(dateString);
+    const date = dateObject.getDate() < 10 ? `0${dateObject.getDate()}` : dateObject.getDate();
+    const month = dateObject.getMonth() < 10 ? `0${dateObject.getMonth() + 1}` : dateObject.getMonth() + 1;
+    const year = dateObject.getFullYear();
+    const hour = dateObject.getHours() < 10 ? `0${dateObject.getHours()}` : dateObject.getHours();
+    const minute = dateObject.getMinutes() < 10 ? `0${dateObject.getMinutes()}` : dateObject.getMinutes();
+    const second = dateObject.getSeconds() < 10 ? `0${dateObject.getSeconds()}` : dateObject.getSeconds();
+
+    return `${date}-${month}-${year} ${hour}h-${minute}m-${second}s`;
+
 }

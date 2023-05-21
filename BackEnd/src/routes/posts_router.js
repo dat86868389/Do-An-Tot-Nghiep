@@ -11,7 +11,7 @@ module.exports = function (router) {
     //get top posts
     router.get('/get_top_posts_by_view', postsController.getTop8Posts);
 
-    // get posts by id 
+    // get posts by id (read posts)
     router.get('/posts/:id', postsController.getPostsById);
 
     //get all posts by id user
@@ -37,4 +37,13 @@ module.exports = function (router) {
 
     // get posts by category
     router.get('/posts/category/:category', postsController.getPostsByCategory);
+
+    //get posts have status code = 0
+    router.get('/posts/status/code/0', postsController.getPostsStatusCodeEqual0);
+
+    // set status code = 1 for post acepted
+    router.put('/posts/set/status/code/1/postId/:postId', postsController.setPostStatusCodeEqual1);
+
+    // get post info by postId (on admin side)
+    router.get('/post/getinfo/:postId', postsController.getInfoByPostId);
 }

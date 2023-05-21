@@ -50,7 +50,11 @@ Posts.addPosts = function (data, result) {
 }
 
 Posts.getTop8Latest = function (result) {
-    const sql = `SELECT Title, View, PostId, TimePost, Thumnail, description from posts order by  TimePost DESC LIMIT 8;`;
+    const sql = `SELECT
+    Title, View, PostId, TimePost, Thumnail, description 
+    from posts
+    where Status = 1
+    order by TimePost DESC LIMIT 8;`;
 
     database.query(sql, function (err, top8posts) {
         if (err) {
@@ -75,7 +79,16 @@ Posts.getPostsById = function (data, result) {
 }
 
 Posts.getTopPosts = function (result) {
-    const sql = `select posts.PostId,posts.Title,posts.View,posts.TimePost,posts.Thumnail,posts.description,users.UserName from posts inner join users on posts.UserId = users.UserId order by View DESC limit 8;`;
+    const sql = `select
+    posts.PostId,
+    posts.Title,
+    posts.View,
+    posts.TimePost,
+    posts.Thumnail,
+    posts.description,
+    users.UserName from posts inner join users on posts.UserId = users.UserId
+    where posts.Status = 1
+    order by View DESC limit 8;`;
     database.query(sql, function (err, data) {
         if (err) {
             throw err;
@@ -194,4 +207,61 @@ Posts.getPostsByCategory = function (categoryId, result) {
     });
 }
 
+Posts.getPostsStatusCodeEqual0 = function (result) {
+    const sql = `SELECT
+    posts.PostId,
+    posts.UserId,
+    posts.Title,
+    posts.TimePost,
+    users.UserName
+    FROM posts inner join users
+    on posts.UserId = users.UserId
+    where posts.Status = 0 order by TimePost DESC
+    limit 8;`;
+    console.log(sql);
+    database.query(sql, function (err, data) {
+        if (err) {
+            throw err;
+        }
+
+        else {
+            result(data);
+            return;
+        }
+    });
+}
+
+Posts.setPostStatusCodeEqual1 = function (postId, result) {
+    const sql = `UPDATE posts
+    SET Status = 1
+    WHERE posts.PostId = ${postId};`
+    database.query(sql, function (err) {
+        if (err) {
+            throw err;
+        }
+        result(1);
+    })
+}
+
+Posts.getInfoByPostId = function(postId, result) {
+    const sql = `select
+    posts.PostId,
+    posts.Title,
+    posts.Content,
+    posts.TimePost,
+    posts.Thumnail,
+    posts.description,
+    users.UserId,
+    users.UserName
+    from posts inner join users
+    on posts.UserId = users.UserId
+    where posts.PostId = ${postId};`;
+
+    database.query(sql, function (err, data){
+        if (err) {
+            throw err;
+        }
+        result(data);
+    })
+}
 module.exports = Posts;

@@ -21,7 +21,7 @@ export default function AdminTopNav() {
     return (
         <div className={`col-12`}>
             <div className={`${AdminStyle.info}`}>
-                <p>Xin chào: {user.userName}</p>
+                <p>Xin chào: {user?.userName}</p>
                 <button
                     className={`${AdminTopNavStyle.button_loggout}`}
                     onClick={handleLogout}>

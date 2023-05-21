@@ -80,3 +80,23 @@ exports.getPostsByCategory = function(req, res) {
         res.send({ result : data});
     })
 }
+
+exports.getPostsStatusCodeEqual0 = function(req, res) {
+    postsModel.getPostsStatusCodeEqual0(function(data){
+        res.send({ result : data});
+    })
+}
+
+exports.setPostStatusCodeEqual1 = function(req, res) {
+    const postID = req.params.postId
+    postsModel.setPostStatusCodeEqual1(postID, function(data){
+        res.send({ result : data});
+    })
+}
+
+exports.getInfoByPostId = function(req, res) {
+    const postID = req.params.postId;
+    postsModel.getInfoByPostId(postID, function(data){
+        res.send({ result : data});
+    })
+}
