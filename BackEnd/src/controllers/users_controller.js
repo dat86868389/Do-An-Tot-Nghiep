@@ -32,3 +32,10 @@ exports.getLatest15 = function(req, res) {
         res.send({ result: data });
     })
 }
+
+exports.getUsersByPage = function(req, res) {
+    const page = req.params.page;
+    usersModel.getUsersByPage(page, function (data){
+        res.send({ result: data });
+    })
+}

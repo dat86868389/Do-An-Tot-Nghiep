@@ -29,9 +29,9 @@ export default function AdminPreviewPost({ postID }) {
                     console.log("123", data?.result[0]?.Content);
                     let content = JSON.parse(e.result[0].Content);
                     const editor = new EditorJS({
-        
+
                         holder: 'editorjs',
-        
+
                         placeholder: 'Ấn vào đây để tạo nội dung',
                         data: {
                             blocks: content.blocks
@@ -47,11 +47,11 @@ export default function AdminPreviewPost({ postID }) {
                                         facebook: true,
                                         instagram: true,
                                         twitter: true,
-        
+
                                     }
                                 }
                             },
-        
+
                             image: {
                                 class: ImageTool,
                                 config: {
@@ -59,12 +59,12 @@ export default function AdminPreviewPost({ postID }) {
                                         byFile: 'http://localhost:3001/upload_image_editorjs',
                                         byUrl: 'http://localhost:3001/upload_image_editorjs',
                                     },
-        
+
                                     field: 'image',
                                     types: 'image/*'
                                 }
                             },
-        
+
                             list: {
                                 class: NestedList,
                                 inlineToolbar: true,
@@ -72,14 +72,14 @@ export default function AdminPreviewPost({ postID }) {
                                     defaultStyle: 'ordered'
                                 },
                             },
-        
+
                             linkTool: {
                                 class: LinkTool,
                                 config: {
                                     endpoint: 'http://localhost:3001/fetchUrl', // Your backend endpoint for url data fetching,
                                 }
                             },
-        
+
                         }
                     })
                     console.log("123");
@@ -103,7 +103,10 @@ export default function AdminPreviewPost({ postID }) {
             <div className="row">
                 <div className="col-6">
                     <h2>Tiêu đề bài viết</h2>
-                    <input value={data?.result[0]?.Title} readOnly />
+                    <input value={data?.result[0]?.Title}
+                        readOnly 
+                        className={`${AdminPreviewPostStyle.title}`}
+                        />
                 </div>
 
                 <div className="col-6">
@@ -113,7 +116,9 @@ export default function AdminPreviewPost({ postID }) {
 
                 <div className="col-12">
                     <h2>Mô tả bài viết</h2>
-                    <textarea value={`${data?.result[0]?.description}`} />
+                    <textarea value={`${data?.result[0]?.description}`} 
+                     className={`${AdminPreviewPostStyle.text_area}`}
+                    />
                 </div>
 
                 <div className="col-12 write-content">

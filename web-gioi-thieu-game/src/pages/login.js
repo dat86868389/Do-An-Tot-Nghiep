@@ -74,7 +74,6 @@ export default function Login() {
 
           <div className='other'>
             <Link href="/register">Đăng ký</Link>
-            <Link href="#">Lấy lại mật khẩu</Link>
           </div>
         </div>
       </div>

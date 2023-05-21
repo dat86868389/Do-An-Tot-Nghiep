@@ -23,8 +23,8 @@ User.getUsers = function (result) {
 
 User.addUser = function (data, result) {
     const dateOBJ = new Date(Date.now());
-    const month = dateOBJ.getMonth()+1 < 10? `0${dateOBJ.getMonth()+1}` : dateOBJ.getMonth()+1;
-    const date =  dateOBJ.getDate() < 10? `0${dateOBJ.getDate()}` : dateOBJ.getDate();
+    const month = dateOBJ.getMonth() + 1 < 10 ? `0${dateOBJ.getMonth() + 1}` : dateOBJ.getMonth() + 1;
+    const date = dateOBJ.getDate() < 10 ? `0${dateOBJ.getDate()}` : dateOBJ.getDate();
     const _date = `${dateOBJ.getFullYear()}-${month}-${date}`;
     const sql = `call SP_addUser(n'${data.userName}','${data.account}','${data.password}','${data.email}','${_date}');`;
     database.query(sql, function (err) {
@@ -64,10 +64,26 @@ User.getUserQuantity = function (result) {
     });
 }
 
-User.getLatest15 = function(result) {
+User.getLatest15 = function (result) {
     const sql = `select * from users order by time_create DESC;`;
     database.query(sql, function (err, users) {
-        if(err) {
+        if (err) {
+            throw err;
+        }
+        else {
+            result(users);
+        }
+    })
+}
+
+User.getUsersByPage = function (page, result) {
+    const sql = `select * from users
+    where RoleID != 0
+    order by time_create DESC
+    limit 8
+    offset ${parseInt(page) - 1}`;
+    database.query(sql, function (err, users) {
+        if (err) {
             throw err;
         }
         else {

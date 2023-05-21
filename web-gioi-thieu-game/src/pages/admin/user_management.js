@@ -1,11 +1,11 @@
 import LayoutAdmin from "@/layouts/layout_admin";
-
+import AdminUserManagementCompoent from "../../components/admin_user_management_component"
 
 export default function UserManagement() {
 
     return (
         <LayoutAdmin>
-            <h1>Quan ly nguoi dung</h1>
+            <AdminUserManagementCompoent />
         </LayoutAdmin>
 
     )

@@ -1,0 +1,25 @@
+.container {
+    overflow: auto;
+    max-height: 100vh;
+    padding: 20px 0 100px 0;
+}
+
+.container::-webkit-scrollbar {
+    display: none;
+}
+
+.table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.tr:nth-child(even) {
+    background-color: #dddddd;
+}
+
+.td,
+.th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}

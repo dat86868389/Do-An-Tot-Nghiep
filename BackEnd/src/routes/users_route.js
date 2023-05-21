@@ -22,4 +22,7 @@ module.exports = function(router) {
 
     // get the latest 15 subscribers
     router.get('/users/latest15',usersController.getLatest15);
+
+    // paginate users
+    router.get('/users/paginate/page/:page',usersController.getUsersByPage);
 }
