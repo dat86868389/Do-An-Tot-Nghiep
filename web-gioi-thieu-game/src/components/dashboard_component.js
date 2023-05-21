@@ -10,6 +10,7 @@ export default function Dasboard() {
     const user_quantity = useSWR('http://localhost:3001/users/quantity', fetcher);
     const posts_quantity = useSWR('http://localhost:3001/posts/get/quantity', fetcher);
     const categories_quantity = useSWR('http://localhost:3001/categories/quantity', fetcher);
+    const posts_waitting_quantity = useSWR('http://localhost:3001/posts/status/code/0/quantity', fetcher);
     const posts_waitting = useSWR('http://localhost:3001/posts/status/code/0', fetcher);
 
 
@@ -80,7 +81,9 @@ export default function Dasboard() {
                             <p className={`${DasboardStyle.statistical_title}`}>
                                 <FontAwesomeIcon icon={faBook} />
                             </p>
-                            <p className={`${DasboardStyle.statistical_quantity}`}>500</p>
+                            <p className={`${DasboardStyle.statistical_quantity}`}>
+                                {posts_waitting_quantity?.data?.result[0].count}
+                            </p>
                         </div>
                     </div>
                 </div>

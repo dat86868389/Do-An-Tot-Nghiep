@@ -41,6 +41,9 @@ module.exports = function (router) {
     //get posts have status code = 0
     router.get('/posts/status/code/0', postsController.getPostsStatusCodeEqual0);
 
+    //get quantity posts have status code = 0
+    router.get('/posts/status/code/0/quantity', postsController.getPostsStatusCode0Quantity)
+
     // set status code = 1 for post acepted
     router.put('/posts/set/status/code/1/postId/:postId', postsController.setPostStatusCodeEqual1);
 

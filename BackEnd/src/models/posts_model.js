@@ -243,7 +243,7 @@ Posts.setPostStatusCodeEqual1 = function (postId, result) {
     })
 }
 
-Posts.getInfoByPostId = function(postId, result) {
+Posts.getInfoByPostId = function (postId, result) {
     const sql = `select
     posts.PostId,
     posts.Title,
@@ -257,9 +257,22 @@ Posts.getInfoByPostId = function(postId, result) {
     on posts.UserId = users.UserId
     where posts.PostId = ${postId};`;
 
-    database.query(sql, function (err, data){
+    database.query(sql, function (err, data) {
         if (err) {
             throw err;
+        }
+        result(data);
+    })
+}
+
+Posts.getPostsStatusCode0Quantity = function (result) {
+    const sql = `select count(posts.PostId) as count from posts
+    where Status = 0 order by TimePost DESC`;
+
+    database.query(sql, function (err, data) {
+        if (err) {
+            throw err;
+
         }
         result(data);
     })

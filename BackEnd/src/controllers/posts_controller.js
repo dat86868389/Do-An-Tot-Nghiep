@@ -100,3 +100,9 @@ exports.getInfoByPostId = function(req, res) {
         res.send({ result : data});
     })
 }
+
+exports.getPostsStatusCode0Quantity = function(req, res) {
+    postsModel.getPostsStatusCode0Quantity(function(data){
+        res.send({ result : data});
+    })
+}
