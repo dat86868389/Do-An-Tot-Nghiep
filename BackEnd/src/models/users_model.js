@@ -22,9 +22,14 @@ User.getUsers = function (result) {
 }
 
 User.addUser = function (data, result) {
-    const sql = `call SP_addUser(n'${data.userName}', '${data.account}', '${data.password}', '${data.email}');`;
+    const dateOBJ = new Date(Date.now());
+    const month = dateOBJ.getMonth()+1 < 10? `0${dateOBJ.getMonth()+1}` : dateOBJ.getMonth()+1;
+    const date =  dateOBJ.getDate() < 10? `0${dateOBJ.getDate()}` : dateOBJ.getDate();
+    const _date = `${dateOBJ.getFullYear()}-${month}-${date}`;
+    const sql = `call SP_addUser(n'${data.userName}','${data.account}','${data.password}','${data.email}','${_date}');`;
     database.query(sql, function (err) {
         if (err) {
+            throw err;
             result(0); // nếu thực hiện truy vấn KHÔNG thành công
         }
         else {
@@ -57,6 +62,18 @@ User.getUserQuantity = function (result) {
             result(count);
         }
     });
+}
+
+User.getLatest15 = function(result) {
+    const sql = `select * from users order by time_create DESC;`;
+    database.query(sql, function (err, users) {
+        if(err) {
+            throw err;
+        }
+        else {
+            result(users);
+        }
+    })
 }
 
 module.exports = User;

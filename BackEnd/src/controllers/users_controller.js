@@ -26,3 +26,9 @@ exports.getUserQuantity = function(req, res) {
         res.send({ result: respond });
     });
 }
+
+exports.getLatest15 = function(req, res) {
+    usersModel.getLatest15(function (data){
+        res.send({ result: data });
+    })
+}

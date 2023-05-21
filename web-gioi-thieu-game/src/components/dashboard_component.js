@@ -11,7 +11,10 @@ export default function Dasboard() {
     const posts_quantity = useSWR('http://localhost:3001/posts/get/quantity', fetcher);
     const categories_quantity = useSWR('http://localhost:3001/categories/quantity', fetcher);
     const posts_waitting_quantity = useSWR('http://localhost:3001/posts/status/code/0/quantity', fetcher);
+
+
     const posts_waitting = useSWR('http://localhost:3001/posts/status/code/0', fetcher);
+    const users = useSWR('http://localhost:3001/users/latest15', fetcher);
 
 
     function handleAcept(postID) {
@@ -115,7 +118,7 @@ export default function Dasboard() {
                                                 <Link href={`/admin/preview_post/${post.PostId}`} target="_blank">xem</Link>
                                             </td>
                                             <td className={`${DasboardStyle.td}`}>
-                                                <button onClick={()=>handleAcept(post.PostId)}>Duyệt</button>
+                                                <button onClick={() => handleAcept(post.PostId)}>Duyệt</button>
                                             </td>
                                         </tr>
                                     ))
@@ -137,38 +140,31 @@ export default function Dasboard() {
                                     <th className={`${DasboardStyle.th}`}>Tài Khoản</th>
                                     <th className={`${DasboardStyle.th}`}>Tên Người Dùng</th>
                                     <th className={`${DasboardStyle.th}`}>Email</th>
+                                    <th className={`${DasboardStyle.th}`}>Ngày tạo</th>
+
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr className={`${DasboardStyle.tr}`}>
-                                    <td className={`${DasboardStyle.td}`}>Alfreds Futterkiste</td>
-                                    <td className={`${DasboardStyle.td}`}>Maria Anders</td>
-                                    <td className={`${DasboardStyle.td}`}>Germany21321321@gmail.com</td>
-                                </tr>
+                                {
+                                    users?.data?.result.map(user => (
+                                        <tr className={`${DasboardStyle.tr}`}>
+                                            <td className={`${DasboardStyle.td}`}>
+                                                {user.Account}
+                                            </td>
+                                            <td className={`${DasboardStyle.td}`}>
+                                                {user.UserName}
+                                            </td>
 
-                                <tr className={`${DasboardStyle.tr}`}>
-                                    <td className={`${DasboardStyle.td}`}>Alfreds Futterkiste</td>
-                                    <td className={`${DasboardStyle.td}`}>Maria Anders</td>
-                                    <td className={`${DasboardStyle.td}`}>Germany</td>
-                                </tr>
+                                            <td className={`${DasboardStyle.td}`}>
+                                                {user.email}
+                                            </td>
 
-                                <tr className={`${DasboardStyle.tr}`}>
-                                    <td className={`${DasboardStyle.td}`}>Alfreds Futterkiste</td>
-                                    <td className={`${DasboardStyle.td}`}>Maria Anders</td>
-                                    <td className={`${DasboardStyle.td}`}>Germany</td>
-                                </tr>
-
-                                <tr className={`${DasboardStyle.tr}`}>
-                                    <td className={`${DasboardStyle.td}`}>Alfreds Futterkiste</td>
-                                    <td className={`${DasboardStyle.td}`}>Maria Anders</td>
-                                    <td className={`${DasboardStyle.td}`}>Germany</td>
-                                </tr>
-
-                                <tr className={`${DasboardStyle.tr}`}>
-                                    <td className={`${DasboardStyle.td}`}>Alfreds123213 Futterkiste</td>
-                                    <td className={`${DasboardStyle.td}`}>Mariasad Anders</td>
-                                    <td className={`${DasboardStyle.td}`}>Germany</td>
-                                </tr>
+                                            <td className={`${DasboardStyle.td}`}>
+                                                {handleRenderDateUser(user.time_create)}
+                                            </td>
+                                        </tr>
+                                    ))
+                                }
                             </tbody>
 
                         </table>
@@ -194,3 +190,16 @@ function handleRenderDate(time) {
     return `${date}-${month}-${year} ${hour}h-${minute}m-${second}s`;
 
 }
+
+
+function handleRenderDateUser(time) {
+    const dateString = time;
+    const dateObject = new Date(dateString);
+    const date = dateObject.getDate() < 10 ? `0${dateObject.getDate()}` : dateObject.getDate();
+    const month = dateObject.getMonth() < 10 ? `0${dateObject.getMonth() + 1}` : dateObject.getMonth() + 1;
+    const year = dateObject.getFullYear();
+    
+    return `${date}-${month}-${year}`;
+
+}
+

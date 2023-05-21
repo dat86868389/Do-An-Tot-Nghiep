@@ -19,4 +19,7 @@ module.exports = function(router) {
 
     // Get User Quantity
     router.get('/users/quantity',usersController.getUserQuantity);
+
+    // get the latest 15 subscribers
+    router.get('/users/latest15',usersController.getLatest15);
 }
