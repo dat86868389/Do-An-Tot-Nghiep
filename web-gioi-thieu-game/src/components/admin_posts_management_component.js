@@ -2,11 +2,15 @@ import PostsMagementStyle from '../styles/admin_post_management.module.css';
 import useSWR from 'swr';
 import Head from 'next/head';
 import AdminPaginationComponent from './admin_pagination_component';
+import { useRouter } from 'next/router';
 
-export default function AdminPostManagementCompoent() {
+export default function AdminPostManagementCompoent({ page }) {
+
+
     const fetcher = (...args) => fetch(...args).then((res) => res.json());
-    const posts = useSWR('http://localhost:3001/posts/get/page/1', fetcher);
-
+    const posts = useSWR(`http://localhost:3001/posts/get/page/${page}`, fetcher);
+    const posts_quantity = useSWR('http://localhost:3001/posts/get/quantity', fetcher);
+    console.log(posts_quantity?.data?.result[0].quantity);
     return (
         <div className={`${PostsMagementStyle.container}`}>
             <Head>
@@ -71,11 +75,16 @@ export default function AdminPostManagementCompoent() {
 
             <div className='row'>
                 <div className='col-12'>
-                    <AdminPaginationComponent />
+                    <AdminPaginationComponent
+                        currentPage={page}
+                        totalPages={Math.ceil(posts_quantity?.data?.result[0].quantity / 15)}
+                    />
                 </div>
             </div>
         </div>
     )
+
+
 }
 
 

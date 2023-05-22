@@ -10,9 +10,7 @@ export default function AdminPaginationComponent({
     totalPages,
     subDomain
 }) {
-    const router = useRouter();
-    const { page } = router.query;
-
+    console.log(totalPages);
     return (
         <div className={`${AdminPaginationStyle.admin_pagination}`}>
             {/* <span href={`#`} className={`${AdminPaginationStyle.disable}`}>
@@ -27,7 +25,7 @@ export default function AdminPaginationComponent({
             <Link href={`#`}>
                 <FontAwesomeIcon icon={faArrowRight} />
             </Link> */}
-            {handleRenderPages(page, 12)}
+            {handleRenderPages(currentPage, totalPages)}
 
         </div>
     )

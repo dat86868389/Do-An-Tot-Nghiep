@@ -288,7 +288,7 @@ Posts.getPostsbyPageOnAdminSide = function(page, result) {
     users.UserName
     from posts inner join users on posts.UserId = users.UserId
     order by TimePost DESC
-    limit 15 offset ${page-1};`;
+    limit 15 offset ${(page-1)*15};`;
     console.log('123213213',sql);
     database.query(sql, function (err, posts) {
         if(err) {
