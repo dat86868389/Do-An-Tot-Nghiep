@@ -1,0 +1,32 @@
+.admin_pagination {
+    float: right;
+    padding: 20px 0;
+}
+
+.admin_pagination a{
+    color: black;
+    font-size: 18px;
+    border: 1px solid; 
+    border-radius: 10px;
+    padding: 10px 15px;
+    margin: 0 5px;
+    text-decoration: none;
+}
+
+.admin_pagination a:hover {
+    background-color: gray;
+}
+
+.admin_pagination span {
+    color: black;
+    font-size: 18px;
+    border: 1px solid; 
+    border-radius: 10px;
+    padding: 10px 15px;
+    margin: 0 5px;
+    pointer-events: none;
+}
+
+.admin_pagination span.active {
+    background-color: gray;
+}

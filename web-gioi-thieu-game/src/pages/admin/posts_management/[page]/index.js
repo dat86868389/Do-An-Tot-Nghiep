@@ -4,6 +4,9 @@ import LayoutAdmin from "@/layouts/layout_admin";
 
 
 export default function PostManagementPage() {
+
+    
+
      return (
         <LayoutAdmin>
             <AdminPostManagementCompoent />

@@ -1,6 +1,7 @@
 import PostsMagementStyle from '../styles/admin_post_management.module.css';
 import useSWR from 'swr';
 import Head from 'next/head';
+import AdminPaginationComponent from './admin_pagination_component';
 
 export default function AdminPostManagementCompoent() {
     const fetcher = (...args) => fetch(...args).then((res) => res.json());
@@ -44,7 +45,7 @@ export default function AdminPostManagementCompoent() {
                                         </td>
 
                                         <td className={`${PostsMagementStyle.td}`}>
-                                            {p.Status}
+                                            {handleStatus(p.Status)}
                                         </td>
 
                                         <td className={`${PostsMagementStyle.td}`}>
@@ -67,6 +68,25 @@ export default function AdminPostManagementCompoent() {
                     </table>
                 </div>
             </div>
+
+            <div className='row'>
+                <div className='col-12'>
+                    <AdminPaginationComponent />
+                </div>
+            </div>
         </div>
     )
+}
+
+
+function handleStatus(status) {
+    switch (status) {
+        case 0: {
+            return `Chờ duyệt`;
+        }
+
+        case 1: {
+            return `Đã duyệt`;
+        }
+    }
 }

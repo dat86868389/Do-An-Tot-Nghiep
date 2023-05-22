@@ -24,7 +24,7 @@ export default function AdminLeftNav() {
 
             <div className="row">
                 <div className="col-12">
-                    <Link href={`/admin/posts_management`}  className={`${LeftNavStyle.link}`}>
+                    <Link href={`/admin/posts_management/1`}  className={`${LeftNavStyle.link}`}>
                         Quản lý bài viết
                     </Link>
                 </div>
