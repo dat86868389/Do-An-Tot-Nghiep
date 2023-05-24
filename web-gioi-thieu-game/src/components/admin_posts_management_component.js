@@ -5,12 +5,20 @@ import AdminPaginationComponent from './admin_pagination_component';
 import { useRouter } from 'next/router';
 
 export default function AdminPostManagementCompoent({ page }) {
-
-
     const fetcher = (...args) => fetch(...args).then((res) => res.json());
-    const posts = useSWR(`http://localhost:3001/posts/get/page/${page}`, fetcher);
+    const posts = useSWR(`http://localhost:3001/posts/get/page/${page}`, fetcher, { refreshInterval: 100 });
     const posts_quantity = useSWR('http://localhost:3001/posts/get/quantity', fetcher);
-    console.log(posts_quantity?.data?.result[0].quantity);
+
+    function handleDelete(postId) {
+        fetch(`http://localhost:3001/admin/posts/delete/${postId}`, {
+            method: 'DELETE',
+        })
+            .then((res) => res.json())
+            .then(e => {
+                console.log(e);
+            })
+    }
+    console.log(posts);
     return (
         <div className={`${PostsMagementStyle.container}`}>
             <Head>
@@ -45,7 +53,7 @@ export default function AdminPostManagementCompoent({ page }) {
                                         </td>
 
                                         <td className={`${PostsMagementStyle.td}`}>
-                                            {p.TimePost}
+                                            {handleRenderDate(p.TimePost)}
                                         </td>
 
                                         <td className={`${PostsMagementStyle.td}`}>
@@ -62,7 +70,7 @@ export default function AdminPostManagementCompoent({ page }) {
                                         </td>
 
                                         <td className={`${PostsMagementStyle.td}`}>
-                                            <button>Xóa</button>
+                                            <button onClick={()=>{handleDelete(p.PostId)}}>Xóa</button>
                                         </td>
                                     </tr>
                                 ))
@@ -97,5 +105,21 @@ function handleStatus(status) {
         case 1: {
             return `Đã duyệt`;
         }
+
+        case -1: {
+            return `đã xóa`;
+        }
     }
+}
+
+
+function handleRenderDate(time) {
+    const dateString = time;
+    const dateObject = new Date(dateString);
+    const date = dateObject.getDate() < 10 ? `0${dateObject.getDate()}` : dateObject.getDate();
+    const month = dateObject.getMonth() < 10 ? `0${dateObject.getMonth() + 1}` : dateObject.getMonth() + 1;
+    const year = dateObject.getFullYear();
+    
+    return `${date}-${month}-${year}`;
+
 }

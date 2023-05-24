@@ -100,7 +100,9 @@ Posts.getTopPosts = function (result) {
 }
 
 Posts.getPersonalPosts = function (prams, result) {
-    const sql = `select PostId,Title,TimePost,Thumnail,description from posts where UserId = ${prams.idUser};`;
+    const sql = `select PostId,Title,TimePost,Thumnail,description 
+    from posts
+    where UserId = 34 and Status = 1`;
     database.query(sql, function (err, data) {
         if (err) {
             throw err;
@@ -160,7 +162,10 @@ Posts.updatePost = function (data, result) {
 
 Posts.getPostByPage = function (data, result) {
     console.log(data);
-    const sql = `select * from posts order by TimePost DESC limit ${data.limit} offset ${(parseInt(data.page) - 1) * parseInt(data.limit)}`;
+    const sql = `select * from posts
+    where Status = 1
+    order by TimePost DESC limit ${data.limit}
+    offset ${(parseInt(data.page) - 1) * parseInt(data.limit)}`;
     database.query(sql, function (err, res) {
         if (err) {
             throw err;
@@ -278,7 +283,7 @@ Posts.getPostsStatusCode0Quantity = function (result) {
     })
 }
 
-Posts.getPostsbyPageOnAdminSide = function(page, result) {
+Posts.getPostsbyPageOnAdminSide = function (page, result) {
     const sql = `select posts.PostId, 
     posts.UserId, 
     posts.Title,
@@ -288,13 +293,22 @@ Posts.getPostsbyPageOnAdminSide = function(page, result) {
     users.UserName
     from posts inner join users on posts.UserId = users.UserId
     order by TimePost DESC
-    limit 15 offset ${(page-1)*15};`;
-    console.log('123213213',sql);
+    limit 15 offset ${(page - 1) * 15};`;
     database.query(sql, function (err, posts) {
-        if(err) {
+        if (err) {
             throw err;
         }
         result(posts);
+    })
+}
+
+Posts.deletePostOnAdminSide = function (postId, result) {
+    const sql = `call SP_DelePostOnAdminSide(${postId});`;
+    database.query(sql, function (err) {
+        if (err) {
+            throw err;
+        }
+        result(1); // success
     })
 }
 module.exports = Posts;

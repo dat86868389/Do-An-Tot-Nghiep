@@ -113,3 +113,10 @@ exports.getPostsbyPageOnAdminSide = function(req, res) {
         res.send({ result : data});
     })
 }
+
+exports.deletePostOnAdminSide = function(req, res) {
+    const postID = req.params.id;
+    postsModel.deletePostOnAdminSide(postID, function(data){
+        res.send({ result : data});
+    })
+}
