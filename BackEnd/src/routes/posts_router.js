@@ -22,8 +22,10 @@ module.exports = function (router) {
     //get post by postId and userId
     router.get('/posts/postId/:postId/userId/:userId', postsController.getPostByPostIdAndUserId);
 
-    //get post quantity
+    //get post quantity have status = 1
     router.get('/posts/get/quantity', postsController.getPostQuantity);
+
+    router.get('/posts/get/all/quantity', postsController.getQuantity);
 
     //find posts by keywords
     router.get('/posts/search/:keyword', postsController.getPostsByKeyWord);
@@ -32,7 +34,7 @@ module.exports = function (router) {
     router.get('/posts/category/:category', postsController.getPostsByCategory);
 
     //get posts have status code = 0
-    router.get('/posts/status/code/0', postsController.getPostsStatusCodeEqual0);
+    router.get('/posts/status/code/0/page/:page', postsController.getPostsStatusCodeEqual0);
 
     //get quantity posts have status code = 0
     router.get('/posts/status/code/0/quantity', postsController.getPostsStatusCode0Quantity);

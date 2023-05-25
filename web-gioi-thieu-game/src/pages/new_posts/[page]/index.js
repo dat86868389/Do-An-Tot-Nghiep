@@ -54,7 +54,6 @@ export default function NewsPosts() {
 
             <Pagging
                 currentPage={data?.page}
-                totalPages={data?.page}
             />
 
 

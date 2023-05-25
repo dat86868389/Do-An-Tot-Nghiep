@@ -8,12 +8,12 @@ import useSWR from 'swr';
 export default function Dasboard() {
     const fetcher = (...args) => fetch(...args).then((res) => res.json());
     const user_quantity = useSWR('http://localhost:3001/users/quantity', fetcher);
-    const posts_quantity = useSWR('http://localhost:3001/posts/get/quantity', fetcher);
+    const posts_quantity = useSWR('http://localhost:3001/posts/get/quantity', fetcher, { refreshInterval: 1000 });
     const categories_quantity = useSWR('http://localhost:3001/categories/quantity', fetcher);
-    const posts_waitting_quantity = useSWR('http://localhost:3001/posts/status/code/0/quantity', fetcher);
+    const posts_waitting_quantity = useSWR('http://localhost:3001/posts/status/code/0/quantity', fetcher, { refreshInterval: 1000 });
 
 
-    const posts_waitting = useSWR('http://localhost:3001/posts/status/code/0', fetcher);
+    const posts_waitting = useSWR('http://localhost:3001/posts/status/code/0/page/1', fetcher, { refreshInterval: 1000 });
     const users = useSWR('http://localhost:3001/users/latest15', fetcher);
 
 
@@ -94,7 +94,10 @@ export default function Dasboard() {
                 {/* cac bai viet chua duyet */}
                 <div className="row">
                     <div className="col-12">
-                        <h2>Các bài viết chưa duyệt - <span><Link href={`#`}>xem tất cả</Link></span></h2>
+                        <h2>Các bài viết chưa duyệt - <span><Link href={`/admin/review_post/1`}>
+                            xem tất cả</Link>
+                        </span>
+                        </h2>
                         <table className={`${DasboardStyle.table}`}>
                             <thead>
                                 <tr className={`${DasboardStyle.tr}`}>
@@ -198,7 +201,7 @@ function handleRenderDateUser(time) {
     const date = dateObject.getDate() < 10 ? `0${dateObject.getDate()}` : dateObject.getDate();
     const month = dateObject.getMonth() < 10 ? `0${dateObject.getMonth() + 1}` : dateObject.getMonth() + 1;
     const year = dateObject.getFullYear();
-    
+
     return `${date}-${month}-${year}`;
 
 }

@@ -10,23 +10,10 @@ export default function AdminPaginationComponent({
     totalPages,
     subDomain
 }) {
-    console.log(totalPages);
+    console.log(currentPage, totalPages);
     return (
         <div className={`${AdminPaginationStyle.admin_pagination}`}>
-            {/* <span href={`#`} className={`${AdminPaginationStyle.disable}`}>
-                <FontAwesomeIcon icon={faArrowLeft} />
-            </span>
-            <span>
-                1
-            </span>
-            <Link href={`#`}>
-                2
-            </Link>
-            <Link href={`#`}>
-                <FontAwesomeIcon icon={faArrowRight} />
-            </Link> */}
-            {handleRenderPages(currentPage, totalPages)}
-
+            {handleRenderPages(currentPage, totalPages, subDomain)}
         </div>
     )
 }
@@ -48,7 +35,7 @@ function handleRenderPages(currentPage, totalPages, subDomain) {
             </span>);
         }
         else {
-            jsx.push(<Link href={`/admin/posts_management/${_currentPage - 1}`}>
+            jsx.push(<Link href={`${subDomain}${_currentPage - 1}`}>
                 <FontAwesomeIcon icon={faArrowLeft} />
             </Link>);
         }
@@ -59,7 +46,7 @@ function handleRenderPages(currentPage, totalPages, subDomain) {
                 </span>);
             }
             else {
-                jsx.push(<Link href={`/admin/posts_management/${i}`}>
+                jsx.push(<Link href={`${subDomain}${i}`}>
                     {i}
                 </Link>);
             }
@@ -71,7 +58,7 @@ function handleRenderPages(currentPage, totalPages, subDomain) {
             </span>);
         }
         else {
-            jsx.push(<Link href={`/admin/posts_management/${_currentPage + 1}`}>
+            jsx.push(<Link href={`${subDomain}${_currentPage + 1}`}>
                 <FontAwesomeIcon icon={faArrowRight} />
             </Link>);
         }
@@ -86,7 +73,7 @@ function handleRenderPages(currentPage, totalPages, subDomain) {
                 </span>);
             }
             else {
-                jsx.push(<Link href={`/admin/posts_management/${_currentPage - 1}`}>
+                jsx.push(<Link href={`${subDomain}${_currentPage - 1}`}>
                     <FontAwesomeIcon icon={faArrowLeft} />
                 </Link>);
             }
@@ -97,7 +84,7 @@ function handleRenderPages(currentPage, totalPages, subDomain) {
                     </span>);
                 }
                 else {
-                    jsx.push(<Link href={`/admin/posts_management/${i}`}>
+                    jsx.push(<Link href={`${subDomain}${i}`}>
                         {i}
                     </Link>);
                 }
@@ -106,11 +93,11 @@ function handleRenderPages(currentPage, totalPages, subDomain) {
                 ...
             </span>);
             for (let i = _totalPages - rightSide + 1; i <= _totalPages; i++) {
-                jsx.push(<Link href={`/admin/posts_management/${i}`}>
+                jsx.push(<Link href={`${subDomain}${i}`}>
                     {i}
                 </Link>);
             }
-            jsx.push(<Link href={`/admin/posts_management/${_currentPage + 1}`}>
+            jsx.push(<Link href={`${subDomain}${_currentPage + 1}`}>
                 <FontAwesomeIcon icon={faArrowRight} />
             </Link>);
 
@@ -118,12 +105,12 @@ function handleRenderPages(currentPage, totalPages, subDomain) {
         }
 
         if (_currentPage > leftSide + midSide - 1 && _currentPage < _totalPages - rightSide - midSide + 1) {
-            jsx.push(<Link href={`/admin/posts_management/${_currentPage - 1}`}>
+            jsx.push(<Link href={`${subDomain}${_currentPage - 1}`}>
                 <FontAwesomeIcon icon={faArrowLeft} />
             </Link>);
 
             for (let i = 1; i <= leftSide; i++) {
-                jsx.push(<Link href={`/admin/posts_management/${i}`}>
+                jsx.push(<Link href={`${subDomain}${i}`}>
                     {i}
                 </Link>);
             }
@@ -139,7 +126,7 @@ function handleRenderPages(currentPage, totalPages, subDomain) {
                     </span>);
                 }
                 else {
-                    jsx.push(<Link href={`/admin/posts_management/${i}`}>
+                    jsx.push(<Link href={`${subDomain}${i}`}>
                         {i}
                     </Link>);
                 }
@@ -151,26 +138,26 @@ function handleRenderPages(currentPage, totalPages, subDomain) {
 
             for (let i = _totalPages - rightSide + 1; i <= _totalPages; i++) {
 
-                jsx.push(<Link href={`/admin/posts_management/${i}`}>
+                jsx.push(<Link href={`${subDomain}${i}`}>
                     {i}
                 </Link>);
 
             }
 
-            jsx.push(<Link href={`/admin/posts_management/${_currentPage + 1}`}>
+            jsx.push(<Link href={`${subDomain}${_currentPage + 1}`}>
                 <FontAwesomeIcon icon={faArrowRight} />
             </Link>);
         }
 
         if (_currentPage >= _totalPages - (midSide + rightSide - 1) && _currentPage <= _totalPages) {
 
-            jsx.push(<Link href={`/admin/posts_management/${_currentPage - 1}`}>
+            jsx.push(<Link href={`${subDomain}${_currentPage - 1}`}>
                 <FontAwesomeIcon icon={faArrowLeft} />
             </Link>);
 
             for (let i = 1; i <= leftSide; i++) {
 
-                jsx.push(<Link href={`/admin/posts_management/${i}`}>
+                jsx.push(<Link href={`${subDomain}${i}`}>
                     {i}
                 </Link>);
             }
@@ -184,7 +171,7 @@ function handleRenderPages(currentPage, totalPages, subDomain) {
                     </span>);
                 }
                 else {
-                    jsx.push(<Link href={`/admin/posts_management/${i}`}>
+                    jsx.push(<Link href={`${subDomain}${i}`}>
                         {i}
                     </Link>);
                 }
@@ -196,7 +183,7 @@ function handleRenderPages(currentPage, totalPages, subDomain) {
                 </span>);
             }
             else {
-                jsx.push(<Link href={`/admin/posts_management/${_currentPage + 1}`}>
+                jsx.push(<Link href={`${subDomain}${_currentPage + 1}`}>
                     <FontAwesomeIcon icon={faArrowRight} />
                 </Link>);
             }

@@ -82,7 +82,8 @@ exports.getPostsByCategory = function(req, res) {
 }
 
 exports.getPostsStatusCodeEqual0 = function(req, res) {
-    postsModel.getPostsStatusCodeEqual0(function(data){
+    const prams = req.params
+    postsModel.getPostsStatusCodeEqual0(prams, function(data){
         res.send({ result : data});
     })
 }
@@ -117,6 +118,12 @@ exports.getPostsbyPageOnAdminSide = function(req, res) {
 exports.deletePostOnAdminSide = function(req, res) {
     const postID = req.params.id;
     postsModel.deletePostOnAdminSide(postID, function(data){
+        res.send({ result : data});
+    })
+}
+
+exports.getQuantity = function(req, res){
+    postsModel.getQuantity(function(data){
         res.send({ result : data});
     })
 }

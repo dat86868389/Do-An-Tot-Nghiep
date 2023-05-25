@@ -177,7 +177,7 @@ Posts.getPostByPage = function (data, result) {
 }
 
 Posts.getPostQuantity = function (result) {
-    const sql = `select count(PostId) as quantity from posts`;
+    const sql = `select count(PostId) as quantity from posts where Status = 1`;
     database.query(sql, function (err, res) {
         if (err) {
             throw err;
@@ -212,7 +212,7 @@ Posts.getPostsByCategory = function (categoryId, result) {
     });
 }
 
-Posts.getPostsStatusCodeEqual0 = function (result) {
+Posts.getPostsStatusCodeEqual0 = function (prams, result) {
     const sql = `SELECT
     posts.PostId,
     posts.UserId,
@@ -222,8 +222,8 @@ Posts.getPostsStatusCodeEqual0 = function (result) {
     FROM posts inner join users
     on posts.UserId = users.UserId
     where posts.Status = 0 order by TimePost DESC
-    limit 8;`;
-    console.log(sql);
+    limit 12 offset ${(parseInt(prams.page) - 1) * 12};`;
+
     database.query(sql, function (err, data) {
         if (err) {
             throw err;
@@ -293,7 +293,7 @@ Posts.getPostsbyPageOnAdminSide = function (page, result) {
     users.UserName
     from posts inner join users on posts.UserId = users.UserId
     order by TimePost DESC
-    limit 15 offset ${(page - 1) * 15};`;
+    limit 12 offset ${(page - 1) * 12};`;
     database.query(sql, function (err, posts) {
         if (err) {
             throw err;
@@ -311,4 +311,15 @@ Posts.deletePostOnAdminSide = function (postId, result) {
         result(1); // success
     })
 }
+
+Posts.getQuantity = function (result) {
+    const sql = `select count(PostId) as count from posts;`;
+    database.query(sql, function (err, data) {
+        if (err) {
+            throw err;
+        }
+        result(data); // success
+    })
+}
+
 module.exports = Posts;

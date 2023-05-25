@@ -32,6 +32,14 @@ export default function AdminLeftNav() {
 
             <div className="row">
                 <div className="col-12">
+                    <Link href={`/admin/review_post/1`}  className={`${LeftNavStyle.link}`}>
+                        Duyệt bài viết
+                    </Link>
+                </div>
+            </div>
+
+            <div className="row">
+                <div className="col-12">
                     <Link href={`/admin/user_management`}  className={`${LeftNavStyle.link}`}>
                         Quản lý người dùng
                     </Link>
