@@ -102,7 +102,7 @@ Posts.getTopPosts = function (result) {
 Posts.getPersonalPosts = function (prams, result) {
     const sql = `select PostId,Title,TimePost,Thumnail,description 
     from posts
-    where UserId = 34 and Status = 1`;
+    where UserId = ${prams.idUser} and Status = 1`;
     database.query(sql, function (err, data) {
         if (err) {
             throw err;
