@@ -12,7 +12,25 @@ export default function AdminReviewPostsComponent({ page }) {
     const posts = useSWR(`http://localhost:3001/posts/status/code/0/page/${page}`, fetcher);
     const posts_quantity = useSWR('http://localhost:3001/posts/status/code/0/quantity', fetcher);
 
+    function handleAcept(postID) {
+        fetch(`http://localhost:3001/posts/set/status/code/1/postId/${postID}`, {
+            method: 'PUT'
+        })
+            .then((res) => res.json())
+            .then((e) => {
+                console.log(e);
+            });
+    }
 
+    function handleDelete(postId) {
+        fetch(`http://localhost:3001/admin/posts/delete/${postId}`, {
+            method: 'DELETE',
+        })
+            .then((res) => res.json())
+            .then(e => {
+                console.log(e);
+            })
+    }
 
     if (posts.data && posts_quantity.data) {
         console.log(posts_quantity?.data?.result[0].count);
@@ -54,7 +72,7 @@ export default function AdminReviewPostsComponent({ page }) {
                                             </td>
 
                                             <td className={`${PostsMagementStyle.td}`}>
-                                                <button onClick={() => { handleDelete(p.PostId) }}>Duyệt</button>
+                                                <button onClick={() => { handleAcept(p.PostId) }}>Duyệt</button>
                                             </td>
 
                                             <td className={`${PostsMagementStyle.td}`}>
