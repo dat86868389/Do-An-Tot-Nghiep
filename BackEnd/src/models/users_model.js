@@ -39,7 +39,8 @@ User.addUser = function (data, result) {
 }
 
 User.getUser = function (data, result) {
-    const sql = `select * from users where Account = '${data.account}' and Password = '${data.password}';`;
+    const sql = `select * from users where Account = '${data.account}' and Password = '${data.password}'
+    and status != 0;`;
     database.query(sql, function (err, user) {
         if (err) {
             throw err;
