@@ -56,74 +56,81 @@ exports.updatePost = function (req, res) {
 
 exports.getPostByPage = function (req, res) {
     const data = req.params;
-    postsModel.getPostByPage(data, function(data) {
-        res.send({ result : data});
+    postsModel.getPostByPage(data, function (data) {
+        res.send({ result: data });
     })
 }
 
-exports.getPostQuantity = function(req, res) {
-    postsModel.getPostQuantity(function(data) {
-        res.send({ result : data});
+exports.getPostQuantity = function (req, res) {
+    postsModel.getPostQuantity(function (data) {
+        res.send({ result: data });
     })
 }
 
 exports.getPostsByKeyWord = function (req, res) {
     const data = req.params;
-    postsModel.getPostsByKeyWord(data, function(data) {
-        res.send({ result : data});
+    postsModel.getPostsByKeyWord(data, function (data) {
+        res.send({ result: data });
     })
 }
 
-exports.getPostsByCategory = function(req, res) {
+exports.getPostsByCategory = function (req, res) {
     const categoryId = req.params.category;
-    postsModel.getPostsByCategory(categoryId, function(data) {
-        res.send({ result : data});
+    postsModel.getPostsByCategory(categoryId, function (data) {
+        res.send({ result: data });
     })
 }
 
-exports.getPostsStatusCodeEqual0 = function(req, res) {
+exports.getPostsStatusCodeEqual0 = function (req, res) {
     const prams = req.params
-    postsModel.getPostsStatusCodeEqual0(prams, function(data){
-        res.send({ result : data});
+    postsModel.getPostsStatusCodeEqual0(prams, function (data) {
+        res.send({ result: data });
     })
 }
 
-exports.setPostStatusCodeEqual1 = function(req, res) {
+exports.setPostStatusCodeEqual1 = function (req, res) {
     const postID = req.params.postId
-    postsModel.setPostStatusCodeEqual1(postID, function(data){
-        res.send({ result : data});
+    postsModel.setPostStatusCodeEqual1(postID, function (data) {
+        res.send({ result: data });
     })
 }
 
-exports.getInfoByPostId = function(req, res) {
+exports.getInfoByPostId = function (req, res) {
     const postID = req.params.postId;
-    postsModel.getInfoByPostId(postID, function(data){
-        res.send({ result : data});
+    postsModel.getInfoByPostId(postID, function (data) {
+        res.send({ result: data });
     })
 }
 
-exports.getPostsStatusCode0Quantity = function(req, res) {
-    postsModel.getPostsStatusCode0Quantity(function(data){
-        res.send({ result : data});
+exports.getPostsStatusCode0Quantity = function (req, res) {
+    postsModel.getPostsStatusCode0Quantity(function (data) {
+        res.send({ result: data });
     })
 }
 
-exports.getPostsbyPageOnAdminSide = function(req, res) {
+exports.getPostsbyPageOnAdminSide = function (req, res) {
     const page = req.params.page;
-    postsModel.getPostsbyPageOnAdminSide(page, function(data){
-        res.send({ result : data});
+    postsModel.getPostsbyPageOnAdminSide(page, function (data) {
+        res.send({ result: data });
     })
 }
 
-exports.deletePostOnAdminSide = function(req, res) {
+exports.deletePostOnAdminSide = function (req, res) {
     const postID = req.params.id;
-    postsModel.deletePostOnAdminSide(postID, function(data){
-        res.send({ result : data});
+    postsModel.deletePostOnAdminSide(postID, function (data) {
+        res.send({ result: data });
     })
 }
 
-exports.getQuantity = function(req, res){
-    postsModel.getQuantity(function(data){
-        res.send({ result : data});
+exports.getQuantity = function (req, res) {
+    postsModel.getQuantity(function (data) {
+        res.send({ result: data });
+    })
+}
+
+exports.updateViewPost = function (req, res) {
+    const params = req.params;
+    postsModel.updateViewPost(params, function (data) {
+        res.send({ result: data });
     })
 }

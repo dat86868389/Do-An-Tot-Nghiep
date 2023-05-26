@@ -8,16 +8,14 @@ import CommentStyle from '../../../styles/comments.module.css';
 
 export default function PostIndex() {
     const router = useRouter();
-
+    const viewRef = useRef(false);
 
     const [postData, setPostData] = useState(null);
 
 
     useEffect(() => {
         if (router.isReady) {
-      
             const { id } = router.query;
-            console.log("id: ",id);
             fetch(`http://localhost:3001/posts/${id}`)
                 .then(res => res.json())
                 .then((e) => {
@@ -26,12 +24,24 @@ export default function PostIndex() {
                     const username = e.result[0].UserName;
 
                     const data = { title, username, ...content, id };
-                    console.log(data);
                     setPostData(data);
                 })
-        }
 
+        }
     }, [router.isReady]);
+
+    useEffect(() => {
+        if (router.isReady) {
+            const { id } = router.query;
+            fetch(`http://localhost:3001/post/${id}/update/view`, {
+                method: 'PUT',
+            })
+                .then(res => res.json())
+                .then((e) => {
+                    viewRef.current = true;
+                })
+        }
+    }, [])
 
     return (
         <Layout_Post>
@@ -58,7 +68,7 @@ export default function PostIndex() {
                 </div>
                 {
                     postData?.id != undefined && (
-                        <CommentsComponent postId={postData?.id}/>
+                        <CommentsComponent postId={postData?.id} />
                     )
                 }
             </div>
@@ -110,7 +120,6 @@ function handleRenderPostData(block) {
                     table += `</td>`;
                 })
                 table += `</tr>`;
-                console.log(table);
             })
 
             return (

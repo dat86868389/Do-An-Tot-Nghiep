@@ -322,4 +322,14 @@ Posts.getQuantity = function (result) {
     })
 }
 
+Posts.updateViewPost = function (prams, result) {
+    const sql = `call SP_UpdateView(${prams.postId})`;
+    database.query(sql, function (err) {
+        if (err) {
+            throw err;
+        }
+        result(1); // success
+    })
+}
+
 module.exports = Posts;

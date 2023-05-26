@@ -60,6 +60,9 @@ module.exports = function (router) {
     //update post
     router.put('/post/update', postsController.updatePost);
 
+    //update view posts
+    router.put('/post/:postId/update/view', postsController.updateViewPost);
+
     // set status code = 1 for post acepted
     router.put('/posts/set/status/code/1/postId/:postId', postsController.setPostStatusCodeEqual1);
 
