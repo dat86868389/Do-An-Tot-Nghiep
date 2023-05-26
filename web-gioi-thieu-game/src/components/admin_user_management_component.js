@@ -1,10 +1,25 @@
 import useSWR from 'swr';
 import UserManagementStyle from "../styles/admin_user_management.module.css";
 import Head from 'next/head';
+import AdminPaginationComponent from './admin_pagination_component';
 
-export default function UserManagementStyleComponent() {
+export default function UserManagementStyleComponent({ page }) {
+    console.log(page);
     const fetcher = (...args) => fetch(...args).then((res) => res.json());
-    const users = useSWR('http://localhost:3001/users/paginate/page/1', fetcher);
+    const users = useSWR(`http://localhost:3001/users/paginate/page/${page}`, fetcher);
+    const users_quantity = useSWR(`http://localhost:3001/users/quantity`, fetcher);
+
+    
+    function handleDeleteUser(id) {
+        
+        fetch(`http://localhost:3001/user/${id}/status/0`, {
+            method: 'PUT'
+        })
+            .then(response => response.json())
+            .then(e => {
+                console.log(e);
+            })
+    }
 
 
     function handleSubmit(e) {
@@ -79,7 +94,11 @@ export default function UserManagementStyleComponent() {
                                         </td>
 
                                         <td className={`${UserManagementStyle.td}`}>
-                                            <button>Xóa</button>
+                                            <button onClick={
+                                                () => {
+                                                    handleDeleteUser(user.UserId)
+                                                }
+                                            }>Xóa</button>
                                         </td>
                                     </tr>
                                 ))
@@ -155,6 +174,16 @@ export default function UserManagementStyleComponent() {
                     <button id='update_info_user'>Chỉnh sửa</button>
                 </form>
             </div>
+
+            <div className='row'>
+                <div className='col-12'>
+                    <AdminPaginationComponent
+                        currentPage={page}
+                        totalPages={Math.ceil(users_quantity?.data?.result[0].count / 12)}
+                        subDomain={`/admin/user_management/`}
+                    />
+                </div>
+            </div>
         </div>
     )
 }
@@ -171,7 +200,7 @@ function handleRenderDateUser(time) {
 }
 
 function handleRenderRoleUser(role) {
-    switch(role){
+    switch (role) {
         case 0: {
             return `Quản trị viên`
         }

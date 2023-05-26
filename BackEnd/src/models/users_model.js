@@ -52,7 +52,7 @@ User.getUser = function (data, result) {
 }
 
 User.getUserQuantity = function (result) {
-    const sql = `select count(users.UserId) as count from users;`;
+    const sql = `select count(users.UserId) as count from users where status != 0;`;
 
     database.query(sql, function (err, count) {
         if (err) {
@@ -78,9 +78,10 @@ User.getLatest15 = function (result) {
 
 User.getUsersByPage = function (page, result) {
     const sql = `select * from users
+    where status != 0
     order by time_create DESC
-    limit 8
-    offset ${parseInt(page) - 1}`;
+    limit 12
+    offset ${(parseInt(page) - 1) * 12}`;
     database.query(sql, function (err, users) {
         if (err) {
             throw err;
@@ -91,15 +92,27 @@ User.getUsersByPage = function (page, result) {
     })
 }
 
-User.updateRoleUser = function(prams, result) {
+User.updateRoleUser = function (prams, result) {
     const sql = `call SP_UpdateRoleUser(${prams.role},${prams.userId});`;
-    database.query(sql, function(err) {
+    database.query(sql, function (err) {
         if (err) {
 
             result(0);
         }
         else {
             result(1);
+        }
+    })
+}
+
+User.updateStatusUser = function (user, result) {
+    const sql = `call SP_UpdateStatusUser(${user.userID},${user.status});`;
+    database.query(sql, function (err) {
+        if (err) {
+            result(0);
+        }
+        else {
+            result(`update success`);
         }
     })
 }

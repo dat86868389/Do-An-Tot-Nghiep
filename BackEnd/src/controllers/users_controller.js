@@ -46,3 +46,10 @@ exports.updateRoleUser = function(req, res) {
         res.send({ result: data });
     })
 }
+
+exports.updateStatusUser = function(req, res) {
+    const params = req.params;
+    usersModel.updateStatusUser(params, function (data){
+        res.send({ result: data });
+    })
+}

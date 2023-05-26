@@ -28,4 +28,7 @@ module.exports = function(router) {
 
     //update user role 
     router.put('/user/update/role/:role/userId/:userId',usersController.updateRoleUser);
+
+    // update status user 
+    router.put('/user/:userID/status/:status',usersController.updateStatusUser);
 }
