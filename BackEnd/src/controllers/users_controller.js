@@ -39,3 +39,10 @@ exports.getUsersByPage = function(req, res) {
         res.send({ result: data });
     })
 }
+
+exports.updateRoleUser = function(req, res) {
+    const params = req.params;
+    usersModel.updateRoleUser(params, function (data){
+        res.send({ result: data });
+    })
+}

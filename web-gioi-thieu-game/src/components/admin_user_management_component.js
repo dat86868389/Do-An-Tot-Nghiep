@@ -1,55 +1,84 @@
 import useSWR from 'swr';
-import UserManagement from "../styles/admin_user_management.module.css";
+import UserManagementStyle from "../styles/admin_user_management.module.css";
 import Head from 'next/head';
 
-export default function UserManagementComponent() {
+export default function UserManagementStyleComponent() {
     const fetcher = (...args) => fetch(...args).then((res) => res.json());
     const users = useSWR('http://localhost:3001/users/paginate/page/1', fetcher);
 
+
+    function handleSubmit(e) {
+        e.preventDefault();
+        const form = e.target;
+        const formData = new FormData(form);
+        const formJson = Object.fromEntries(formData.entries());
+        console.log(formJson);
+
+        fetch(`http://localhost:3001/user/update/role/${formJson.role}/userId/${formJson.user_ID}`, {
+            method: 'PUT'
+        })
+            .then(response => response.json())
+            .then(e => {
+                console.log(e);
+            })
+    }
+
+    console.log(users);
     return (
-        <div className={`${UserManagement.container}`}>
+        <div className={`${UserManagementStyle.container}`}>
             <Head>
                 <title>Quản lý người dùng</title>
             </Head>
             <h2>Quản lý người dùng</h2>
             <div className="row">
                 <div className="col-12">
-                    <table className={`${UserManagement.table}`}>
+                    <table className={`${UserManagementStyle.table}`}>
                         <thead>
-                            <tr className={`${UserManagement.tr}`}>
-                                <th className={`${UserManagement.th}`}>Tài Khoản</th>
-                                <th className={`${UserManagement.th}`}>Tên Người Dùng</th>
-                                <th className={`${UserManagement.th}`}>Email</th>
-                                <th className={`${UserManagement.th}`}>Ngày tạo</th>
-                                <th className={`${UserManagement.th}`}>Chỉnh sửa</th>
-                                <th className={`${UserManagement.th}`}>Xóa</th>
+                            <tr className={`${UserManagementStyle.tr}`}>
+                                <th className={`${UserManagementStyle.th}`}>Tài Khoản</th>
+                                <th className={`${UserManagementStyle.th}`}>Tên Người Dùng</th>
+                                <th className={`${UserManagementStyle.th}`}>Email</th>
+                                <th className={`${UserManagementStyle.th}`}>Ngày tạo</th>
+                                <th className={`${UserManagementStyle.th}`}>Quyền</th>
+                                <th className={`${UserManagementStyle.th}`}>Chỉnh sửa</th>
+                                <th className={`${UserManagementStyle.th}`}>Xóa</th>
 
                             </tr>
                         </thead>
                         <tbody>
                             {
                                 users?.data?.result.map(user => (
-                                    <tr className={`${UserManagement.tr}`}>
-                                        <td className={`${UserManagement.td}`}>
+                                    <tr className={`${UserManagementStyle.tr}`}>
+                                        <td className={`${UserManagementStyle.td}`}>
                                             {user.Account}
                                         </td>
-                                        <td className={`${UserManagement.td}`}>
+                                        <td className={`${UserManagementStyle.td}`}>
                                             {user.UserName}
                                         </td>
 
-                                        <td className={`${UserManagement.td}`}>
+                                        <td className={`${UserManagementStyle.td}`}>
                                             {user.email}
                                         </td>
 
-                                        <td className={`${UserManagement.td}`}>
+                                        <td className={`${UserManagementStyle.td}`}>
                                             {handleRenderDateUser(user.time_create)}
                                         </td>
 
-                                        <td className={`${UserManagement.td}`}>
-                                            <button>Sửa</button>
+                                        <td className={`${UserManagementStyle.td}`}>
+                                            {handleRenderRoleUser(user.RoleID)}
                                         </td>
 
-                                        <td className={`${UserManagement.td}`}>
+                                        <td className={`${UserManagementStyle.td}`}>
+                                            <button
+                                                onClick={() => {
+                                                    renderFormEditUser(user)
+                                                }}
+                                            >
+                                                Sửa
+                                            </button>
+                                        </td>
+
+                                        <td className={`${UserManagementStyle.td}`}>
                                             <button>Xóa</button>
                                         </td>
                                     </tr>
@@ -59,6 +88,72 @@ export default function UserManagementComponent() {
 
                     </table>
                 </div>
+            </div>
+
+            <div
+                className={`${UserManagementStyle.edit_user_container}`}
+                id="edit_user"
+            >
+                <span className={`${UserManagementStyle.close}`}
+                    onClick={handleClose}
+                >
+                    X
+                </span>
+                <form className={`${UserManagementStyle.edit_user}`}
+                    onSubmit={handleSubmit}
+                >
+
+                    <label>
+                        <br /><input
+                            type="text"
+                            name="user_ID"
+                            readOnly
+                            id='user_ID'
+                            style={{ display: 'none' }}
+                        />
+                    </label>
+
+                    <label>
+                        Tài khoản:
+                        <br /><input
+                            type="text"
+                            name="user_acount"
+                            readOnly
+                            id='user_acount'
+                        />
+                    </label> <br />
+
+                    <label>
+                        Tên người dùng:
+                        <br /><input
+                            type="text"
+                            name='user_name'
+                            readOnly
+                            id='user_name'
+                        />
+                    </label> <br />
+
+                    <label>
+                        Ngày tạo
+                        <br /><input
+                            type="text"
+                            name='user_date'
+                            readOnly
+                            id='user_date'
+                        />
+                    </label> <br />
+
+                    <label>
+                        Quyền
+                        <br />
+                        <select name="role" id="role" defaultValue="0">
+                            <option value="0">Quản trị viên</option>
+                            <option value="1">Người dùng</option>
+                        </select>
+                    </label>
+                    <br />
+                    <button id='update_info_user'>Chỉnh sửa</button>
+                </form>
             </div>
         </div>
     )
@@ -73,4 +168,28 @@ function handleRenderDateUser(time) {
 
     return `${date}-${month}-${year}`;
 
+}
+
+function handleRenderRoleUser(role) {
+    switch(role){
+        case 0: {
+            return `Quản trị viên`
+        }
+        case 1: {
+            return `Người dùng`
+        }
+    }
+}
+
+function renderFormEditUser(user) {
+    document.getElementById("edit_user").classList.add(UserManagementStyle.active);
+    document.getElementById("user_acount").value = user.Account;
+    document.getElementById("user_name").value = user.UserName;
+    document.getElementById("user_date").value = handleRenderDateUser(user.time_create);
+    document.getElementById("user_ID").value = user.UserId;
+    console.log(user.UserId);
+}
+
+function handleClose() {
+    document.getElementById("edit_user").classList.remove(UserManagementStyle.active);
 }

@@ -23,3 +23,53 @@
     text-align: left;
     padding: 8px;
 }
+
+.edit_user_container {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.8);
+    left: 0;
+    color: #fff;
+    align-items: center;
+    justify-content: center;
+    display: none;
+    z-index: 10;
+}
+
+.edit_user_container.active {
+    display: flex;
+}
+
+.edit_user {
+    width: 40%;
+}
+.edit_user label {
+    width: 100%;
+    font-size: 18px;
+}
+.edit_user input {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+}
+
+.edit_user select {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+}
+
+.edit_user button {
+   padding: 10px;
+}
+
+.close {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-color: red;
+    padding: 10px 15px;
+    cursor: pointer;
+}

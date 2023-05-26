@@ -25,4 +25,7 @@ module.exports = function(router) {
 
     // paginate users
     router.get('/users/paginate/page/:page',usersController.getUsersByPage);
+
+    //update user role 
+    router.put('/user/update/role/:role/userId/:userId',usersController.updateRoleUser);
 }

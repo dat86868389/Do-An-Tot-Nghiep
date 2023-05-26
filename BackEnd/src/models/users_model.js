@@ -78,7 +78,6 @@ User.getLatest15 = function (result) {
 
 User.getUsersByPage = function (page, result) {
     const sql = `select * from users
-    where RoleID != 0
     order by time_create DESC
     limit 8
     offset ${parseInt(page) - 1}`;
@@ -88,6 +87,19 @@ User.getUsersByPage = function (page, result) {
         }
         else {
             result(users);
+        }
+    })
+}
+
+User.updateRoleUser = function(prams, result) {
+    const sql = `call SP_UpdateRoleUser(${prams.role},${prams.userId});`;
+    database.query(sql, function(err) {
+        if (err) {
+
+            result(0);
+        }
+        else {
+            result(1);
         }
     })
 }
