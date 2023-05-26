@@ -1,12 +1,23 @@
 import CommentsComponent from "@/components/comments_component";
 import CommentStyle from '../styles/comments.module.css';
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
+import Head from "next/head";
 
 
 export default function ReadPostComponent({ idPost }) {
 
     const [postData, setPostData] = useState(null);
+    const viewdRef = useRef(false);
+
+    useEffect(() => {
+        if (!viewdRef.current) {
+            fetch(`http://localhost:3001/post/${idPost}/update/view`, {
+                method: 'PUT',
+            })
+            viewdRef.current = true;
+        }
+    }, [])
 
     useEffect(() => {
         console.log(123);
@@ -18,16 +29,17 @@ export default function ReadPostComponent({ idPost }) {
                 const username = e.result[0].UserName;
 
                 const data = { title, username, ...content, idPost };
+
                 setPostData(data);
             })
-
-        fetch(`http://localhost:3001/post/${idPost}/update/view`, {
-            method: 'PUT',
-        })
-
     }, []);
+
+
     return (
         <>
+            <Head>
+                <title>{postData?.title}</title>
+            </Head>
             <div className="row post-container">
                 <h1>{postData?.title}</h1>
 

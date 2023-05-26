@@ -12,9 +12,7 @@ export default function PostIndex() {
     if (router.isReady) {
         return (
             <Layout_Post>
-                <Head>
-                    <title>{postData?.title}</title>
-                </Head>
+                
                 
                 <ReadPostComponent 
                     idPost={router.query.id}
