@@ -8,10 +8,16 @@ import CommentStyle from '../../../styles/comments.module.css';
 
 export default function PostIndex() {
     const router = useRouter();
-    const viewRef = useRef(false);
-
     const [postData, setPostData] = useState(null);
 
+    useEffect(() => {
+        console.log(4);
+        const { id } = router.query;
+        fetch(`http://localhost:3001/post/${id}/update/view`, {
+            method: 'PUT',
+        })
+
+    }, [router.isReady == true])
 
     useEffect(() => {
         if (router.isReady) {
@@ -30,18 +36,7 @@ export default function PostIndex() {
         }
     }, [router.isReady]);
 
-    useEffect(() => {
-        if (router.isReady) {
-            const { id } = router.query;
-            fetch(`http://localhost:3001/post/${id}/update/view`, {
-                method: 'PUT',
-            })
-                .then(res => res.json())
-                .then((e) => {
-                    viewRef.current = true;
-                })
-        }
-    }, [])
+   
 
     return (
         <Layout_Post>

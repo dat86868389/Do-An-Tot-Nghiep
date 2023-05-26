@@ -7,6 +7,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Link from 'next/link';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
+import CategoriesLinksComponent from './categories_links_component';
 
 export default function NewPosts({ data }) {
 
@@ -31,41 +32,7 @@ export default function NewPosts({ data }) {
 
                             <p className={Lastest_post.markscategory}>
                                 <FontAwesomeIcon icon={faTags} />
-                                <Link href="#">
-                                    Game,
-                                </Link>
-
-                                <Link href="#">
-                                    Game Chiến Thuật,
-                                </Link>
-
-                                <Link href="#">
-                                    Game Chiến Thuật,
-                                </Link>
-
-                                <Link href="#">
-                                    Game Chiến Thuật,
-                                </Link>
-
-                                <Link href="#">
-                                    Game Chiến Thuật,
-                                </Link>
-
-                                <Link href="#">
-                                    Game Chiến Thuật,
-                                </Link>
-
-                                <Link href="#">
-                                    Game Chiến Thuật,
-                                </Link>
-
-                                <Link href="#">
-                                    Game Chiến Thuật,
-                                </Link>
-
-                                <Link href="#">
-                                    Game Chiến Thuật,
-                                </Link>
+                                <CategoriesLinksComponent postID={post.PostId} />
                             </p>
 
                             <div className={Lastest_post.views_and_watchpost}>
@@ -73,7 +40,7 @@ export default function NewPosts({ data }) {
                                     Xem bài viết
                                 </Link>
 
-                                <p><FontAwesomeIcon icon={faEye} /> 120</p>
+                                <p><FontAwesomeIcon icon={faEye} /> {post.View}</p>
                             </div>
                         </div>
 
