@@ -5,4 +5,5 @@ module.exports = function(router) {
 
     router.post('/history/add/postID/:postId/userId/:userId', historyController.addHistory);
 
+    router.get('/history/get/:userId', historyController.getHistory);
 }

@@ -22,4 +22,21 @@ History.addHistory = function (prams, result) {
     });
 }
 
+History.getHistory = function(prams, result){
+    const sql = `select history.date, history.PostId, posts.Title, posts.Thumnail
+    from history inner join posts
+    on history.PostId = posts.PostId
+    where history.UserId = ${prams.userId} and posts.Status = 1
+    order by history.date DESC;`;
+
+    database.query(sql, function (err,data) {
+        if (err) {
+            throw err;
+        }
+        else {
+            result(data);
+        }
+    });
+}
+
 module.exports = History;
