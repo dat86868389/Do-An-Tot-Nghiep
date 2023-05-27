@@ -67,4 +67,16 @@ Categories.getCategoriesQuantity = function (result) {
     });
 }
 
+Categories.addCategories = function(cate, result) {
+    const sql = `call SP_AddCategory('${cate.cate_name}')`;
+    database.query(sql, function (err) {
+        if (err) {
+            throw err;
+        }
+        else {
+            result(1);
+        }
+    });
+}
+
 module.exports = Categories;

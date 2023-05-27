@@ -12,19 +12,6 @@ const Posts = function (posts) {
 }
 
 Posts.addPosts = function (data, result) {
-    // var content = `{"blocks": [`;
-    // data.blocks.map((e, index) => {
-    //     if (index < data.blocks.length - 1) {
-    //         content += JSON.stringify(e);
-    //         content += `,`
-    //     }
-    //     else {
-    //         content += JSON.stringify(e);
-    //     }
-
-    // })
-    // content += `]}`;
-    // console.log('123', content);
 
     var content = { blocks: data.blocks }
     const sql = `call SP_addPosts(${data.userId},${data.userId},'${data.Title}','${JSON.stringify(content)}',0,0,'${data.thumnailLink}','${data.description}');`;
@@ -39,8 +26,6 @@ Posts.addPosts = function (data, result) {
                     result(0); // nếu thực hiện truy vấn KHÔNG thành công
                 }
                 else {
-                    console.log(idPost[0].PostId);
-                    console.log(sql);
                     result(idPost[0].PostId); //nếu thực hiện truy vấn thành công
                 }
             });
@@ -67,7 +52,6 @@ Posts.getTop8Latest = function (result) {
 }
 Posts.getPostsById = function (data, result) {
     const sql = `select posts.Title, posts.Content, users.UserName from posts INNER JOIN users ON posts.UserId = users.UserId where posts.PostId = ${data.id};`;
-    // console.log(sql);
     database.query(sql, function (err, data) {
         if (err) {
             throw err

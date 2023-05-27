@@ -8,10 +8,8 @@ const History = function (history) {
 
 History.addHistory = function (prams, result) {
     const date = new Date();
-    console.log(date);
     const dateString = `${date.getFullYear()}-${date.getMonth()+1}-${date.getDate()} ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`;
     const sql = `call SP_AddHistory(${prams.postId},${prams.userId},'${dateString}');`;
-    console.log(sql);
     database.query(sql, function (err) {
         if (err) {
             throw err;

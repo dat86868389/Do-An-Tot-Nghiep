@@ -13,4 +13,8 @@ module.exports = function(router) {
 
     // get categories quantity
     router.get('/categories/quantity',categoriesController.getCategoriesQuantity);
+
+    // add categories on Admin side
+    router.post('/admin_side/categories/post/add',categoriesController.addCategories);
+
 }

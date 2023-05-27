@@ -7,6 +7,25 @@ export default function AdminCateManagementCompoent() {
     const fetcher = (...args) => fetch(...args).then((res) => res.json());
     const categories = useSWR('http://localhost:3001/categories/get', fetcher);
 
+    function handleAddCate(e) {
+        e.preventDefault();
+        const form = e.target;
+        const formData = new FormData(form);
+
+        const formJson = Object.fromEntries(formData.entries());
+
+        fetch(`http://localhost:3001/admin_side/categories/post/add`, {
+            method: 'POST',
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(formJson)
+        })
+            .then(response => response.json())
+            .then(e => {
+                console.log(e);
+            })
+    }
 
     return (
         <div className={`${CateMagementStyle.container}`}>
@@ -15,17 +34,18 @@ export default function AdminCateManagementCompoent() {
             </Head>
             <h2>Quản lý thể loại</h2>
             <div className='row'>
-                <form>
+                <form onSubmit={handleAddCate}>
                     <div className='row'>
-                    <div className='col-11'>
-                        <input placeholder='Tên thể loại cần thêm'
-                        className={`${CateMagementStyle.input}`} />
+                        <div className='col-11'>
+                            <input placeholder='Tên thể loại cần thêm'
+                                name='cate_name'
+                                className={`${CateMagementStyle.input}`} />
+                        </div>
+                        <div className='col-1'>
+                            <button className={`${CateMagementStyle.button}`}>Thêm</button>
+                        </div>
                     </div>
-                    <div className='col-1'>
-                        <button className={`${CateMagementStyle.button}`}>Thêm</button>
-                    </div>
-                    </div>
-                    
+
                 </form>
             </div>
             <div className="row">
