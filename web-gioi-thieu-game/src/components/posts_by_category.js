@@ -22,7 +22,7 @@ export default function PostByCategory({ id, page }) {
     return (
         <ul className="row post-container">
             {
-                data?.map((post, index) => (
+                data?.map((post) => (
                     <li className='col-md-4 col-lg-3' key={post.PostId}>
 
                         <div className={Lastest_post.postpre}>
@@ -48,7 +48,7 @@ export default function PostByCategory({ id, page }) {
                                     Xem bài viết
                                 </Link>
 
-                                <p><FontAwesomeIcon icon={faEye} /> 120</p>
+                                <p><FontAwesomeIcon icon={faEye} /> {post.View}</p>
                             </div>
                         </div>
 
