@@ -186,7 +186,8 @@ Posts.getPostsByCategory = function (categoryId, result) {
     const sql = `select categoriespost.PostId, posts.Title, posts.Thumnail, posts.TimePost, posts.description
     ,posts.View
     from categoriespost inner join posts on categoriespost.PostId = posts.PostId
-    where categoriespost.CategoryId = ${categoryId} order by posts.TimePost DESC;`;
+    where categoriespost.CategoryId = ${categoryId} and posts.Status = 1
+    order by posts.TimePost DESC;`;
     database.query(sql, function (err, data) {
         if (err) {
             throw err;
