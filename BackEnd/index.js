@@ -38,11 +38,12 @@ app.use(bodyParser.urlencoded({ extended: false }))
 
 app.use(bodyParser.json())
 
-// Api users, posts, categories
+// Api
 require('./src/routes/users_route')(app);
 require('./src/routes/posts_router')(app);
 require('./src/routes/categories_router')(app);
 require('./src/routes/comments_router')(app);
+require('./src/routes/history_router')(app);
 
 // Upload Images EditorJS API
 app.post('/upload_image_editorjs', upload.single('image'), (req, res) => {

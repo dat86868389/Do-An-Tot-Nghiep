@@ -49,7 +49,7 @@ export default function Header(props) {
                                 <span>Xin chào: <Link href='#'><b>{user.userName}</b></Link>
                                     <ul className="user-submenu">
                                         <li>
-                                            <Link href='#'><FontAwesomeIcon icon={faGamepad} /> Lịch sử xem bài viết</Link>
+                                            <Link href={`/history/${user.userId}`}><FontAwesomeIcon icon={faGamepad} /> Lịch sử xem bài viết</Link>
                                         </li>
                                         <li>
                                             <Link href={`/personal_post/${user.userId}`}><FontAwesomeIcon icon={faBook} /> Bài viết của bạn</Link>

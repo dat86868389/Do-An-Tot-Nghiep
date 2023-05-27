@@ -3,18 +3,25 @@ import CommentStyle from '../styles/comments.module.css';
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import Head from "next/head";
+import useUser from "@/lib/useUser";
 
 
 export default function ReadPostComponent({ idPost }) {
-
+    const { user } = useUser();
     const [postData, setPostData] = useState(null);
     const viewdRef = useRef(false);
 
     useEffect(() => {
         if (!viewdRef.current) {
-            fetch(`http://localhost:3001/post/${idPost}/update/view`, {
-                method: 'PUT',
-            })
+            if (user?.isLoggedIn == true) {
+                fetch(`http://localhost:3001/post/${idPost}/update/view`, {
+                    method: 'PUT',
+                })
+
+                fetch(`http://localhost:3001/history/add/postID/${idPost}/userId/${user.userId}`, {
+                    method: 'POST',
+                })
+            }
             viewdRef.current = true;
         }
     }, [])
