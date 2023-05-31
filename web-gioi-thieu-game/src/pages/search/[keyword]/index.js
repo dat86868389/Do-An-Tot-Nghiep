@@ -4,10 +4,13 @@ import SearchComponent from "@/components/search_component";
 
 export default function SearchPage() {
     const router = useRouter()
-    const { keyword } = router.query
-    return (
-        <Layout>
-            <SearchComponent keyword={keyword} />
-        </Layout>
-    )
+    if (router.isReady) {
+        const { keyword } = router.query
+        return (
+            <Layout>
+                <SearchComponent keyword={keyword} />
+            </Layout>
+        )
+    }
+   
 }

@@ -3,6 +3,7 @@ import Lastest_post from '../styles/postpre.module.css';
 import Link from "next/link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faTags } from "@fortawesome/free-solid-svg-icons";
+import CategoriesLinksComponent from "./categories_links_component";
 
 
 export default function SearchComponent({ keyword }) {
@@ -46,47 +47,7 @@ export default function SearchComponent({ keyword }) {
 
                                     <p className={Lastest_post.markscategory}>
                                         <FontAwesomeIcon icon={faTags} />
-                                        <Link href="#">
-                                            Game,
-                                        </Link>
-
-                                        <Link href="#">
-                                            Game Chiến Thuật,
-                                        </Link>
-
-
-                                        <Link href="#">
-                                            Game Chiến Thuật,
-                                        </Link>
-
-
-                                        <Link href="#">
-                                            Game Chiến Thuật,
-                                        </Link>
-
-
-                                        <Link href="#">
-                                            Game Chiến Thuật,
-                                        </Link>
-
-
-                                        <Link href="#">
-                                            Game Chiến Thuật,
-                                        </Link>
-
-
-                                        <Link href="#">
-                                            Game Chiến Thuật,
-                                        </Link>
-
-
-                                        <Link href="#">
-                                            Game Chiến Thuật,
-                                        </Link>
-
-                                        <Link href="#">
-                                            Game Chiến Thuật,
-                                        </Link>
+                                        <CategoriesLinksComponent postID={e.PostId}/>
                                     </p>
 
                                     <div className={Lastest_post.views_and_watchpost}>

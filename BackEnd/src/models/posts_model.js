@@ -171,7 +171,7 @@ Posts.getPostQuantity = function (result) {
 }
 
 Posts.getPostsByKeyWord = function (data, result) {
-    const sql = `select * from posts where Title like '%${data.keyword}%'`;
+    const sql = `select * from posts where Title like '%${data.keyword}%' and Status = 1`;
     database.query(sql, function (err, res) {
         if (err) {
             throw err;
