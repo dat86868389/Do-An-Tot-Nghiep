@@ -19,10 +19,10 @@ export default function navBarComponent() {
                 />
 
                 <p>
-                    Daominhha.com là website giới thiệu Game Miễn Phí Tốc độ cao mới nhất ,
+                    nguyentiendat.com là website giới thiệu Game Miễn Phí Tốc độ cao mới nhất ,
                     Full Kích Hoạt , Full DLC , Full Mods …
                     chia sẻ những thủ thuật về game và công nghệ .
-                    Ngoài ra daominhha.com còn cung cấp cho anh em một nơi
+                    Ngoài ra nguyentiendat.com còn cung cấp cho anh em một nơi
                     tải Phần Mềm Miễn Phí Chất Lượng Cao . Với Phương Châm
                     ” Chia sẻ miễn phí tất cả “
                 </p>
@@ -31,24 +31,9 @@ export default function navBarComponent() {
             </div>
 
             <div className='col-12 col-sm-4'>
-                <ul>CHÍNH SÁCH & ĐIỀU KHOẢN
+                <ul>Địa chỉ
                     <li>
-                        <Link href="#">Giới thiệu về Daominhha.com</Link>
-                    </li>
-                    <li>
-                        <Link href="#">Chính sách bảo mật</Link>
-                    </li>
-
-                    <li>
-                        <Link href="#">Câu hỏi thường gặp</Link>
-                    </li>
-
-                    <li>
-                        <Link href="#">Liên hệ</Link>
-                    </li>
-
-                    <li>
-                        <Link href="#">Điều khoản sử dụng</Link>
+                        <Link href="#">Số 3 phố Cầu Giấy, P.Láng Thượng, Q.Đống Đa, Hà Nội.</Link>
                     </li>
 
                 </ul>

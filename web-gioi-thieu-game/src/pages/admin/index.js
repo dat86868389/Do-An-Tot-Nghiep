@@ -9,10 +9,7 @@ import { useEffect } from "react";
 
 export default function AdminPage() {
     const router = useRouter();
-    const { user, mutateUser } = useUser({
-        redirectTo: '/admin',
-        redirectIfFound: true,
-    });
+    const { user, mutateUser } = useUser();
 
     //logout user
     async function handleLogout() {

@@ -10,13 +10,14 @@ export default function AdminPostManagementCompoent({ page }) {
     const posts = useSWR(`http://localhost:3001/posts/get/page/${page}`, fetcher);
     const posts_quantity = useSWR('http://localhost:3001/posts/get/all/quantity', fetcher);
 
-    function handleDelete(postId) {
-        fetch(`http://localhost:3001/admin/posts/delete/${postId}`, {
+    async function handleDelete(postId) {
+        await fetch(`http://localhost:3001/admin/posts/delete/${postId}`, {
             method: 'DELETE',
         })
             .then((res) => res.json())
             .then(e => {
                 console.log(e);
+                posts.mutate();
             })
     }
 

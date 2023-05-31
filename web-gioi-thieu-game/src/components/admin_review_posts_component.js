@@ -19,6 +19,7 @@ export default function AdminReviewPostsComponent({ page }) {
             .then((res) => res.json())
             .then((e) => {
                 console.log(e);
+                posts.mutate();
             });
     }
 
@@ -29,6 +30,7 @@ export default function AdminReviewPostsComponent({ page }) {
             .then((res) => res.json())
             .then(e => {
                 console.log(e);
+                posts.mutate();
             })
     }
 
