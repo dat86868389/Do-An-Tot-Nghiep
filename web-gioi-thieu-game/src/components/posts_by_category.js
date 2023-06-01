@@ -11,12 +11,13 @@ export default function PostByCategory({ id, page }) {
     const [data, setData] = useState([]);
 
     useEffect(() => {
-        fetch(`http://localhost:3001/posts/category/${id}`)
+        console.log(page);
+        fetch(`http://localhost:3001/posts/category/${id}/page/${page}`)
             .then(res => res.json())
             .then((data) => {
                 setData( data.result);
             })
-    }, [id]);
+    }, [id,page]);
 
     return (
         <ul className="row post-container">

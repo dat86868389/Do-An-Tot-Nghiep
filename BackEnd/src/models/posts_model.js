@@ -181,12 +181,13 @@ Posts.getPostsByKeyWord = function (data, result) {
     });
 }
 
-Posts.getPostsByCategory = function (categoryId, result) {
+Posts.getPostsByCategory = function (params, result) {
     const sql = `select categoriespost.PostId, posts.Title, posts.Thumnail, posts.TimePost, posts.description
     ,posts.View
     from categoriespost inner join posts on categoriespost.PostId = posts.PostId
-    where categoriespost.CategoryId = ${categoryId} and posts.Status = 1
-    order by posts.TimePost DESC;`;
+    where categoriespost.CategoryId = ${params.category} and posts.Status = 1
+    order by posts.TimePost DESC
+    limit 8 offset ${(parseInt(params.page) - 1)*8};`;
     database.query(sql, function (err, data) {
         if (err) {
             throw err;
@@ -314,6 +315,22 @@ Posts.updateViewPost = function (prams, result) {
             throw err;
         }
         result(1); // success
+    })
+}
+
+Posts.getPostQuantityByCategory = function (params, result) {
+    const sql = `select count(posts.PostId) as count
+    from posts inner join categoriespost
+    on posts.PostId = categoriespost.PostId
+    where categoriespost.CategoryId = ${params.category} and Status = 1;`;
+
+    database.query(sql, function (err, data) {
+        if (err) {
+            throw err;
+        }
+        else {
+            result(data);
+        }
     })
 }
 

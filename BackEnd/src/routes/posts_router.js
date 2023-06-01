@@ -31,7 +31,7 @@ module.exports = function (router) {
     router.get('/posts/search/:keyword', postsController.getPostsByKeyWord);
 
     // get posts by category
-    router.get('/posts/category/:category', postsController.getPostsByCategory);
+    router.get('/posts/category/:category/page/:page', postsController.getPostsByCategory);
 
     //get posts have status code = 0
     router.get('/posts/status/code/0/page/:page', postsController.getPostsStatusCodeEqual0);
@@ -44,6 +44,8 @@ module.exports = function (router) {
 
     // get post on admin side
     router.get('/posts/get/page/:page', postsController.getPostsbyPageOnAdminSide);
+
+    router.get('/posts/get/quantity/category/:category', postsController.getPostQuantityByCategory);
 
 
     /**

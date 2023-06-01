@@ -75,8 +75,8 @@ exports.getPostsByKeyWord = function (req, res) {
 }
 
 exports.getPostsByCategory = function (req, res) {
-    const categoryId = req.params.category;
-    postsModel.getPostsByCategory(categoryId, function (data) {
+    const params = req.params;
+    postsModel.getPostsByCategory(params, function (data) {
         res.send({ result: data });
     })
 }
@@ -131,6 +131,13 @@ exports.getQuantity = function (req, res) {
 exports.updateViewPost = function (req, res) {
     const params = req.params;
     postsModel.updateViewPost(params, function (data) {
+        res.send({ result: data });
+    })
+}
+
+exports.getPostQuantityByCategory = function (req, res) {
+    const params = req.params;
+    postsModel.getPostQuantityByCategory(params, function(data){
         res.send({ result: data });
     })
 }
