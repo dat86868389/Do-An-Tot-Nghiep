@@ -11,13 +11,16 @@ export default function ClientPagging({
     cateId
 }) {
     const totalPages = useSWR(`http://localhost:3001/posts/get/quantity/category/${cateId}`, fetcher);
-    console.log(totalPages, `http://localhost:3001/posts/get/quantity/category/${cateId}`);
+    console.log(totalPages?.data?.result[0].count / 8, `http://localhost:3001/posts/get/quantity/category/${cateId}`);
     return (
         <div className="row pagging-container">
-            {handleRenderPages(currentPage,
-                Math.ceil(totalPages?.data?.result[0].count/8),
-                subDomain
-            )}
+            <div className="col-12">
+                {handleRenderPages(currentPage,
+                    Math.ceil(totalPages?.data?.result[0].count / 8),
+                    subDomain
+                )}
+            </div>
+
         </div>
     )
 }
@@ -32,6 +35,9 @@ function handleRenderPages(currentPage, totalPages, subDomain) {
     let _totalPages = parseInt(totalPages);
     let jsx = [];
 
+    if (_totalPages === 0) {
+        return;
+    }
 
     if (_totalPages <= leftSide + rightSide + midSide) {
         if (_currentPage <= 1) {

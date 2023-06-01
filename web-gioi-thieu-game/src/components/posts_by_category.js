@@ -15,12 +15,20 @@ export default function PostByCategory({ id, page }) {
         fetch(`http://localhost:3001/posts/category/${id}/page/${page}`)
             .then(res => res.json())
             .then((data) => {
-                setData( data.result);
+                setData(data.result);
             })
-    }, [id,page]);
+    }, [id, page]);
 
     return (
         <ul className="row post-container">
+            {
+                data?.length == 0 && (
+                    <>
+                        <h1>KHÔNG CÓ BÀI VIẾT NÀO</h1>
+                        <Link href={`/`}>Bấm vào đây để về trang chủ</Link>
+                    </>
+                )
+            }
             {
                 data?.map((post) => (
                     <li className='col-md-4 col-lg-3' key={post.PostId}>
@@ -40,7 +48,7 @@ export default function PostByCategory({ id, page }) {
 
                             <p className={Lastest_post.markscategory}>
                                 <FontAwesomeIcon icon={faTags} />
-                                <CategoriesLinksComponent postID={post.PostId}/>
+                                <CategoriesLinksComponent postID={post.PostId} />
                             </p>
 
                             <div className={Lastest_post.views_and_watchpost}>
