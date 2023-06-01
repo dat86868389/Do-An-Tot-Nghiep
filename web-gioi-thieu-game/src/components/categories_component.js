@@ -18,7 +18,6 @@ export default function CategoriesList(
                                 type="checkbox"
                                 value={e.CategoryId}
                                 onChange={e => {
-                                    console.log(e.target.checked);
                                     e.target.checked == true ? onChooseCategory(parseInt(e.target.value)) : onUnChooseCategory(parseInt(e.target.value));
                                 }}
                             /> {e.CategoryName}

@@ -50,9 +50,9 @@ export default function Editor() {
             });
             const result = await response.json();
             thumnailLink += result.file.url;
-            console.log("Success:", result);
+
         } catch (error) {
-            console.error("Error:", error);
+
         }
 
 
@@ -60,13 +60,13 @@ export default function Editor() {
         await editorRef.current.save().then((outputData) => {
             content = { ...outputData }
         }).catch((error) => {
-            console.log('Saving failed: ', error)
+
         });
 
         const postdata = { ...data, thumnailLink, ...user, ...content }
-        console.log(postdata);
+
         var myJsonString = JSON.stringify(postdata);
-        console.log(myJsonString);
+
 
         let idPost;
         await fetch('http://localhost:3001/post/add', {
@@ -90,7 +90,6 @@ export default function Editor() {
             });
 
         let categoriesData = { id: idPost, cateList: categoriesChekedList }
-        console.log(categoriesData);
         fetch(`http://localhost:3001/categories/post/add`, {
             method: 'POST',
             headers: {
@@ -193,7 +192,6 @@ export default function Editor() {
         fetch('http://localhost:3001/categories/get')
             .then(res => res.json())
             .then(data => {
-                console.log(data);
                 setCategories(data.result);
             })
             .catch(() => {

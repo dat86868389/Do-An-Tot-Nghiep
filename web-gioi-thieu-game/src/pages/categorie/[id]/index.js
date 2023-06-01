@@ -15,9 +15,7 @@ export default function PostIndex() {
         
     }, [router.isReady, router.query.id]);
 
-    console.log(prams);
     if (prams != null) {
-        console.log(prams);
         return (
             <Layout>
                 <PostsByCategory id={prams.id} />

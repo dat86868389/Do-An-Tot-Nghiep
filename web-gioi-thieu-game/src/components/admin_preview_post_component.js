@@ -26,7 +26,6 @@ export default function AdminPreviewPost({ postID }) {
                 console.log(e);
 
                 if (!editorRef.current) {
-                    console.log("123", data?.result[0]?.Content);
                     let content = JSON.parse(e.result[0].Content);
                     const editor = new EditorJS({
 

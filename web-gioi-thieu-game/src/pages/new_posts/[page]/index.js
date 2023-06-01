@@ -18,7 +18,6 @@ export default function NewsPosts() {
     useEffect(() => {
         if (router.isReady) {
             const { page } = router.query;
-            console.log(page);
             fetch(`http://localhost:3001/posts/get_posts_by_page/${page}/limit/8`)
                 .then(res => res.json())
                 .then(e => {

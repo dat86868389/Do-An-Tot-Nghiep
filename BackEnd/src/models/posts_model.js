@@ -99,7 +99,6 @@ Posts.getPersonalPosts = function (prams, result) {
 
 Posts.deletePostById = function (id, result) {
     const sql = `DELETE FROM categoriespost WHERE PostId = ${id};`;
-    // console.log(sql);
     database.query(sql, function (err) {
         if (err) {
             result(0);

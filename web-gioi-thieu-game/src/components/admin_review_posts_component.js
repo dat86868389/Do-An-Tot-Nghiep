@@ -17,8 +17,7 @@ export default function AdminReviewPostsComponent({ page }) {
             method: 'PUT'
         })
             .then((res) => res.json())
-            .then((e) => {
-                console.log(e);
+            .then(() => {
                 posts.mutate();
             });
     }
@@ -28,14 +27,12 @@ export default function AdminReviewPostsComponent({ page }) {
             method: 'DELETE',
         })
             .then((res) => res.json())
-            .then(e => {
-                console.log(e);
+            .then(() => {
                 posts.mutate();
             })
     }
 
     if (posts.data && posts_quantity.data) {
-        console.log(posts_quantity?.data?.result[0].count);
         return (
             <div className={`${PostsMagementStyle.container}`}>
                 <Head>

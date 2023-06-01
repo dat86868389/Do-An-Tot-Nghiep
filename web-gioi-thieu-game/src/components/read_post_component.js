@@ -27,7 +27,6 @@ export default function ReadPostComponent({ idPost }) {
     }, [])
 
     useEffect(() => {
-        console.log(123);
         fetch(`http://localhost:3001/posts/${idPost}`)
             .then(res => res.json())
             .then((e) => {

@@ -76,9 +76,8 @@ export default function UpdatePostComponent() {
         });
 
         const postdata = { ...data, thumbnail, ...user, idPost: router.query.idPost, ...content }
-        console.log("du lieu la : ",postdata);
+  
         var myJsonString = JSON.stringify(postdata);
-        console.log(myJsonString);
 
         fetch('http://localhost:3001/post/update', {
             method: 'PUT',
@@ -104,9 +103,9 @@ export default function UpdatePostComponent() {
             fetch(`http://localhost:3001/posts/postId/${idPost}/userId/${userId}`)
                 .then(res => res.json())
                 .then(data => {
-                    console.log(data);
+
                     content = { ...JSON.parse(data.result[0].Content) };
-                    console.log('content la', content.blocks);
+
                     if (!editorRef.current) {
                         const editor = new EditorJS({
 

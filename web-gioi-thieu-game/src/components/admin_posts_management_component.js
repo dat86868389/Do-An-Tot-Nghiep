@@ -16,13 +16,11 @@ export default function AdminPostManagementCompoent({ page }) {
         })
             .then((res) => res.json())
             .then(e => {
-                console.log(e);
                 posts.mutate();
             })
     }
 
     if (posts.data && posts_quantity.data){
-        console.log(posts_quantity?.data?.result[0].count);
         return (
             <div className={`${PostsMagementStyle.container}`}>
                 <Head>

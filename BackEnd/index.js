@@ -58,9 +58,6 @@ app.post('/upload_image_editorjs', upload.single('image'), (req, res) => {
 // Upload image 
 
 app.post('/upload_image', upload.single('image_thumnail'), function (req, res) {
-  // req.file is the name of your file in the form above, here 'uploaded_file'
-  // req.body will hold the text fields, if there were any 
-  console.log("req",req.file,"req body" ,req.body)
   res.send({
     "success": 1,
     "file": {

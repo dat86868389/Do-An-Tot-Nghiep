@@ -4,7 +4,6 @@ import Head from 'next/head';
 import AdminPaginationComponent from './admin_pagination_component';
 
 export default function UserManagementStyleComponent({ page }) {
-    console.log(page);
     const fetcher = (...args) => fetch(...args).then((res) => res.json());
     const users = useSWR(`http://localhost:3001/users/paginate/page/${page}`, fetcher);
     const users_quantity = useSWR(`http://localhost:3001/users/quantity`, fetcher);
@@ -16,8 +15,8 @@ export default function UserManagementStyleComponent({ page }) {
             method: 'PUT'
         })
             .then(response => response.json())
-            .then(e => {
-                console.log(e);
+            .then(() => {
+                users.mutate();
             })
     }
 
@@ -27,18 +26,16 @@ export default function UserManagementStyleComponent({ page }) {
         const form = e.target;
         const formData = new FormData(form);
         const formJson = Object.fromEntries(formData.entries());
-        console.log(formJson);
 
         fetch(`http://localhost:3001/user/update/role/${formJson.role}/userId/${formJson.user_ID}`, {
             method: 'PUT'
         })
             .then(response => response.json())
-            .then(e => {
-                console.log(e);
+            .then(() => {
+                users.mutate();
             })
     }
 
-    console.log(users);
     return (
         <div className={`${UserManagementStyle.container}`}>
             <Head>
@@ -216,7 +213,6 @@ function renderFormEditUser(user) {
     document.getElementById("user_name").value = user.UserName;
     document.getElementById("user_date").value = handleRenderDateUser(user.time_create);
     document.getElementById("user_ID").value = user.UserId;
-    console.log(user.UserId);
 }
 
 function handleClose() {
