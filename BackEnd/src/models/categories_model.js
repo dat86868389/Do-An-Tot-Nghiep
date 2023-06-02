@@ -43,7 +43,7 @@ Categories.getCategoriesByPostId = function (postId, result) {
     const sql = `select categoriespost.CategoryId, categories.CategoryName 
     from categoriespost inner join categories
     on categoriespost.CategoryId = categories.CategoryId
-    where categoriespost.PostId = ${postId};`
+    where categoriespost.PostId = ${postId} and status = 1;`
 
     database.query(sql, function (err, categories) {
         if (err) {
@@ -56,7 +56,8 @@ Categories.getCategoriesByPostId = function (postId, result) {
 }
 
 Categories.getCategoriesQuantity = function (result) {
-    const sql = 'select count(categories.CategoryId) as count from categories;';
+    const sql = `select count(categories.CategoryId) as count from categories
+    where status = 1;`;
     database.query(sql, function (err, count) {
         if (err) {
             result(err);
