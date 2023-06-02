@@ -8,13 +8,15 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import CategoriesLinksComponent from './categories_links_component';
+import useSWR from 'swr';
 
-export default function NewPosts({ data }) {
-
+const fetcher = (...args) => fetch(...args).then((res) => res.json());
+export default function NewPosts({ page }) {
+    const posts = useSWR(`http://localhost:3001/posts/get_posts_by_page/${page}/limit/8`, fetcher);
     return (
         <ul className='row latest-posts'>
             {
-                data?.map((post) => (
+                posts?.data?.result.map((post) => (
                     <li className='col-md-4 col-lg-3' key={post.PostId}>
 
                         <div className={Lastest_post.postpre}>
@@ -51,9 +53,4 @@ export default function NewPosts({ data }) {
         </ul>
 
     );
-}
-
-
-function paging(curentPage, perPage, totalPages) {
-
 }

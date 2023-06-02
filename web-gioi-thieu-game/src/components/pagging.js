@@ -2,23 +2,26 @@ import { faArrowLeft, faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Link from "next/link";
 import useSWR from 'swr';
+import PaggingStytle from '../styles/pagging_client.module.css';
 
 const fetcher = (...args) => fetch(...args).then((res) => res.json());
 
 export default function ClientPagging({
     currentPage,
     subDomain,
-    cateId
+    cateId,
+    totalPages
 }) {
-    const totalPages = useSWR(`http://localhost:3001/posts/get/quantity/category/${cateId}`, fetcher);
-    console.log(totalPages?.data?.result[0].count / 8, `http://localhost:3001/posts/get/quantity/category/${cateId}`);
+    
     return (
         <div className="row pagging-container">
             <div className="col-12">
-                {handleRenderPages(currentPage,
-                    Math.ceil(totalPages?.data?.result[0].count / 8),
-                    subDomain
-                )}
+                <center>
+                    {handleRenderPages(currentPage,
+                        totalPages,
+                        subDomain
+                    )}
+                </center>
             </div>
 
         </div>
@@ -41,35 +44,39 @@ function handleRenderPages(currentPage, totalPages, subDomain) {
 
     if (_totalPages <= leftSide + rightSide + midSide) {
         if (_currentPage <= 1) {
-            jsx.push(<span>
+            jsx.push(<span className={`${PaggingStytle.span}`}>
                 <FontAwesomeIcon icon={faArrowLeft} />
             </span>);
         }
         else {
-            jsx.push(<Link href={`${subDomain}${_currentPage - 1}`}>
+            jsx.push(<Link href={`${subDomain}${_currentPage - 1}`} className={`${PaggingStytle.link}`}>
                 <FontAwesomeIcon icon={faArrowLeft} />
             </Link>);
         }
         for (let i = 1; i <= _totalPages; i++) {
             if (i == _currentPage) {
-                jsx.push(<span>
+                jsx.push(<span className={`${PaggingStytle.span} ${PaggingStytle.active}`}>
                     {i}
                 </span>);
             }
             else {
-                jsx.push(<Link href={`${subDomain}${i}`}>
+                jsx.push(<Link href={`${subDomain}${i}`}
+                    className={`${PaggingStytle.link}`}
+                >
                     {i}
                 </Link>);
             }
         }
 
         if (_currentPage == _totalPages) {
-            jsx.push(<span>
+            jsx.push(<span className={`${PaggingStytle.span}`}>
                 <FontAwesomeIcon icon={faArrowRight} />
             </span>);
         }
         else {
-            jsx.push(<Link href={`${subDomain}${_currentPage + 1}`}>
+            jsx.push(<Link href={`${subDomain}${_currentPage + 1}`}
+                className={`${PaggingStytle.link}`}
+            >
                 <FontAwesomeIcon icon={faArrowRight} />
             </Link>);
         }
@@ -84,18 +91,22 @@ function handleRenderPages(currentPage, totalPages, subDomain) {
                 </span>);
             }
             else {
-                jsx.push(<Link href={`${subDomain}${_currentPage - 1}`}>
+                jsx.push(<Link href={`${subDomain}${_currentPage - 1}`}
+                    className={`${PaggingStytle.link}`}
+                >
                     <FontAwesomeIcon icon={faArrowLeft} />
                 </Link>);
             }
             for (let i = 1; i <= leftSide + midSide; i++) {
                 if (i == _currentPage) {
-                    jsx.push(<span>
+                    jsx.push(<span className={`${PaggingStytle.span} ${PaggingStytle.active}`}>
                         {i}
                     </span>);
                 }
                 else {
-                    jsx.push(<Link href={`${subDomain}${i}`}>
+                    jsx.push(<Link href={`${subDomain}${i}`}
+                        className={`${PaggingStytle.link}`}
+                    >
                         {i}
                     </Link>);
                 }
@@ -104,7 +115,9 @@ function handleRenderPages(currentPage, totalPages, subDomain) {
                 ...
             </span>);
             for (let i = _totalPages - rightSide + 1; i <= _totalPages; i++) {
-                jsx.push(<Link href={`${subDomain}${i}`}>
+                jsx.push(<Link href={`${subDomain}${i}`}
+                    className={`${PaggingStytle.link}`}
+                >
                     {i}
                 </Link>);
             }
@@ -116,85 +129,103 @@ function handleRenderPages(currentPage, totalPages, subDomain) {
         }
 
         if (_currentPage > leftSide + midSide - 1 && _currentPage < _totalPages - rightSide - midSide + 1) {
-            jsx.push(<Link href={`${subDomain}${_currentPage - 1}`}>
+            jsx.push(<Link href={`${subDomain}${_currentPage - 1}`}
+                className={`${PaggingStytle.link}`}
+            >
                 <FontAwesomeIcon icon={faArrowLeft} />
             </Link>);
 
             for (let i = 1; i <= leftSide; i++) {
-                jsx.push(<Link href={`${subDomain}${i}`}>
+                jsx.push(<Link href={`${subDomain}${i}`}
+                    className={`${PaggingStytle.link}`}
+                >
                     {i}
                 </Link>);
             }
 
-            jsx.push(<span>
+            jsx.push(<span className={`${PaggingStytle.span}`}>
                 ...
             </span>);
 
             for (let i = _currentPage - 1; i <= _currentPage + 1; i++) {
                 if (i == _currentPage) {
-                    jsx.push(<span>
+                    jsx.push(<span className={`${PaggingStytle.span} ${PaggingStytle.active}`}>
                         {i}
                     </span>);
                 }
                 else {
-                    jsx.push(<Link href={`${subDomain}${i}`}>
+                    jsx.push(<Link href={`${subDomain}${i}`}
+                        className={`${PaggingStytle.link}`}
+                    >
                         {i}
                     </Link>);
                 }
             }
 
-            jsx.push(<span>
+            jsx.push(<span className={`${PaggingStytle.span}`}>
                 ...
             </span>);
 
             for (let i = _totalPages - rightSide + 1; i <= _totalPages; i++) {
 
-                jsx.push(<Link href={`${subDomain}${i}`}>
+                jsx.push(<Link href={`${subDomain}${i}`}
+                    className={`${PaggingStytle.link}`}
+                >
                     {i}
                 </Link>);
 
             }
 
-            jsx.push(<Link href={`${subDomain}${_currentPage + 1}`}>
+            jsx.push(<Link href={`${subDomain}${_currentPage + 1}`}
+                className={`${PaggingStytle.link}`}
+            >
                 <FontAwesomeIcon icon={faArrowRight} />
             </Link>);
         }
 
         if (_currentPage >= _totalPages - (midSide + rightSide - 1) && _currentPage <= _totalPages) {
 
-            jsx.push(<Link href={`${subDomain}${_currentPage - 1}`}>
+            jsx.push(<Link href={`${subDomain}${_currentPage - 1}`}
+                className={`${PaggingStytle.link}`}
+            >
                 <FontAwesomeIcon icon={faArrowLeft} />
             </Link>);
 
             for (let i = 1; i <= leftSide; i++) {
 
-                jsx.push(<Link href={`${subDomain}${i}`}>
+                jsx.push(<Link href={`${subDomain}${i}`}
+                    className={`${PaggingStytle.link}`}
+                >
                     {i}
                 </Link>);
             }
 
-            jsx.push(<span>...</span>);
+            jsx.push(<span className={`${PaggingStytle.span}`}>...</span>);
 
             for (let i = _totalPages - midSide - rightSide + 1; i <= _totalPages; i++) {
                 if (i == _currentPage) {
-                    jsx.push(<span>
+                    jsx.push(<span className={`${PaggingStytle.span} ${PaggingStytle.active}`}>
                         {i}
                     </span>);
                 }
                 else {
-                    jsx.push(<Link href={`${subDomain}${i}`}>
+                    jsx.push(<Link href={`${subDomain}${i}`}
+                        className={`${PaggingStytle.link}`}
+                    >
                         {i}
                     </Link>);
                 }
             }
 
             if (_currentPage == _totalPages) {
-                jsx.push(<span>
+                jsx.push(<span className={`${PaggingStytle.span}`}>
                     <FontAwesomeIcon icon={faArrowRight} />
                 </span>);
             }
             else {
-                jsx.push(<Link href={`${subDomain}${_currentPage + 1}`}>
+                jsx.push(<Link href={`${subDomain}${_currentPage + 1}`}
+                    className={`${PaggingStytle.link}`}
+                >
                     <FontAwesomeIcon icon={faArrowRight} />
                 </Link>);
             }

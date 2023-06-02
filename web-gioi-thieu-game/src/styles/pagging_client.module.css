@@ -1,0 +1,18 @@
+.span {
+    padding: 5px 10px;
+    font-size: 18px;
+    margin: 0 7px;
+}
+
+.link {
+    padding: 5px 10px;
+    font-size: 18px;
+    margin: 0 7px;
+    text-decoration: none;
+    color: #fff;
+}
+
+.active {
+    background-color: var(--border-bottom-submenu);
+    border-radius: 10px;
+}
