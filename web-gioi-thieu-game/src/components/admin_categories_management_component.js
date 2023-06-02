@@ -23,7 +23,19 @@ export default function AdminCateManagementCompoent() {
         })
             .then(response => response.json())
             .then(e => {
-                console.log(e);
+                categories.mutate();
+                document.getElementById(`input_category_name`).value = '';
+            })
+    }
+
+    function handleDeleteCate(idCate) {
+        fetch(`http://localhost:3001/admin_side/categories/delete/${idCate}`, {
+            method: 'DELETE'
+        })
+            .then(response => response.json())
+            .then(e => {
+                    console.log(e);
+                    categories.mutate();
             })
     }
 
@@ -37,9 +49,13 @@ export default function AdminCateManagementCompoent() {
                 <form onSubmit={handleAddCate}>
                     <div className='row'>
                         <div className='col-11'>
-                            <input placeholder='Tên thể loại cần thêm'
+                            <input
+                                required
+                                placeholder='Tên thể loại cần thêm'
                                 name='cate_name'
-                                className={`${CateMagementStyle.input}`} />
+                                className={`${CateMagementStyle.input}`}
+                                id='input_category_name'
+                            />
                         </div>
                         <div className='col-1'>
                             <button className={`${CateMagementStyle.button}`}>Thêm</button>
@@ -54,7 +70,6 @@ export default function AdminCateManagementCompoent() {
                         <thead>
                             <tr className={`${CateMagementStyle.tr}`}>
                                 <th className={`${CateMagementStyle.th}`}>Tên thể loại</th>
-                                <th className={`${CateMagementStyle.th}`}>Chỉnh sửa</th>
                                 <th className={`${CateMagementStyle.th}`}>Xóa</th>
 
                             </tr>
@@ -67,13 +82,14 @@ export default function AdminCateManagementCompoent() {
                                             {cate.CategoryName}
                                         </td>
 
-
                                         <td className={`${CateMagementStyle.td}`}>
-                                            <button>Sửa</button>
-                                        </td>
-
-                                        <td className={`${CateMagementStyle.td}`}>
-                                            <button>Xóa</button>
+                                            <button
+                                                onClick={() => {
+                                                    handleDeleteCate(cate.CategoryId)
+                                                }}
+                                            >
+                                                Xóa
+                                            </button>
                                         </td>
                                     </tr>
                                 ))

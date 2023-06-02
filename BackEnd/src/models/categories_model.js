@@ -6,7 +6,7 @@ const Categories = function (categories) {
 }
 
 Categories.getAllCategories = function (result) {
-    database.query(`select * from categories;`, function (err, categories) {
+    database.query(`select * from categories where status = 1;`, function (err, categories) {
         if (err) {
             result(err);
         }
@@ -77,6 +77,20 @@ Categories.addCategories = function(cate, result) {
             result(1);
         }
     });
+}
+
+Categories.deleteCategories = function(idCate, result) {
+    const sql = `update categories
+    set status = 0
+    where CategoryId = ${idCate}`;
+    database.query(sql, function(err) {
+        if (err) {
+            throw err;
+        }
+        else {
+            result(true)
+        }
+    })
 }
 
 module.exports = Categories;

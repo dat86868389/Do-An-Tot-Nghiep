@@ -17,4 +17,6 @@ module.exports = function(router) {
     // add categories on Admin side
     router.post('/admin_side/categories/post/add',categoriesController.addCategories);
 
+    //delete categories on Admin side
+    router.delete('/admin_side/categories/delete/:id',categoriesController.deleteCategories);
 }

@@ -32,3 +32,10 @@ exports.addCategories = function (req, res) {
         res.send({ result: data });
     })
 }
+
+exports.deleteCategories = function (req, res) {
+    const idCate = req.params.id;
+    categoriesModel.deleteCategories(idCate, function(data){
+        res.send({ isSucces: data });
+    })
+}
