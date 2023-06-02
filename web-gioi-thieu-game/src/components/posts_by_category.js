@@ -11,7 +11,6 @@ export default function PostByCategory({ id, page }) {
     const [data, setData] = useState([]);
 
     useEffect(() => {
-        console.log(page);
         fetch(`http://localhost:3001/posts/category/${id}/page/${page}`)
             .then(res => res.json())
             .then((data) => {
