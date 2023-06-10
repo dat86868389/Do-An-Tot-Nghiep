@@ -58,8 +58,19 @@
 
 .info_user {
     padding: 10px 0;
+    position: relative;
 }
 
 .info_time {
     margin: 0;
+}
+
+.button_delete {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: var(--border-bottom-submenu);
+    color: #fff;
+    padding: 0 5px;
 }

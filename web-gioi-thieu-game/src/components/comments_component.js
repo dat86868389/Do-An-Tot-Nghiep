@@ -11,7 +11,7 @@ export default function CommentsComponent({ postId }) {
     const fetcher = url => fetch(url).then(r => r.json())
     const { data } = useSWR(`http://localhost:3001/comments/post/${postId}`,
         fetcher,
-        { refreshInterval: 50 }
+        { refreshInterval: 1000 }
     );
 
     //when user post comment
@@ -72,15 +72,12 @@ export default function CommentsComponent({ postId }) {
             <div className='col-12'>
                 <ul className={CommentStyle.comments_of_post}>
                     {
-                        data?.result.map(c => (
-                            handleRender(c)
-                        )
-
-
-                        )
+                        data?.result.map(c => {
+                            if (user.isLoggedIn == true) {
+                                return handleRender(c, user)
+                            }
+                        })
                     }
-
-
                 </ul>
             </div>
 
@@ -91,7 +88,10 @@ export default function CommentsComponent({ postId }) {
 
 
 
-function handleRender(comment) {
+function handleRender(comment, user) {
+    console.log(user);
+    console.log(user.userId, comment.userId);
+    console.log(user.userId == comment.userId)
     const dateString = comment.time;
     const dateObject = new Date(dateString);
     const date = dateObject.getDate() < 10 ? `0${dateObject.getDate()}` : dateObject.getDate();
@@ -104,6 +104,18 @@ function handleRender(comment) {
     return (
         <li key={comment._id}>
             <div className={CommentStyle.info_user}>
+                {
+                    user.userId == comment.userId && (
+                        <button
+                            className={`${CommentStyle.button_delete}`}
+                            onClick={() => {
+                                handleDeleteComment(comment._id)
+                            }}
+                        >
+                            Xóa
+                        </button>
+                    )
+                }
                 <p className={CommentStyle.info_time}>
                     <span className={CommentStyle.info_user_name}>
                         {comment.userName}
@@ -118,8 +130,27 @@ function handleRender(comment) {
                 <p className={CommentStyle.users_comments}>
                     {comment.comment}
                 </p>
+
+
             </div>
         </li>
     )
 
+}
+
+
+function handleDeleteComment(idComent) {
+    let text = "Bạn muốn xóa bình luận này?";
+    if (confirm(text) == true) {
+        fetch(`http://localhost:3001/comments/delete/idComment/${idComent}`, {
+            method: 'DELETE'
+        })
+            .then(res => res.json())
+            .then(r => {
+                console.log(r);
+            })
+            .catch(() => {
+                alert("Hệ Thống đã xảy ra lỗi!");
+            })
+    }
 }
