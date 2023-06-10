@@ -60,22 +60,22 @@ export default function Register() {
 
             <label>
               Tên của bạn:
-              <br /><input type="text" name="userName" /><br />
+              <br /><input type="text" required name="userName" /><br />
             </label>
 
             <label>
               Tên tài khoản:
-              <br /><input type="text" name="account" /><br />
+              <br /><input type="text" required name="account" /><br />
             </label>
 
             <label>
               Mật khẩu:
-              <br /><input type="password" name="password" /><br />
+              <br /><input type="password" required name="password" /><br />
             </label>
 
             <label>
               Email:
-              <br /><input type="text" name="email" /><br />
+              <br /><input type="text" required name="email" /><br />
             </label>
 
             <input type="submit" value="Đăng ký" />

@@ -7,7 +7,7 @@ export default function HistoryComponent({ idUser }) {
     const [history, setHistory] = useState();
 
     useEffect(() => {
-        fetch(`http://localhost:3001/history/get/34`)
+        fetch(`http://localhost:3001/history/get/${idUser}`)
         .then((response) => response.json())
         .then(e=> {
             setHistory(e);
@@ -16,6 +16,7 @@ export default function HistoryComponent({ idUser }) {
 
     return (
         <div className={`row ${PersonalPostStyle.container}`}>
+            <h1>Các bài viết đã xem</h1>
             {
                 history?.result.map((e) => (
                     <div className={`col-3 ${PersonalPostStyle.items}`}>
