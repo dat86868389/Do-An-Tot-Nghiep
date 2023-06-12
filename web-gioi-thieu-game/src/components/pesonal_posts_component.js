@@ -31,8 +31,7 @@ export default function PesonalPostsComponent(props) {
     useEffect(() => {
         fetch(`http://localhost:3001/get_personal_posts/${props.id}`)
             .then(response => response.json())
-            .then((data) => {
-                console.log(data);
+            .then((data) => {;
                 setpesonalPosts(data);
             })
             .catch(() => {

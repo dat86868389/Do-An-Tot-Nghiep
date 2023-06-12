@@ -23,7 +23,6 @@ export default function AdminPreviewPost({ postID }) {
             .then(res => res.json())
             .then(e => {
                 setData(e);
-                console.log(e);
 
                 if (!editorRef.current) {
                     let content = JSON.parse(e.result[0].Content);

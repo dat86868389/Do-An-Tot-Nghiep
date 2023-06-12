@@ -16,7 +16,6 @@ export default function NewsPosts() {
     const quantity = useSWR(`http://localhost:3001/posts/get/quantity`, fetcher);
     if (router.isReady) {
         const { page } = router.query;
-        console.log(parseInt(quantity?.data?.result[0].quantity)/8);
         return (
             <div className='container-lg'>
                 <Head>

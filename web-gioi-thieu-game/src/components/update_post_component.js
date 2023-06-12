@@ -60,7 +60,6 @@ export default function UpdatePostComponent() {
                 });
                 const result = await response.json();
                 thumbnail += result.file.url;
-                console.log("Success:", result);
             } catch (error) {
                 console.error("Error:", error);
             }

@@ -34,7 +34,6 @@ export default function AdminCateManagementCompoent() {
         })
             .then(response => response.json())
             .then(e => {
-                    console.log(e);
                     categories.mutate();
             })
     }

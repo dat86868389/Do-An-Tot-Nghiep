@@ -33,6 +33,7 @@ export default function UserManagementStyleComponent({ page }) {
             .then(response => response.json())
             .then(() => {
                 users.mutate();
+                handleClose();
             })
     }
 

@@ -15,7 +15,6 @@ export default function PostIndex() {
     if (router.isReady) {
         const { id, page } = router.query;
         const quantity = useSWR(`http://localhost:3001/posts/get/quantity/category/${id}`, fetcher);
-        console.log(Math.ceil(parseInt(quantity?.data?.result[0].count)/8));
         return (
             <Layout>
                 <Head>

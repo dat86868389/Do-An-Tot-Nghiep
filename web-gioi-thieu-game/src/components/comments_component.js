@@ -32,10 +32,6 @@ export default function CommentsComponent({ postId }) {
                 'Content-Type': 'application/json'
             }
         })
-            .then(res => res.json())
-            .then(r => {
-                console.log(r);
-            })
 
         document.getElementById('input_comment').value = '';
     }
@@ -92,9 +88,6 @@ export default function CommentsComponent({ postId }) {
 
 
 function handleRenderCommentsWhenUserLogged(comment, user) {
-    console.log(user);
-    console.log(user.userId, comment.userId);
-    console.log(user.userId == comment.userId)
     const dateString = comment.time;
     const dateObject = new Date(dateString);
     const date = dateObject.getDate() < 10 ? `0${dateObject.getDate()}` : dateObject.getDate();

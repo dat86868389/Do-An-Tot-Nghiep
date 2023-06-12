@@ -28,7 +28,6 @@ export default function Header(props) {
         const form = e.target;
         const formData = new FormData(form);
         const formJson = Object.fromEntries(formData.entries());
-        console.log(formJson);
         router.push(`/search/${formJson.key_word}`)
     }
 

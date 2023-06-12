@@ -144,7 +144,6 @@ Posts.updatePost = function (data, result) {
 }
 
 Posts.getPostByPage = function (data, result) {
-    console.log(data);
     const sql = `select * from posts
     where Status = 1
     order by TimePost DESC limit ${data.limit}

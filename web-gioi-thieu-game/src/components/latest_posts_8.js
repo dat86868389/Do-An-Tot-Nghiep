@@ -26,7 +26,6 @@ export default function navBarComponent() {
             })
     }, []);
 
-    console.log(posts);
     if (posts.length != 0) {
         return (
 

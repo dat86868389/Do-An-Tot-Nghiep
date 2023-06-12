@@ -21,10 +21,6 @@ export default function Dasboard() {
         fetch(`http://localhost:3001/posts/set/status/code/1/postId/${postID}`, {
             method: 'PUT'
         })
-            .then((res) => res.json())
-            .then((e) => {
-                console.log(e);
-            });
     }
     return (
         <>
