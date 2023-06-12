@@ -24,7 +24,7 @@ export default function AdminPostManagementCompoent({ page }) {
         return (
             <div className={`${PostsMagementStyle.container}`}>
                 <Head>
-                    <title>Quản lý thể loại</title>
+                    <title>Quản lý bài viết</title>
                 </Head>
                 <h2>Quản lý bài viết</h2>
                 <div className="row">

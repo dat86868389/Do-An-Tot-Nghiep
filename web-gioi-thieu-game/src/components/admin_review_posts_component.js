@@ -36,9 +36,9 @@ export default function AdminReviewPostsComponent({ page }) {
         return (
             <div className={`${PostsMagementStyle.container}`}>
                 <Head>
-                    <title>Duệt bài viết</title>
+                    <title>Duyệt bài viết</title>
                 </Head>
-                <h2>Quản lý bài viết</h2>
+                <h2>Các bài viết chưa được duyệt</h2>
                 <div className="row">
                     <div className="col-12">
                         <table className={`${PostsMagementStyle.table}`}>

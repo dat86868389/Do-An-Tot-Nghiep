@@ -74,7 +74,10 @@ export default function CommentsComponent({ postId }) {
                     {
                         data?.result.map(c => {
                             if (user.isLoggedIn == true) {
-                                return handleRender(c, user)
+                                return handleRenderCommentsWhenUserLogged(c, user)
+                            }
+                            else {
+                                return handleRenderComments(c);
                             }
                         })
                     }
@@ -88,7 +91,7 @@ export default function CommentsComponent({ postId }) {
 
 
 
-function handleRender(comment, user) {
+function handleRenderCommentsWhenUserLogged(comment, user) {
     console.log(user);
     console.log(user.userId, comment.userId);
     console.log(user.userId == comment.userId)
@@ -136,6 +139,41 @@ function handleRender(comment, user) {
         </li>
     )
 
+}
+
+function handleRenderComments(comment) {
+    const dateString = comment.time;
+    const dateObject = new Date(dateString);
+    const date = dateObject.getDate() < 10 ? `0${dateObject.getDate()}` : dateObject.getDate();
+    const month = dateObject.getMonth() < 10 ? `0${dateObject.getMonth() + 1}` : dateObject.getMonth() + 1;
+    const year = dateObject.getFullYear();
+    const hour = dateObject.getHours() < 10 ? `0${dateObject.getHours()}` : dateObject.getHours();
+    const minute = dateObject.getMinutes() < 10 ? `0${dateObject.getMinutes()}` : dateObject.getMinutes();
+    const second = dateObject.getSeconds() < 10 ? `0${dateObject.getSeconds()}` : dateObject.getSeconds();
+
+    return (
+        <li key={comment._id}>
+            <div className={CommentStyle.info_user}>
+
+                <p className={CommentStyle.info_time}>
+                    <span className={CommentStyle.info_user_name}>
+                        {comment.userName}
+                    </span>
+                    <span>
+                        <FontAwesomeIcon icon={faClock} /> {
+                            `${date}-${month}-${year} | ${hour}h-${minute}m-${second}s`
+                        }
+                    </span>
+                </p>
+
+                <p className={CommentStyle.users_comments}>
+                    {comment.comment}
+                </p>
+
+
+            </div>
+        </li>
+    )
 }
 
 
